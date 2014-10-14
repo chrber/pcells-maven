@@ -1,0 +1,131 @@
+<html>
+<head><title>XCommander</title></head>
+<body>
+<h1>The XCommander plug-in Module</h1>
+<blockquote>
+   <h2>Introduction</h2>
+   <blockquote>
+      The XCommander plug-in module is not specific to any cell application, like the dCache.
+      It's designed to simplify navigation and communication with cells. It allows to scan the 
+      whole cell/domain system and provides the content, which are the cells,
+      in either a table or a tree view.
+      It handles history buffers for commands and cell destinations.
+   </blockquote> 
+   <h2>Cell system scan</h2>
+   <blockquote>
+      The initial screen of the XCommander module presents a dark background with
+      some bubbles without any obvious meaning. Using the right mouse button
+      initiates a scan of the connected cell system. Clicking the leftmost mouse button
+      immediatly swithes to the actual commander panel. From the <em>commander  panel</em>
+      view, a domain scan can be performed by pressing the <em>Scan Domain</em> button.
+      <blockquote>
+         <font color="gray">
+         How is this scan done : First, the GUI checks whether a Topology manager is running
+         somewhere in the cell system or not. If yes, it queries the Topology manager for
+         the overall cell/domain topology.
+         If no Topology manager was found, the XCommander starts its own topology detection
+         algorithm which may take awhile to finish. 
+         So, depending on the cell system setup (Topology manager
+         running or not) the Cell System Scan may take just some seconds up to a  minute or two.
+         </font>
+      </blockquote>
+      As soon as the cell system topology is known, it's displayed in a star like structure.
+      Each domain is represented as a square, labeled by its name. Domains having TCP connections
+      are connected by a line in the picture. The domain with 
+      the maximum number of connections is located in the center of the image.
+      The resulting  picture looks nice but is extremly useless. <br>
+      Clicking the leftmost mouse button will switch to the actual commander window.
+      At any time, the scan can be reprocessed by clicking the "Scan Domain" button
+      at the center of the bottom row of the commander panel. In case you like the topology
+      image, chose the <em>Topology</em> entry in the combo box next to the <em>Scan Topology</em>
+      button.
+   </blockquote>
+   <h2>The XCommander panel</h2>
+   <blockquote>
+      The main commander window consists of two main areas. The leftmost panel
+      allows to navigate  through the cell system if a cell/domain scan has been 
+      previously done. Otherwise the navigator windos are empty. A cell 
+      system scan can
+      be triggered from this panel by pressing the <em>SScan Domain</em> button
+      at the center of the bottom row<p>
+      The rightmost part of the XCommander is the actual commander window, 
+      called the EasyCommander.
+      It allows to specify
+      the destination cell name and the command text field and presents a scrollable
+      text area for the destination cell output text. 
+      <p>
+      The destination cell name field is automatically filled when a domain/cell
+      is selected in the navigation panel.
+   </blockquote>
+   <h2>The Easy Commander</h2>
+   <blockquote>
+      The <em>Easy Commander</em> essentially sends a command string to a cell and
+      displays the output as soon as it arrives. The command can just be typed into
+      the <em>Command</em> text field or may be recalled by typing the <em>back arrow</em>
+      key in case the command has been issued previously. 
+      The destination cell name can either be typed into the <em>Destination</em> text
+      field or may be selected from the navigation panel to the left if a domain scan has
+      been issued before. If given manually,
+      the cell destination name has to be fully qualified <em>&lt;cell&gt;@&lt;domain&gt;</em>
+      if the cell is not a <em>Wellknow
+      cell</em> otherwise just the cell name is sufficient. The most recent cell destinations
+      may as well be chosen from the destination text field combo box.
+      
+      For convenience, the EasyCommander issues
+      the three  most useful commands by just pressing one of the prepared buttons,
+      which is <em>info, pinboard and help</em> for all cells except for the system cell
+      where the buttons are doing a <em>processes, routes and help</em>. Because
+      Frau Dr. Ressmann
+      thought it would be a good idea, we are appending the date/time after each
+      cell output into the output display area to separate supsequent outputs.
+      We have to admit that she was right, its quite useful.
+   </blockquote>
+   <h2>The navigation panel</h2>
+   <blockquote>    
+      In case a cell system scan has been done, the navigation panel contains
+      the cell system topology. There are two views into the cell topology.
+      <p>
+      The <strong>double list view</strong> offers all domains in the upper list. Selecting
+      one of the domains lists the cell domain content in the lower list.
+      This operation may take awhile if done the first time for this domain.
+      Selecting a cell out of the lower list, lets the destination cell 
+      text field switch to this cell name. The cell content of a domain is cached locally,
+      so that a change in number or names of cells in a domain is not reflected
+      automatically within those lists. To get the domain content refreshed,
+      select the Domain you want to have updated in the upper list and press
+      <em>Update Cells</em> just below the lower cell list.
+      <p>
+      The <strong>tree view</strong> is chosen by pressing the
+      <em>Toggle Views</em> button below the lower cells list while
+      the panel is in <strong>double list mode</strong>. Pressing the button again
+      will switch back. The <em>tree view</em>
+      presents the domains as branches in a tree structure. To view the cells,
+      which are obviously the tree leaves, just click on the red circle of the
+      corresponding domain/branch.
+      The whole tree becomes 'disabled'
+      and as soon as the domain content (the cells) are available, the 
+      the circle changes to green. Clicking the handle of a branch lets it expand and
+      shows the cells of that domain. So, chosing the handle
+      of a green button show the cached content while chosing the handle of a red button
+      fetches the cell names first which leads to a delay in displaying the cells. 
+      <blockquote>
+         <font color="gray">
+         <strong>Possible misbehaviour : </strong><br>
+         In the latter case it eventually
+         happens that the tree messes up and comes up with extremly long lines connecting
+         the tree branchs. To get rid of that, collapse the branch again by activating 
+         the corresponding handle, select the branch name and press the
+         <em>Update cells</em> button. Finally click the handle of the branch again.
+         </font>
+      </blockquote>
+      The domains itself and the contents of the domains are not refreshed automatically.
+      To get the domain structure refresh, chose the <em>Scan topology</em> button and
+      to get the content of a domain (the cells) refreshed, collaps the domain, select the
+      domain name and press the <em>Update cells</em> button. Expanding the domain
+      will display the udated domain content.
+   </blockquote>
+</blockquote>
+<hr>
+<address>Author : Patrick Fuhrmann  (patrick.fuhrmann@desy.de) Last Modified : $Date: 2005/07/10 18:54:17 $</address>
+</body>
+</html>

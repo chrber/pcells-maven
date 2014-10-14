@@ -1,0 +1,3 @@
+Main-Class: org.pcells.util.CellGuiClassLoader
+pcells-gui-jar-name: org.pcells
+pcells-gui-jar-version: 1.1.1

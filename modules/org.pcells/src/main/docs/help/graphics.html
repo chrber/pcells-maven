@@ -1,0 +1,48 @@
+<html>
+<head><title>GUI Skin</title></head>
+<body>
+<center><h2>Custumizing the GUI Skin</h2></center>
+The graphical layout of the this GUI is, honostly spoken, not our major concern. Consequently
+there is not much you can change or customize about that.
+Nevertheless :
+<h3>Colors</h3>
+<blockquote>
+In the default setup, background, forground as well as the borders are drawn in 
+two different gray tones. Foreground and
+background colors may be changed by defining new ones in the OS
+command line when starting the GUI.
+<pre>
+  like java -D&lt;variable&gt;=&lt;value&gt;
+</pre>
+   <blockquote>
+       <table border=1 cellspacing=2 cellpadding=2>
+       <tr><th>Variable</th><th>Value</th></tr>
+       <tr><td>skin.type</td><td>0=classic;1=border;11=colors</td></tr>
+       <tr><td>skin.colors</td><td>aabbccxxyyzz</td></tr>
+       </table>
+       <p>Where <em>aabbcc</em> is the hex rgb representation of the background and
+          <em>xxyyzz</em> the hex rgb of the foreground color. If <em>skin.type</em> is set
+          to 1, the color is just used to draw the border, otherwise, having
+          <em>skin.type</em> set to 11, the colors are used to draw most of 
+          regular background as well.
+       <pre>
+       Example :
+        java -Dskin.type=11 -Dskin.colors=123456aabbcc -jar org.pcells.jar
+       </pre>
+       Other variables :
+       <table border=1 cellspacing=2 cellpadding=2>
+       <tr><th>Variable</th><th>Purpose</th><th>Default</th></tr>
+       <tr><td>histogram.bins</td><td>Number of bins in Histogram</td><td>Depends on histogram</td></tr>
+       <tr><td>histogram.color.bin</td><td>Color of the histogram bins</td><td>Black or background color</td></tr>
+       <tr><td>histogram.color.frame</td><td>Color of the histogram frame</td><td>Black</td></tr>
+       <tr><td>storyboard.background</td><td>Background picture of the storyboard</td><td>NONE</td></tr>
+       </table>
+
+   </blockquote>
+   The Menu bar <em>Specials -> Skin</em> lets you chose different colors for
+   the current session. Those settings are not persistent.
+</blockquote>
+<hr>
+<address>Author : Patrick Fuhrmann  (patrick.fuhrmann@desy.de) Last Modified : $Date: 2007/02/25 23:29:12 $</address>
+</body>
+</html>

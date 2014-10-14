@@ -1,0 +1,42 @@
+<html>
+<head><title>Command Timeouts</title></head>
+<body>
+<center><h2>Command Timeouts</h2></center>
+<h3>Why timeouts</h3
+   <blockquote>
+   Whenever a GUI application is connected to a cell/domain
+   system, a proxy within the domain server is created, translating
+   the issued requests into cell/domain messages. For various reasons,
+   it may happen that one of the cells, the proxy is talking to,
+   doesn't respond in time. If this happens, the proxy sends a 
+   <em>Timeout Message</em> to the GUI, so that the GUI may release
+   allocated resources and unblocks graphical components.
+   The timeout, the proxy is using, is global to all requests coming
+   from the connected GUI but may be different between different 
+   GUI instances. From the GUI perspective the timeout can be different
+   for all connected dCache instances. The default timeout is set to
+   10 seconds.
+   </blockquote>
+<h3>How to set timeouts</h3
+   <blockquote>
+   There is currently no graphical component available to change
+   the default timeout. In order to do so anyway, one needs to use the 
+   <em>XCommander Module</em> to talk directly to the GUI proxy service.
+   <p>
+   <ul>
+     <li>Change to the <em>Commander</em> panel</li>
+     <li>Clear the <em>Cell Name</em> text field and type return within this text field.
+     <li>Type <strong>set timeout &lt;newTimeoutInSeconds&gt;</strong> in the
+         command text field followed by a return.
+     <li>Done
+   </ul>
+   After that, all requests to the corresponding cell/domain system will have this timeout set.
+   Larger timeouts can be quite usefull if the system has a lot of components (pools, doors) or
+   is extremly busy.
+   Changing the timeout is not persistent. With the next loggin into the same 
+   cell/domain system the default timeout value is active again.
+   </blockquote>
+<hr>
+<address>Author : Patrick Fuhrmann  (patrick.fuhrmann@desy.de) Last Modified : $Date: 2005/07/10 18:54:17 $</address>
+</body>
+</html>

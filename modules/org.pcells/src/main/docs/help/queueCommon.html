@@ -1,0 +1,70 @@
+<html>
+<head><title>Queues (Restore and Transfer)</title></head>
+<body>
+<h2>Restore and Transfer Queues (Commonalities)</h2>
+<blockquote>
+Beside all the fancy stuff, dCache essentially handles data transfers. Depending on
+the type of transfer and the load of the system, those transfers may
+take a certain time or may even be scheduled only, but not yet processed because
+of a lack of resources, which can be CPU, space etc. 
+The current design of dCache 
+doesn't handle those transfer queues centrally. The central dCache components
+delegate all those transfers immediatly to the most appropriate pool.
+dCache essentially handles the following queue types :
+<ol type="a">
+  <li>Transfers between dCache pools and client applications. (dCap,ftp,http...)</strong>
+  <li>Transfers from HSM systems into a dCache pool</strong>
+  <li>Transfers from dCache pools into HSM systems</strong>.
+  <li>Transfers between pools.
+</ol>
+To make those highly distributed queues managable, dCache builds <em>virtual
+queues</em> which are consequently the sum of the queues of same type from the
+corresponding pools. Right now, those different queue types are handled slightly
+different. Queue <strong>c</strong> has no central virtual queue yet,
+they are treated totally autonomous by the corresponding pools. 
+Queue <strong>b</strong> and <strong>d</strong> are managed by the same
+component, the <em>PoolManager</em>. The PoolManager sends the incoming requests to
+the appropriate pools and monitors the transfer process. At any time, it has a valid list of 
+all its subqueues. Virtual queue <strong>b</strong> is constructed by
+a component which frequently scans the pools and creates a list of 
+all transfers of that type. This process may take awhile and is started 
+within configurable intervals. Consequently this queue is always slightly
+out of date. <p>
+This GUI allows to inspect and manipulate the <strong>b/d</strong> as well as the 
+<strong>a</strong> queue type by different modules, namely <strong>Restore</strong> and
+<strong>Transfer</strong> respectively. Although the general outlook and behaviour of
+the two modules look simaliar, there are important differences in operation.
+While the common part is described here, the differences are 
+handles in the subsequent chapters (<strong>Restore</strong> and <strong>Tansfers</strong>)
+<h3>Queue views</h3>
+   <blockquote>
+     The queue modules present the corresponding queue in two ways. In
+     <em>List Mode</em> the queue is listed in table form. The table can be sorted
+     by column in increasing and descreasing order. Various operations can be
+     performed on list entries as well as on selection of list entries.
+     In <em>Histogram Mode</em> the queue is represented in a time series histogram.
+     This histogram can be automatically updated and may be detached from the
+     main application for continues monitoring.
+   </blockquote>
+<h3>List Mode Details</h3>
+   <blockquote>
+   In <em>List Mode</em> all queue entries are represented in a table. The table my be
+   sorted according to the content of any column. 
+   Clicking on a header resp. title field of a column will sort all
+   rows according that column in ascending order. Clicking a second time, does the sorting
+   in descending order.<p>
+   The width of the different columns are all identical on startup which only in rare cases
+   fits the needs. By moving the
+   small bars between the title fields of the columns, its width can be custumized.
+   <p> 
+   Actions can be performed on selections of rows. How the selection is created depends
+   on the underlying window system. In general, just clicking on a row, selects exactly
+   this row. To select a continues set of rows one need to click on the top row and,
+   pressing the shift key clicking the bottom row. Arbitrary rows may be added resp. removed to/from
+   a selection by holding the CONTROL key while clicking the corresponding row. 
+   </blockquote>
+</blockquote>
+<hr>
+<address>Author : Patrick Fuhrmann  (patrick.fuhrmann@desy.de) Last Modified : $Date: 2006/04/03 20:25:46 $</address>
+</body>
+</html>

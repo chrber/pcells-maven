@@ -1,0 +1,66 @@
+<html>
+<head><title>dCache Cost module</title></head>
+<body>
+<h2>dCache Cost Monitoring Module</h2>
+<blockquote>
+   In order to find the appropriate pool candidate for each read, write or restore request,
+   the PoolManager collects <em>CPU</em> and <em>disk space</em> related cost information
+   from all connected pools. Please checkout the documentation area of 
+   <strong>www.dCache.ORG</strong> for more information how this is done.
+   <p>
+   The Cost Module essentially displays the cost information of all the pools.
+   <h3>Startup and info collection</h3>
+   <blockquote>
+      As soon as the cost module starts up, which is as soon as the
+      GUI successfully connects to a dCache instance, it collects
+      the <em>Pool Group</em> and <em>Link</em> information from the
+      dCache <em>PoolManager</em>. A progress bar on the bottom of the
+      panel shows the progress. It has to go twice before its done.
+      After that the PoolGroup sets and the Links Sets are loaded.
+      To get the <em>Cost Information</em> press the <em>Update Cost</em>
+      button. Again the same progess bar shows how much is already loaded. 
+   </blockquote>
+   <h3>Pool Set specific cost picture</h3>
+   <blockquote>
+    The pool set selection part on the left side of the cost module panel
+    allows to select either a set of pools which correspond to a PoolManager
+    <em>PoolGroup</em> or to a PoolManager <em>Link</em>. One may switch between
+    those views using the <em>Toggle Source</em> buttom below the
+    list component on the left side of the panel.
+    The cost histogram on the right side of the panel only shows those pools
+    which belong to the set selected on the left side.
+   </blockquote>
+   <h3>The cost picture</h3>
+   <blockquote>
+     The cost picture itself can be viewed in three modes. Those modes are selected
+     by the combo box on the right bottom side of the panel.
+     <ul>
+       <li><strong>Sorted by Space Cost</strong> The cost is still split into
+       space and cpu cost as received from the pools. The upper part is the
+       space and the lower part (below the zero line) is the cpu cost.
+       The display is <em>sorted by space cost</em>. So the upper part of the display
+       monotonoly grows from left to right. The cpu cost below the zero line
+       usually looks rather fuzzy.
+       <li><strong>Sorted by CPU Cost</strong> The cost is still split into
+       space and cpu cost as received from the pools. The upper part is the
+       space and the lower part (below the zero line) is the cpu cost.
+       The dispay is sorted by cpu cost. So the lower part of the display
+       monotonoly grows from left to right. The space cost above the zero line
+       usually looks rather fuzzy.
+       <li><strong>Sorted by merged CPU and Space cost</strong>. The space and cpu
+       cost info received fromt the PoolManager is merged according to the
+       <em>pool decision cost factores</em>. Those numbers are shown on the left side just
+       below the cost image. They may be changed in the panel. This re-adjusts the
+       image accordingly. The actual value in dCache is not affected.
+     </ul>
+     Each vertical line in the cost picture represents a pool. To get the name
+     of a particular line, click into the image. One of the lines is not green but
+     red. The name of the corresponding pool is shown just above the middle line
+     of the image on the left side. Use the left/right arrow keys to move the
+     red line (pool names) to the desired destination.
+   </blockquote>
+</blockquote>
+<hr>
+<address>Author : Patrick Fuhrmann  (patrick.fuhrmann@desy.de) Last Modified : $Date: 2005/07/10 18:54:17 $</address>
+</body>
+</html>

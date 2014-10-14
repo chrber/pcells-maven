@@ -1,0 +1,107 @@
+<html>
+<head><title>Generic help for CellLogin</title></head>
+<body bgcolor="lightgray">
+<center><h1>Content</h1></center>
+<blockquote>
+   <h3>General Remarks</h3>
+   <h3>Managing Sessions</h3>
+   <blockquote>
+      Creating a session<br>
+      Establishing a session (connect to dCache)<br>
+      Chosing a predefined Session<br>
+      Switching sessions<br>
+   </blockquote>
+   <h3>Plug-ins</h3>
+</blockquote>
+<center><h1>The CellLogin</h1></center>
+<blockquote>
+   <h2>Managing Sessions</h2>
+   <blockquote>
+      <strong>Creating a session</strong>
+      <blockquote>
+        Navigate from the Menu Bar<p>
+        <strong>Session -> New ...</strong><p>
+        <em>CellLogin</em> will prompt for the name of the newly to create session. The 
+        session name might be anything which remindes you of the dCache instance
+        this session  should be connected to. Session names should be unique.
+        After entring a valid session name, type 'ok'.
+        <p>
+        CellLogin will switch to the <em>Cell Login</em> panel. Chose the
+        <em>Setup</em> button to custumize the <em>Session</em> parameters.
+        <p>
+        <em>CellLogin</em> offers a set of setup cards.<p>
+        The <strong>Addresses</strong> card covers the server parameters. Host, port,
+        user name and protocol. <em>Server name</em> is the name of the headnode of the
+        selected dCache instance.  <em>Port Number</em> is the ssh  resp. admin port
+        number. <em>User name</em> is obvious and the protocol should be <em>ssh1</em>.
+        Activate the <em>Apply</em> button to make all changes permanent.
+        <p>
+        The <strong>Module</strong> card determines the dCache communication modules
+        which should be loaded for this session. The <em>CellLogin</em> jar file is
+        coming with a proper configured <em>Modules</em> card.
+        <blockquote>
+          <strong>Adding a dCache communication module</strong><p>
+          Activate the <em>Next</em> button until the end of the list is reached ,at which 
+          point the <em>Next</em> button appears <em>disabled</em>. Type <em>Insert</em>.
+          Chose a name for the new entry. (Arbitrary). Add the full class name of the
+          module which should be made known under the name chosen above.
+          Activate the <em>previous</em> button followed by the <em>Apply</em> button.
+        </blockquote>
+        Choose the <em>Quit</em> button to get back to the <em>Login</em> panel.
+        <em>CellLogin</em> stores all configured parameters together with the
+        session name. A restarted <em>CellLogin</em> application will recall all
+        configured sessions.
+      </blockquote>
+      <strong>Connecting a session</strong>
+      <blockquote>
+         <em>CellLogin Panel</em> provides two 'ssh1' methods to log into a dCache server.
+         If no password is specified, <em>CellLogin</em> assumes to find a valid private rsa1 key
+         at ${home}/.ssh/identity, otherwise, if a password is specified, <em>CellLogin</em> tries
+         to login with the given 'username' 'password pair. In case the login succeeded, <em>CellLogin</em>
+         offers all modules defined within the 'setup' step as stacked cards.
+      </blockquote>
+      <strong>Chosing a predefined Session</strong>
+      <blockquote>
+        Navigate from the Menu Bar<p>
+        <strong>Session -> Open -> &lt;session name&gt;</strong><p>
+        <em>CellLogin</em> will present the chosen session.
+      </blockquote>
+      <strong>Switching sessions</strong>
+      <blockquote>
+        Navigate from the Menu Bar<p>
+        <strong>Windows -> &lt;session name&gt;</strong><p>
+        <em>CellLogin</em> moves the selected session to front.
+      </blockquote>
+   </blockquote>
+   <h2>The Commander (org.pcells.services.gui.XCommander)</h2>
+   <blockquote>
+       XCommander is a generic tool to communicate with any CellRealm. It's not aware of 
+       Cell applications (e.g. dCache). If XCommander is configured in the session setup,
+       it will show up as a card after logged in.
+       <p>
+       When activated, the <em>XCommander</em> shows up with its logo. 
+       <p>
+       <strong>Left Mouse click</strong> on the logo will switch to the XCommander
+       main menu.<p>
+       <strong>Right Mouse click</strong> will launch the Cell Domain scanner. The scanner first 
+       checks it a Topology cell can be accessed. If yes, the Topology cell is ask to provide
+       the Domain Topology. It no TopoCell is found, the XCommander initiates
+       a topology scan. In either case the XCommander will display the result.       
+   </blockquote>
+   <h2>Graphics</h2>
+   <blockquote>
+       <table border=1 cellspacing=2 cellpadding=2>
+       <tr><th>Variable</th><th>Value</th></tr>
+       <tr><td>skin.type</td><td>0=classic;1=border;11=colors</td></tr>
+       <tr><td>skin.colors</td><td>aabbccxxyyzz</td></tr>
+       </table>
+       <pre>
+       Example :
+        java -Dskin.type=11 -Dskin.colors=123456aabbcc -jar org.pcells.jar
+       </pre>
+   </blockquote>
+</blockquote>
+<address>Author : Patrick Fuhrmann  (patrick.fuhrmann@desy.de) Last Modified : $Date: 2005/07/06 21:24:01 $</address>
+</body>
+</html>
+

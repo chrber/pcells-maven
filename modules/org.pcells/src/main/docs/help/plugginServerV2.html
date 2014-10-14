@@ -1,0 +1,136 @@
+<html>
+<head><title>The pCells pluggin mechnism</title></head>
+<body bgcolor=white>
+<h2>Pluggin mechnism</h2>
+<blockquote>
+  The pCells gui is a framework allowing to connect to multiple
+  pCell domains (resp. dCache instances) simultaniously. It
+  handles login security mechnisms and makes the secure channels
+  available to modules talking to the cells. While various modules
+  are already included in the distribution, developers are free to
+  add their own modules or pluggins to the GUI.
+</blockquote>
+<h2>Preparing pluggin java code</h2>
+<blockquote>
+  A java class may become a pCell gui pluggin if it matches
+  the following rules :
+  <ul> 
+    <li>The main class has to be <em>public</em>.
+    <li>The main class has to extend <em>org.pcells.services.gui.CellGuiSkinHelper.CellPanel</em>
+    <li>The main class has to implement <em>org.pcells.services.connection.DomainConnectionListener</em>
+    <li>The constructor of the main class needs to accept the following two arguments
+          <ul>
+            <li>org.pcells.services.connection.DomainConnection
+            <li>java.util.prefs.Preferences
+          </ul>
+  </ul>
+  Kind of ...
+  <pre bgcolor="#dddddd">
+  package org.myownpluggins.gui ;
+  //
+  // import awt and javax.swing
+  //
+  import java.util.prefs.* ;
+  import org.pcells.services.connection.* ;
+  import org.pcells.services.gui.* ;
+  //
+  // whatever you need as well ...
+  //
+  public class PCellFun
+    extends    <font color=red>CellGuiSkinHelper.CellPanel</font>
+    implements <font color=red>DomainConnectionListener</font>,
+               ActionListener{
+
+
+         private DomainConnection <font color=red>_connection</font> =  null ; 
+         public PCellFun( 
+              <font color=red>DomainConnection connection , 
+              Preferences preferences </font>    ){
+             //
+             // do the init graphics here, like adding buttons and text fields.
+             //
+             //  store the connection in some class variable.
+             //  It's needed to send messages to cells.
+             //
+             <font color=red>_connection = connection ;</font>
+         }            
+  }            
+  </pre>
+  To send an object message to a cell, use the <em>connection</em>.
+  <pre> 
+     _connection.sendObject( &lt;destinationCellName&gt; ,
+                             &lt;serializableObjectToSent&gt; ,
+                             &lt;DomainConnectionListener&gt; ,
+                             &lt;commandId&gt
+                           ) ;
+  </pre>
+  Example :
+  <pre bgcolor="#dddddd">
+  try{
+      _connection.sendMessage( "PoolManager" , "rc ls" , this , 105 ) ;
+  }catch(Exception ee ){
+      // exception handling
+  }
+  </pre>
+  The reply, if there is any, will arrive via the <em>domainAnswerArrived</em> callback
+  method.
+  <pre>
+  <font color=red>public void domainAnswerArrived( Object obj , int commandId )</font>{
+     //
+     // <em>obj</em> is the object sent by the cell as a reply of the 'sendObject' call.
+     // <em>commandId</em> is the <em>commandId</em> specified in the sendObject call.
+     //
+  }
+  </pre>
+  <p>
+  
+</blockquote>
+<h2>Preparing jar file</h2>
+<blockquote>
+  All class files, needed to run the pluggin, has to be jar'ed together into
+  a single 'jar' file. No manifest it needed.
+  <pre>
+      <font color=red>jar tvf  pcells.pluggin0.jar  `find . -name "*.class"`</font>
+  </pre>    
+  Make sure, the jar files contains the full path structure of the 
+  java package. In the example above the
+  <pre>jar tvf pcells.pluggin0.jar</pre>
+  must contain the class entries as follows :
+  <pre>
+      ....   org/myownpluggins/gui/PCellFun.class
+      ....   org/myownpluggins/gui/....class
+  </pre>
+  The name of the jar file may be any of pcells.pluggin0.jar up to 
+  pcells.pluggin3.jar.
+  <p>
+  The addinional jar file(s) must be in the same directory, the org.pcells.jar file exists
+  which is executed by 
+  <pre>
+      java -jar org.pcells.jar
+  </pre>
+</blockquote>
+<h2>Loading the additional pluggin</h2>
+<blockquote>
+   
+   In order to activate the new pluggin :
+   <ul>
+     <li> place the pcells.plugginX.jar
+                in the same directory, the org.pcells.jar exists.
+     <li> restart the GUI.
+     <li> Select a session.
+     <li> Select : <strong>Setup</strong> -> <strong>Modules</strong> 
+     <li> Click <strong>Next</strong> until the end of the list is reached.
+     <li> Click <strong>Insert</strong> and a new/ empty card is presented.
+     <li> Select and fill-in a module name which shouldn't clash with already existing module names.
+     <li> Fill in the full classpath name for the module. For this example the
+          class path would have to be <strong>org.myownpluggins.gui.PCellFun</strong>.
+     <li> Click <strong>Apply</strong> and activate the session.
+     <li> If the new module/pluggin doesn't show up in the list of 
+          modules (top bar) check the <strong>Specials -> Console</strong> for error messages.
+   </ul>
+   <br>
+   
+</blockquote>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<html>
+<head><title>Properties</title></head>
+<body>
+<center><h2>Custumizing the GUI behaviour by manipulating Properties</h2></center>
+   <blockquote>
+       Properties may be set permanently by using the menu :
+       <br>
+       <em>Specials -> Properties</em>
+       <br>
+       Initial values may be chosen using the java '-D' options.
+       <pre>
+           java -D&lt;property&gt;=&lt;name&gt; -jar org.pcells.jar
+       </pre>
+       Other variables :
+       <table border=1 cellspacing=2 cellpadding=2>
+       
+       <tr><th>Variable</th>
+           <th>Purpose</th> 
+           <th>Values</th>
+           <th>Default</th>
+       </tr>
+       
+       <tr><td>skin</td>
+           <td>Skin Schema</td>
+           <td>soft,7ties,dark,funky,debug</td>
+           <td>OS defaults</td>
+       </tr>
+       <tr><td>histogram.bins</td>
+           <td>Number of bins in Histogram</td>
+           <td>&lt;Integer&gt; > 10 </td>
+           <td>Depends on histogram</td>
+       </tr>
+       <tr><td>histogram.color.bin</td>
+           <td>Color of the histogram bins</td>
+           <td>0xRRGGBB</td>
+           <td>Black or background color</td>
+       </tr>
+       <tr><td>histogram.color.frame</td>
+           <td>Color of the histogram frame</td>
+           <td>0xRRGGBB</td>
+           <td>Black</td>
+       </tr>
+       <tr><td>storyboard.background</td>
+           <td>Background picture of the storyboard</td>
+           <td>File name of background picture in pcells directory</td>
+           <td>NONE</td>
+       </tr>
+       <tr><td>storyboard.background.range</td>
+           <td>Range of storyboard background pictures</td>
+           <td>0,1,2 ...</td>
+           <td>NONE</td>
+       </tr>
+       <tr><td>storyboard.background.scale</td>
+           <td>Should storyboard background picture be scaled into storyboard</td>
+           <td>true,false</td>
+           <td>false</td>
+       </tr>
+       </table>
+
+   </blockquote>
+</blockquote>
+<hr>
+<address>Author : Patrick Fuhrmann  (patrick.fuhrmann@desy.de) Last Modified : $Date: 2007/02/27 07:55:45 $</address>
+</body>
+</html>

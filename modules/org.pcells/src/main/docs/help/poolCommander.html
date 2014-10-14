@@ -1,0 +1,89 @@
+<html>
+<head><title>Pool Commander</title></head>
+<body>
+<center><h2>The Pool Commander</h2></center>
+<blockquote>
+The <em>Pool Commander</em> is a dCache specific module allowing to send commands to 
+multiple pools simultaniously. It collects the output of all selected pools
+and makes it available for inspection. It groups pools according to 
+the dCache PoolManager <em>Pool Groups</em> and <em>Links</em>. In addition 
+it provides a locally customizable selection.
+   <h3>Pool Commander startup</h3>
+   <blockquote>
+       When the <em>Pool Commander Module</em> starts up, which is essentially after
+       the application is logged into the corresponding dCache instance, the Commander
+       tries to fetch the <em>Group and Link</em> lists from the <em>dCache PoolManager</em>.
+       While this operation is in progress, a bar at the bottom of the display shows its
+       progress. Because the gui has to fetch the groups <strong>and</strong> links,
+       the progess bar is running twice before the display becomes enabled. 
+       Depending on the complexity of the PoolManager configuration and the speed
+       of the network connection this process may take awhile.
+   </blockquote>
+   <h3>The Panel Layout and Pool communication</h3>
+   <blockquote>
+      The main <em>Pool Commander Panel</em> is split into two parts. The left
+      one offers a list of Pool Sets. Those sets can either be <em>PoolManager</em>
+      <em>Links</em> or <em>Pool Groups</em>. The <em>Toggle Source</em> button just below
+      the list allows to switch between both views.
+      Having selected one of those Pool Sets, the right part of the main panel
+      presents all pools belonging to that set, in form of a table. The table has three
+      columns. The <em>Pool Name</em>, the <em>time</em> the pool needs to answer
+      a command and the actual <em>Output string</em> of the corresponding pool.
+      Just below the pool list table a text field allows to type a command which,
+      after pressing <em>Return</em>, is sent to all pools in the table. After that,
+      the table is populated with the reply of the pools. Because the reply string might
+      be longer than the column table space, double clicking on a row
+      opens a new text window, containing the complete text, returned by the selected pool.
+      <blockquote>
+      <font color=gray>
+        Usually the width of the three columns are equally spaced, which might not be
+        very useful. The columns can be re-adjusted to the specific needs by
+        grabbing the small bar between the column titles and moving them
+        right or left as needed.
+      </font>
+      </blockquote>
+      <p>
+      There are three special cases of pool replies which result in different colors
+      of the corresponding rows
+      <ul>
+        <li><strong>CommandSyntaxException</strong> indicating that the issued command
+                wasn't understood by the pool.
+        <li><strong>NoRouteToCellException</strong> indicating that the corresponding
+                pool is not up.
+        <li><strong>Request Timed Out</strong> either indicates that the corresponding
+                pool appears dead or is so busy that the timeout has expired.
+                See chapter <em>Special Topics -> Command Timeouts</em> on how to
+                change the default timeout value.
+                
+      </ul> 
+   </blockquote>
+   <h3>Private Pool Selections</h3>
+   <blockquote>
+   In addition to the <em>PoolGroup</em> and <em>Link</em> selection, based on the
+   PoolManager setup, a temporary selection can created.
+   <p>
+   Select  one or more rows from the left side pool list.
+   <ul>
+   <li><strong>Single selection</strong> Just click on the pool row you want to select.
+   <li><strong>Multiple continues selections</strong> Click on the top row you want to have
+    in your selection. Press Shift and keep it pressed while klicking on the
+    bottom row of the pools you want to select. All rows between the top and botton row
+    are selected.
+   <li><strong>Multiple discontinues selections</strong> Pressing the control key while
+      clicking on rows adds those rows to your selection. Clicking on a already selected
+      rows unselects it again.
+   </ul>
+   After having all pools (resp. rows) you need selected from the current table, press the
+   <em>popup mouse button (leftmost)</em> and select <em>Add selected items to your private
+    selection</em>. After that your private selection has been populated by the selected
+    pools. Switch to your private selection by pressing the <em>To Your Selection</em>
+    button on the right bottom of the panel. Within the <em>private selection</em> table
+    a similiar popup menu allows to remove selected items from the private selection.
+    You may switch back and forth between the private and the PoolManager selections and
+    perform commands independently.
+   </blockquote>
+</blockquote>
+<hr>
+<address>Author : Patrick Fuhrmann (patrick.fuhrmann@desy.de) Last Modified : $Date: 2005/07/10 18:54:17 $</address>
+</body>
+</html>
