@@ -2,13 +2,20 @@
 //
 package  org.pcells.util ;
 //
-import java.net.* ;
-import java.io.* ;
-import java.util.jar.* ;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
+import java.net.JarURLConnection;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.*;
-import java.util.prefs.*;
-import java.util.regex.* ;
-import java.lang.reflect.*;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
+import java.util.prefs.Preferences;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassLoader {
 

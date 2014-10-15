@@ -2,12 +2,12 @@
 //
 package  org.pcells.util ;
 //
-import java.net.* ;
-import java.io.* ;
-import java.util.jar.* ;
-import java.util.*;
-import java.util.prefs.*;
-import java.lang.reflect.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.prefs.Preferences;
 
 
    public class ClassLoaderPreferences {
