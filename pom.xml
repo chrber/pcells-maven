@@ -13,7 +13,7 @@
     <modules>
         <module>modules/org.pcells</module>
         <module>modules/pcells-gui-core</module>
-        <module>modules/pcells-gui-dcache</module>
+        <!--<module>modules/pcells-gui-dcache</module>-->
         <module>modules/pcells-gui-psu</module>
     </modules>
 </project>
