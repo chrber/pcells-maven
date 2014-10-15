@@ -1,0 +1,12 @@
+// $Id$
+
+package org.pcells.services.gui.util ;
+
+
+
+
+public class BasicHistogramModel  {
+
+
+
+}

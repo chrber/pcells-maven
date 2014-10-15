@@ -1,0 +1,93 @@
+
+
+Intro :
+Das dCache Grid Storage-Element hat sich
+waehrend des HEPCG Foerderungszeitraums
+zu einem QuasiStandard im LHC Computing 
+Grid entwickelt. 8 der 11 Tier I Zentren,
+sowie weitere 60 Tier II Zentren benutzen
+dCache als ihr zentrales Massen Daten
+Management System. Durch den in Kuerze 
+beforstehenden Start des LHC's haben sich
+die Akivitaeten innerhalb der dCache
+Kollaboration aber weg von der Entwicklung neuer
+Funktionalitaet, hin in Richtung von Themen
+entwickelt, die das Betreiben des Systems
+vereinfachen. Dazu gehoert u.A. die Installation
+von dCache auf einigen hundert bis tausend 
+Speicherknoten, die Administration und das
+Monitoring des Systems. Das sind jedoch genau die 
+Bereiche, in denen grosse Industrieunternehmen
+fuehrend sind. Wir planen, durch die
+Zusammenarbeit mit HP, dCache
+zu einem professionellen Produkt ausbauen
+koennen. Das Ziel ist dabei primaer die Anzahl
+der benoetigten dCache System Betreuer pro
+Einsatzstandort signifikant zu reduzieren und
+durch das erreichte, vereinfachte Anwendungsprofil
+das Produkt fuer andere Grid Communites attraktiver
+zu gestallten.
+
+A) Integration von dCache in eine existierende
+   Computer Center Infrastruktur.
+   
+ Da Grid Services in den meisten Faellen
+ in eine schon existierende Rechenzentrums
+ Infrastruktur integriert werden muessen, liegt
+ es nahe, solche Services mit standardisierten
+ Administrations und Montioring Protokollen 
+ auszuruesten. In den letzten Jahren hat sich
+ mit Hilfe der "Distributed Management Task Force 
+ (DMTF) Server Management Working Group" ein 
+ Standard entwickelt, um Service Eigenschaften
+ und Zustaende vereinheitlicht in das lokale 
+ Rechenzentrums Service Management System 
+ zu intergrieren. DMTF wird vom Open Grid Forum 
+ abgedeckt, und HP ist ein Partner in der 
+ DMTF Working Group. Das Ziel ist es dCache 
+ zu diesem Standard kompatible zu machen und 
+ somit die Integration des Systems in 
+ Rechenzentren zu vereinfachen.
+ 
+ Reference :
+  
+   a) CIM Diagnostics Model White Paper
+   b) www.dmtf.org
+   
+B) Vereinfachte Installation und Konfiguration
+
+   Zur Zeit ist die Installation von dCache
+   nur fuer kleine Installationen recht einfach
+   durchzufuehren. Aufgrund der Vielzahl von 
+   Anforderungen und Konfigurationsszenarien
+   groessere Rechenzentren wird der Betrieb
+   von dCache im High-Endbereich ausschliesslich
+   Experten vorbehalten. Um den Betrieb von 
+   dCache auf eine Rechzentrums Operating Team
+   auslagen zu koennen muss die Installation und
+   Configuration vereinfacht und vor allem 
+   zwischen den einzelnen Komponenten vereinheitlich
+   werden. Auch hier ist professionelle
+   Erfahrung unerlaesslich. Das Ziel ist es
+   durch die Verwendung einheitlicher Methoden
+   und Konfigurationssprachen dCache von
+   Nicht-dCache Experten managebar zu machen.
+   
+   Reference :
+     a) HP Internal Dokument : "HP Configuration Management software for PCs and servers" data sheet.
+   
+   
+C) Integrierte Referenzinstalation.
+
+ Obwohl dCache durch die eingesetzte Java Technologie
+ weitgehend Hardware und Betriebssystem unabhangig
+ ist, treten immer wieder Fragen nach der optimalen
+ Intergration des Systems mit der verwendenten 
+ Hardware und dem Betriebssystem auf. Das Ziel ist
+ es eine komplete dCache Referenzinstallation anbieten
+ zu koennen, die sowohl von der dCache Experten
+ aus auch von den Hardware und Betriebssystem
+ Experten optimiert wurde. Auch hier ist die 
+ Zusammenarbeit mit HP ideal dazu geeignet 
+ ein solches Setup bereitzustellen.
+ 

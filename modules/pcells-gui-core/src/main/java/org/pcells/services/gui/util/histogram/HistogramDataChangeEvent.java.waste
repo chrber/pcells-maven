@@ -1,0 +1,21 @@
+// $Id$
+
+package org.pcells.services.gui.util.histogram ;
+
+import javax.swing.event.ChangeEvent ;
+
+
+public class HistogramDataChangeEvent extends ActionEvent  {
+
+  private int _type = 0 ;
+  private final static int DATA = 1 ;
+  private final static int PARAMETER = 2 ;
+  private final static int STRUCTURE = 3 ;
+  public HistogramDataChangeEvent( Object source , int type ){
+     super(source) ;
+     _type = type ;
+  }
+  public int getType(){ return _type ; }
+
+
+}

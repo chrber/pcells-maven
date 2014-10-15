@@ -1,0 +1,56 @@
+
+International Linear Collider :
+
+Status : 
+ILC first release of reconstruction software is done. 
+Geant 4 15 Million events simulated (data at desy only)
+10 Major sites Lyon, Ral,. 
+Reconstruction is now going on at desy. weeks / months
+Using grid middleware.
+
+Grid Tier II  :
+
+SL3 -> SL4 is nearly done.
+WMS is regualary overloaded by german sites.
+Currently 7 WMS gLite servers. 2 resource brokers.
+Do better distribution by aliasing 
+(manually was ok so far.)
+I improved by using poised system (DNS round robin
+based on load automatically).
+CERN on local UI's is using our WMS.
+Actually no agreement to run LHC services at all 
+except for CPU and Storage. 10000 per day per WMS.
+
+NAF : 1.3Million 2008/2009 will be spend for NAF. 
+Shared between 600 (480 DD)TByes HH + ZN. Lustre
+update in ZN with infinitband and moderate in
+interactive part and Grid part.
+
+CMS software installation (Wissing). Europa and Asia.
+All sites are ok after some problems (business as usual)
+CMS dCache upgrade. Speeding up the conversion process.
+Tier II upgrade of storage. Pledges are full filled for
+this year. Atlas missing 30 for now. next year in the
+order of 60. Cms will need 140 for next year.
+
+
+
+calice srm-dcache > new 26/27/28 of august. (data taking break)
+
+ilc in progress. details still in discussion.
+
+dCache as services and dcache.org.
+
+Summer students end of the week
+(2 grid and ILC sitting in the container)
+and 2 students from berlin (dCache hepix tests on
+storage systems)
+
+
+
+
+
+
+
+
+

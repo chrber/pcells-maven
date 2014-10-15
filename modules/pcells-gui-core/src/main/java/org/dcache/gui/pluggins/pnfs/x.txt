@@ -1,0 +1,50 @@
+$Revision: 12742 $ NameSpace Provider: diskCacheV111.namespace.provider.PermissionHandlerNameSpaceProvider@7722306c
+CacheLocation Provider:
+$Id: SQLNameSpaceProvider.java,v 1.19 2007-08-22 12:24:38 tigran Exp $
+
+List operations queued: 0
+
+Threads (4) Queue
+[0] 0
+[1] 0
+[2] 0
+[3] 0
+
+Thread groups (1)
+[0] 0
+
+Cache Location Queues
+[0] 0
+[1] 0
+[2] 0
+[3] 0
+
+Statistics:
+PnfsManagerV3 requests failed
+PnfsRenameMessage 305 1
+PnfsGetChecksumMessage 219056 0
+PnfsGetChecksumAllMessage 193 0
+PnfsSetStorageInfoMessage 0 0
+PnfsSetChecksumMessage 229527 0
+PnfsUpdateCacheStatisticsMessage 0 0
+PnfsGetFileAttributes 9229 317
+PnfsFlagMessage 229438 0
+PnfsDeleteEntryMessage 12958 2980
+PnfsSetLengthMessage 0 0
+PnfsGetCacheLocationsMessage 2798929 0
+PnfsGetCacheStatisticsMessage 0 0
+PnfsGetStorageInfoMessage 2786709 364713
+PnfsSetFileMetaDataMessage 0 0
+PnfsGetParentMessage 196 0
+PnfsClearCacheLocationMessage 572743 0
+PoolFileFlushedMessage 18874 0
+PnfsListDirectoryMessage 437 0
+PnfsCreateEntryMessage 229452 293
+PnfsGetFileMetaDataMessage 1729823 147734
+PnfsSetFileAttributes 301917 70
+PnfsMapPathMessage 201778 14
+PnfsAddCacheLocationMessage 283 13
+PnfsCreateDirectoryMessage 8171 7737
+Total 9350018 523872
+PnfsManagerV3.Folded requests failed
+Total 0 0
