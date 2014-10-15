@@ -505,7 +505,7 @@ public class      PoolIoMoverPanel
          setStatus( STATUS_IDLE , 2 , ((Exception)obj).getMessage() ) ;
       }else if( obj instanceof PoolManagerCellInfo ){
           PoolManagerCellInfo poolManagerCellInfo = (PoolManagerCellInfo)obj ;
-          String [] poolList = poolManagerCellInfo.getPoolList() ;
+          String [] poolList = (String[]) poolManagerCellInfo.getPoolCells().toArray();
           synchronized( _lock ){
               _waitingFor    = poolList.length ;
               _waitList      = new ArrayList() ;

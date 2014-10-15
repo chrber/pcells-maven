@@ -264,7 +264,7 @@ public class      JCostPanel
 
 
                 }
-                poolList = _poolInfo.getPoolList() ;
+                poolList = (String[]) _poolInfo.getPoolCells().toArray();
                 if( poolList == null )
                     throw new
                             Exception("Got empty pool list");

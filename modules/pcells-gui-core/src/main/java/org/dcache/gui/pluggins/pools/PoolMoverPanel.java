@@ -65,7 +65,7 @@ public class      PoolMoverPanel
             }else if( obj instanceof Exception ){
             }else if( obj instanceof PoolManagerCellInfo ){
                PoolManagerCellInfo poolManagerCellInfo = (PoolManagerCellInfo)obj ;
-               String [] poolList = poolManagerCellInfo.getPoolList() ;
+               String [] poolList = (String[]) poolManagerCellInfo.getPoolCells().toArray();
                synchronized( _lock ){
                      _waitingFor = poolList.length ;
                      _waitList = new ArrayList() ;

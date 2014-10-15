@@ -137,7 +137,7 @@ public class      JSshLoginPanel
          synchronized( _ioLock ){
              if( ! _connected )throw new IOException( "Not connected" ) ;
              DomainObjectFrame frame = 
-                     new DomainObjectFrame( obj , ++_ioCounter , id ) ;
+                     new DomainObjectFrame((Serializable) obj, ++_ioCounter , id ) ;
              _objOut.writeObject( frame ) ;
              _objOut.reset() ;
              _packetHash.put( frame , listener ) ;
@@ -153,7 +153,7 @@ public class      JSshLoginPanel
          synchronized( _ioLock ){
              if( ! _connected )throw new IOException( "Not connected" ) ;
              DomainObjectFrame frame = 
-                     new DomainObjectFrame( destination , obj , ++_ioCounter , id ) ;
+                     new DomainObjectFrame( destination , (Serializable) obj, ++_ioCounter , id ) ;
              _objOut.writeObject( frame ) ;
              _objOut.reset() ;
              _packetHash.put( frame , listener ) ;
