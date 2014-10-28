@@ -17,6 +17,20 @@
 
     <packaging>jar</packaging>
 
+    <repositories>
+        <repository>
+            <id>dcache.repository</id>
+            <url>https://download.dcache.org/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>dcache.repository</id>
+            <url>https://download.dcache.org/nexus/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <build>
         <plugins>
             <plugin>
@@ -40,7 +54,7 @@
                             <index>true</index>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <mainClass>org.pcells.util.CellGuiClassLoader</mainClass>
+                                <mainClass>org.pcells.services.gui.JMultiLogin</mainClass>
                             </manifest>
                             <manifestEntries>
                                 <mode>development</mode>
