@@ -2,31 +2,22 @@
 //
 package org.dcache.gui.pluggins.pools ;
 //
+import diskCacheV111.poolManager.PoolManagerCellInfo;
+import diskCacheV111.vehicles.IoJobInfo;
+import org.dcache.gui.pluggins.JHistogramDisplay;
+import org.dcache.gui.pluggins.JSwitchUpdatePanel;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.connection.DomainConnectionListener;
+import org.pcells.services.gui.CellGuiSkinHelper;
+import org.pcells.services.gui.util.RowObjectTableModel;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.tree.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
-import java.text.*;
-import java.io.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import dmg.cells.network.CellDomainNode ;
-import dmg.cells.nucleus.CellTunnelInfo ;
-import dmg.cells.nucleus.CellDomainInfo ;   
-import dmg.cells.nucleus.CellInfo ;   
-import diskCacheV111.vehicles.RestoreHandlerInfo ;
-import diskCacheV111.vehicles.IoJobInfo ;
-import diskCacheV111.util.PnfsId ;
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
-import org.pcells.services.gui.* ;
-import org.dcache.gui.pluggins.*;
-import org.pcells.services.gui.util.* ;
 
 public class      PoolIoMoverPanel 
        extends    JSwitchUpdatePanel 
@@ -513,7 +504,7 @@ public class      PoolIoMoverPanel
          setStatus( STATUS_IDLE , 2 , ((Exception)obj).getMessage() ) ;
       }else if( obj instanceof PoolManagerCellInfo ){
           PoolManagerCellInfo poolManagerCellInfo = (PoolManagerCellInfo)obj ;
-          String [] poolList = poolManagerCellInfo.getPoolList() ;
+          String [] poolList = (String[]) poolManagerCellInfo.getPoolNames().toArray();
           synchronized( _lock ){
               _waitingFor    = poolList.length ;
               _waitList      = new ArrayList() ;

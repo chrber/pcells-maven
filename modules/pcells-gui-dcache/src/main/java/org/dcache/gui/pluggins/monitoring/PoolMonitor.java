@@ -3,18 +3,16 @@
 package org.dcache.gui.pluggins.monitoring ;
 //
  
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.regex.*;
-import java.io.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.monitoring.* ;
-import dmg.cells.nucleus.NoRouteToCellException ;
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
-import diskCacheV111.pools.PoolCellInfo ;
+import diskCacheV111.poolManager.PoolManagerCellInfo;
+import diskCacheV111.pools.PoolCellInfo;
+import dmg.cells.nucleus.NoRouteToCellException;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.connection.DomainConnectionListener;
+import org.pcells.services.gui.monitoring.ComponentMonitorAdapter;
+import org.pcells.services.gui.monitoring.ComponentMonitorable;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PoolMonitor 
        extends ComponentMonitorAdapter 
@@ -121,7 +119,7 @@ public class PoolMonitor
    
    }
    private void analysePoolManagerReply( PoolManagerCellInfo info ){
-      String [] poolNames = info.getPoolList() ;
+      String [] poolNames = (String[]) info.getPoolCells().toArray();
       
       if( ( poolNames == null ) || ( poolNames.length == 0 ) ){
           setResult( ComponentMonitorable.RESULT_FATAL , 

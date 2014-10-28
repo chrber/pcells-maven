@@ -2,23 +2,20 @@
 //
 package org.dcache.gui.pluggins.pools ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
+import diskCacheV111.poolManager.PoolManagerCellInfo;
+import diskCacheV111.vehicles.IoJobInfo;
+import org.dcache.gui.pluggins.JHistogramDisplay;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.connection.DomainConnectionListener;
+import org.pcells.services.gui.CellGuiSkinHelper;
+
 import javax.swing.*;
-import javax.swing.table.*;
-import java.util.*;
-import java.io.* ;
-import java.util.prefs.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.* ;
-
-import org.dcache.gui.pluggins.*;
-
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
-import diskCacheV111.vehicles.IoJobInfo ;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.prefs.Preferences;
 
 public class      PoolMoverPanel
        extends    CellGuiSkinHelper.CellPanel 
@@ -67,7 +64,7 @@ public class      PoolMoverPanel
             }else if( obj instanceof Exception ){
             }else if( obj instanceof PoolManagerCellInfo ){
                PoolManagerCellInfo poolManagerCellInfo = (PoolManagerCellInfo)obj ;
-               String [] poolList = poolManagerCellInfo.getPoolList() ;
+               String [] poolList = (String[]) poolManagerCellInfo.getPoolNames().toArray();
                synchronized( _lock ){
                      _waitingFor = poolList.length ;
                      _waitList = new ArrayList() ;
