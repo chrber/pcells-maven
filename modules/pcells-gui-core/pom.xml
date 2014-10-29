@@ -85,6 +85,7 @@
                             <manifest>
                                 <mainClass>org.pcells.services.gui.JMultiLogin</mainClass>
                             </manifest>
+
                         </archive>
                     </configuration>
                     <executions>
