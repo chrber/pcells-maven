@@ -85,7 +85,20 @@
                             <manifest>
                                 <mainClass>org.pcells.services.gui.JMultiLogin</mainClass>
                             </manifest>
-
+                            <manifestEntries>
+                                <pcells-gui-jar-name> pcells-gui-core </pcells-gui-jar-name>
+                                <pcells-gui-jar-version> 2.0.3 </pcells-gui-jar-version>
+                                <pcells-gui-module-name-0> Commander </pcells-gui-module-name-0>
+                                <pcells-gui-module-name-1> LoginBroker </pcells-gui-module-name-1>
+                                <pcells-gui-module-name-2> Monitoring </pcells-gui-module-name-2>
+                                <pcells-gui-module-class-0> org.pcells.services.gui.YCommander </pcells-gui-module-class-0>
+                                <pcells-gui-module-class-1> org.pcells.services.gui.login.LoginBrokerPanel </pcells-gui-module-class-1>
+                                <pcells-gui-module-class-2> org.pcells.services.gui.monitoring.MonitoringPanelV1 </pcells-gui-module-class-2>
+                                <pcells-gui-module-position-0> 10 </pcells-gui-module-position-0>
+                                <pcells-gui-module-position-1> 11 </pcells-gui-module-position-1>
+                                <pcells-gui-module-position-2> 12 </pcells-gui-module-position-2>
+                                <pcells-gui-jar-help> Commander:/docs/help/help-pcells-core.idx </pcells-gui-jar-help>
+                            </manifestEntries>
                         </archive>
                     </configuration>
                     <executions>
