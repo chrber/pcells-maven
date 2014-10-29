@@ -75,6 +75,26 @@
                             <manifest>
                                 <mainClass>org.pcells.services.gui.JMultiLogin</mainClass>
                             </manifest>
+                            <manifestEntries>
+                                <pcells-gui-jar-name> pcells-gui-dcache </pcells-gui-jar-name>
+                                <pcells-gui-jar-version> 1.1.1 </pcells-gui-jar-version>
+                                <pcells-gui-module-name-0> Restore </pcells-gui-module-name-0>
+                                <pcells-gui-module-name-1> Transfers </pcells-gui-module-name-1>
+                                <pcells-gui-module-name-2> Pools </pcells-gui-module-name-2>
+                                <pcells-gui-module-name-3> PoolCosts </pcells-gui-module-name-3>
+                                <pcells-gui-module-name-4> Movers </pcells-gui-module-name-4>
+                                <pcells-gui-module-class-0> org.dcache.gui.pluggins.JRestoreDisplay </pcells-gui-module-class-0>
+                                <pcells-gui-module-class-1> org.dcache.gui.pluggins.JTransferPanel </pcells-gui-module-class-1>
+                                <pcells-gui-module-class-2> org.dcache.gui.pluggins.pools.PoolCommandPanel </pcells-gui-module-class-2>
+                                <pcells-gui-module-class-3> org.dcache.gui.pluggins.costs.JCostPanel </pcells-gui-module-class-3>
+                                <pcells-gui-module-class-4> org.dcache.gui.pluggins.pools.PoolIoMoverPanel </pcells-gui-module-class-4>
+                                <pcells-gui-module-position-0> 100 </pcells-gui-module-position-0>
+                                <pcells-gui-module-position-1> 200 </pcells-gui-module-position-1>
+                                <pcells-gui-module-position-2> 300 </pcells-gui-module-position-2>
+                                <pcells-gui-module-position-3> 420 </pcells-gui-module-position-3>
+                                <pcells-gui-module-position-4> 440 </pcells-gui-module-position-4>
+                                <pcells-gui-jar-help> dCache Core Modules:/docs/help/help-dcache-core.idx </pcells-gui-jar-help>
+                            </manifestEntries>
                         </archive>
                     </configuration>
                     <executions>
