@@ -35,5 +35,7 @@
         <module>modules/pcells-gui-dcache</module>
         <module>modules/pcells-gui-psu</module>
         <module>modules/pcells-common</module>
+        <module>modules/pcells-gui-flush</module>
+        <module>modules/pcells-gui-drives</module>
     </modules>
 </project>

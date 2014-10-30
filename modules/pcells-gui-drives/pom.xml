@@ -15,5 +15,76 @@
     <artifactId>pcells-gui-drives</artifactId>
     <version>2.0-SNAPSHOT</version>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>org.dcache</groupId>
+            <artifactId>pcells-gui-core</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dcache</groupId>
+            <artifactId>pcells-gui-dcache</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <outputDirectory>../org.pcells/target</outputDirectory>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                        <archive>
+                            <manifest>
+                                <mainClass>org.pcells.services.gui.JMultiLogin</mainClass>
+                            </manifest>
+                            <manifestEntries>
+                                <pcells-gui-jar-name> pcells-gui-drives </pcells-gui-jar-name>
+                                <pcells-gui-jar-version> 2.0.3 </pcells-gui-jar-version>
+                                <pcells-gui-module-name-0> DriveWatch </pcells-gui-module-name-0>
+                                <pcells-gui-module-class-0> org.dcache.gui.pluggins.drives.JTapeDriveWatchPanel </pcells-gui-module-class-0>
+                                <pcells-gui-module-position-0> 600 </pcells-gui-module-position-0>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>

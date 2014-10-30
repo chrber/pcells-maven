@@ -15,5 +15,80 @@
     <artifactId>pcells-gui-flush</artifactId>
     <version>2.0-SNAPSHOT</version>
 
-    
+    <dependencies>
+        <dependency>
+            <groupId>org.dcache</groupId>
+            <artifactId>dcache-core</artifactId>
+            <version>2.11.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.dcache</groupId>
+            <artifactId>pcells-gui-core</artifactId>
+            <version>2.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                    <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>2.4</version>
+                    <configuration>
+                        <outputDirectory>../org.pcells/target</outputDirectory>
+                        <descriptorRefs>
+                            <descriptorRef>jar-with-dependencies</descriptorRef>
+                        </descriptorRefs>
+                        <archive>
+                            <manifest>
+                                <mainClass>org.pcells.services.gui.JMultiLogin</mainClass>
+                            </manifest>
+                            <manifestEntries>
+                                <pcells-gui-jar-name> pcells-gui-flush </pcells-gui-jar-name>
+                                <pcells-gui-jar-version> 2.0.3 </pcells-gui-jar-version>
+                                <pcells-gui-module-name-0> PnfsManager </pcells-gui-module-name-0>
+                                <pcells-gui-module-name-1> FlushManager </pcells-gui-module-name-1>
+                                <pcells-gui-module-class-0> org.dcache.gui.pluggins.pnfs.PnfsManagerPanel </pcells-gui-module-class-0>
+                                <pcells-gui-module-class-1> org.dcache.gui.pluggins.flush.JFlushControlPanel </pcells-gui-module-class-1>
+                                <pcells-gui-module-position-0> 450 </pcells-gui-module-position-0>
+                                <pcells-gui-module-position-1> 500 </pcells-gui-module-position-1>
+                                <pcells-gui-jar-help> FlushManager:/docs/help/help-dcache-flush.idx </pcells-gui-jar-help>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>make-assembly</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>single</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
