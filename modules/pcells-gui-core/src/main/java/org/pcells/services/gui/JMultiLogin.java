@@ -627,7 +627,8 @@ public class JMultiLogin extends JFrame implements ActionListener, MenuListener 
         private long    _updateTime          = (long)( 10 * 60 * 1000 ) ;
         private String  _ourVersionLocation  = "/docs/help/version" ;
         private int  [] _currentVersion       = { 0 , 0 } ;
-        private String  _currentVersionString = "0.0" ;
+        // This seems to be the place where the actual version is set
+        private String  _currentVersionString = "2.0.3" ;
         private String  _serverVersionString  = null ;
         private String  _versionUrlString     = "http://www.dcache.org/downloads/gui/version.txt";
         private VersionUpdate(){
