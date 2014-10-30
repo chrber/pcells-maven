@@ -49,9 +49,6 @@
                             <descriptorRef>jar-with-dependencies</descriptorRef>
                         </descriptorRefs>
                         <archive>
-                            <manifest>
-                                <mainClass>org.pcells.services.gui.JMultiLogin</mainClass>
-                            </manifest>
                             <manifestEntries>
                                 <pcells-gui-jar-name> pcells-gui-psu </pcells-gui-jar-name>
                                 <pcells-gui-jar-version> 2.0.3 </pcells-gui-jar-version>
