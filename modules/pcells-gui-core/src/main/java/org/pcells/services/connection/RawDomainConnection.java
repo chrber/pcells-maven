@@ -1,42 +1,46 @@
-// $Id: RawDomainConnection.java,v 1.1 2004/06/21 22:30:27 cvs Exp $
+// $Id: RawDomainConnection.java,v 1.2 2006-11-19 09:14:19 patrick Exp $
 //
 package org.pcells.services.connection ;
 //
 
 import java.net.Socket;
+
 /**
  */
 public class RawDomainConnection extends DomainConnectionAdapter {
 
-   private String _hostname   = null ;
-   private int    _portnumber = 0 ;
-   private Socket _socket     = null ;
+   private String _hostname;
+   private int    _portnumber;
+   private Socket _socket;
 
    public RawDomainConnection( String hostname , int portnumber ){
       _hostname   = hostname ;
       _portnumber = portnumber ;
    }
+   @Override
    public void go() throws Exception {
-   
+
       _socket = new Socket( _hostname , _portnumber ) ;
       setIoStreams( _socket.getInputStream() , _socket.getOutputStream() ) ;
-      
+
       try{
          super.go() ;
       }finally{
          try{ _socket.close() ; }catch(Exception ee ){}
       }
-      
+
    }
-   private class RunConnection 
+   private class RunConnection
            implements Runnable, DomainConnectionListener, DomainEventListener {
-      
-        
-      public RunConnection(  ) throws Exception {
+
+
+      public RunConnection(  )
+      {
          System.out.println("class runConnection init");
          addDomainEventListener(this);
          new Thread(this).start() ;
       }
+      @Override
       public void run(){
          try{
             go() ;
@@ -45,6 +49,7 @@ public class RawDomainConnection extends DomainConnectionAdapter {
             ee.printStackTrace();
          }
       }
+      @Override
       public void domainAnswerArrived( Object obj , int id ){
           System.out.println("Answer : "+obj);
           if( id == 54 ){
@@ -54,7 +59,8 @@ public class RawDomainConnection extends DomainConnectionAdapter {
                 System.out.println("Exception in sendObject"+ee);
              }
           }
-      } 
+      }
+      @Override
       public void connectionOpened( DomainConnection connection ){
          System.out.println("DomainConnection : connectionOpened");
          try{
@@ -63,21 +69,25 @@ public class RawDomainConnection extends DomainConnectionAdapter {
             System.out.println("Exception in sendObject"+ee);
          }
       }
+      @Override
       public void connectionClosed( DomainConnection connection ){
          System.out.println("DomainConnection : connectionClosed");
       }
+      @Override
       public void connectionOutOfBand( DomainConnection connection ,
                                        Object subject                ){
          System.out.println("DomainConnection : connectionOutOfBand");
       }
    }
-   public void test() throws Exception {
+   public void test()
+   {
       System.out.println("Starting test");
       new RunConnection() ;
    }
-   public static void main( String [] args )throws Exception {
+   public static void main( String [] args )
+   {
       if( args.length < 2 ){
-      
+
           System.err.println("Usage : <hostname> <portNumber>");
           System.exit(4);
       }

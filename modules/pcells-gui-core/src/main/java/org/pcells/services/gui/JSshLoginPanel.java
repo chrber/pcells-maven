@@ -129,7 +129,7 @@ public class      JSshLoginPanel
      
      public String getAuthenticatedUser(){ return getLogin() ; }
      
-     public int sendObject( Object obj , 
+     public int sendObject( Serializable obj ,
                             DomainConnectionListener listener ,
                             int id 
                                                  ) throws IOException {
@@ -145,7 +145,7 @@ public class      JSshLoginPanel
          }
      }
      public int sendObject( String destination ,
-                            Object obj , 
+                            Serializable obj ,
                             DomainConnectionListener listener ,
                             int id 
                                                  ) throws IOException {
