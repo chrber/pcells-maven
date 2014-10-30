@@ -29,5 +29,6 @@
         <module>modules/pcells-gui-core</module>
         <module>modules/pcells-gui-dcache</module>
         <module>modules/pcells-gui-psu</module>
+        <module>modules/pcells-common</module>
     </modules>
 </project>

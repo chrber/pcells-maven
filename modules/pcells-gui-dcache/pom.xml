@@ -82,7 +82,7 @@
                             </manifest>
                             <manifestEntries>
                                 <pcells-gui-jar-name> pcells-gui-dcache </pcells-gui-jar-name>
-                                <pcells-gui-jar-version> 1.1.1 </pcells-gui-jar-version>
+                                <pcells-gui-jar-version> 2.0.3 </pcells-gui-jar-version>
                                 <pcells-gui-module-name-0> Restore </pcells-gui-module-name-0>
                                 <pcells-gui-module-name-1> Transfers </pcells-gui-module-name-1>
                                 <pcells-gui-module-name-2> Pools </pcells-gui-module-name-2>
