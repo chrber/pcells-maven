@@ -42,8 +42,8 @@ public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassL
    // pcells-gui-module-help-0:     /docs/GuiMasterHelp.html
    //
    public static class Version implements Comparable {
-      private String _versionString = "0.0.0" ;
-      private Version(){ _versionString = "0.0.0" ; }
+      private String _versionString = "2.0.3" ;
+      private Version(){ _versionString = "2.0.3" ; }
       private Version(String versionString){
          if( versionString == null )return ;
          _versionString = versionString.trim() ;
