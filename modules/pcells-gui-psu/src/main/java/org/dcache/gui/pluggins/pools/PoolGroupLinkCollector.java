@@ -1,6 +1,6 @@
 // $Id: PoolGroupLinkCollector.java,v 1.3 2008/08/04 19:57:51 cvs Exp $
 //
-package org.dcache.gui.pluggins.pools ;
+package org.dcache.gui.pluggins.pools;
 //
 import diskCacheV111.vehicles.CostModulePoolInfoTable;
 import org.pcells.services.connection.DomainConnection;
