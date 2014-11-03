@@ -155,7 +155,7 @@ public class      LoginBrokerPanel
         }else if( source == _updateButton ){
             destination = _currentDestination ;
         }
-        _logger.debug("LoginBrokerPanel source: {} destination: {}", source, destination);
+        _logger.debug("LoginBrokerPanel destination: {} source of event: {}", destination, source);
         if( ( destination == null ) || ( destination.length() == 0 ) )return ;
         _anyBroker.setText( destination ) ;
         String command = "ls -l -binary" ;
