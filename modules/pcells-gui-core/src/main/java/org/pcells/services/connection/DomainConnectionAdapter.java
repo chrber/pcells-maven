@@ -3,6 +3,7 @@
 package org.pcells.services.connection ;
 
 import dmg.cells.applets.login.DomainObjectFrame;
+import org.slf4j.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.Map;
 /**
  */
 public class DomainConnectionAdapter implements DomainConnection {
+
+     private final static Logger _logger = org.slf4j.LoggerFactory.getLogger(DomainConnectionAdapter.class);
 
      private Map<DomainObjectFrame, DomainConnectionListener>   _packetHash = new HashMap<>() ;
      private final Object    _ioLock     = new Object() ;
@@ -42,17 +45,17 @@ public class DomainConnectionAdapter implements DomainConnection {
 
      }
      public void go() throws Exception {
-        //System.out.println("runConnection started");
+        _logger.debug("runConnection started");
         runConnection() ;
-        //System.out.println("runConnection OK");
+         _logger.debug("runConnection OK");
 
         informListenersOpened() ;
 
-        //System.out.println("runReceiver starting");
+         _logger.debug("runReceiver starting");
         try{
            runReceiver() ;
         }finally{
-           //System.out.println("runReceiver finished");
+            _logger.debug("runReceiver finished");
            informListenersClosed() ;
         }
 
@@ -105,9 +108,9 @@ public class DomainConnectionAdapter implements DomainConnection {
             //System.out.println(" >>"+check+"<<");
 
          }while( ! check.equals( "$BINARY$" )  ) ;
-         //System.out.println("opening object streams");
+         _logger.debug("opening object streams");
          _objOut = new ObjectOutputStream( _outputStream ) ;
-         //System.out.println("opening input object streams");
+         _logger.debug("opening input object streams");
          _objIn  = new ObjectInputStream( inputstream)  ;
 
      }
@@ -129,16 +132,17 @@ public class DomainConnectionAdapter implements DomainConnection {
            synchronized( _ioLock ){
 
               frame    = (DomainObjectFrame) obj ;
+              _logger.debug("Frame with ID {} received", frame.getId());
               listener = _packetHash.remove( frame ) ;
               if( listener == null ){
-                 System.err.println("Message without receiver : "+frame ) ;
+                 _logger.debug("Message without receiver : "+frame );
                  continue ;
               }
            }
            try{
                listener.domainAnswerArrived( frame.getPayload() , frame.getSubId() ) ;
            }catch(Exception eee ){
-               System.out.println( "Problem in domainAnswerArrived : "+eee ) ;
+               _logger.error( "Problem in domainAnswerArrived : "+eee ); ;
            }
         }
      }
@@ -156,7 +160,7 @@ public class DomainConnectionAdapter implements DomainConnection {
 
              DomainObjectFrame frame =
                      new DomainObjectFrame( obj , ++_ioCounter , id ) ;
-
+             _logger.debug("Frame with ID {} sent to destination {}", frame.getId(), frame.getDestination());
              _objOut.writeObject( frame ) ;
              _objOut.reset() ;
              _packetHash.put( frame , listener ) ;
@@ -169,7 +173,7 @@ public class DomainConnectionAdapter implements DomainConnection {
                             DomainConnectionListener listener ,
                             int id
                                                  ) throws IOException {
-//         System.out.println("Sending : "+obj ) ;
+         _logger.debug("Sending : "+obj );
          synchronized( _ioLock ){
              if( ! _connected ) {
                  throw new IOException("Not connected");
@@ -177,6 +181,7 @@ public class DomainConnectionAdapter implements DomainConnection {
              DomainObjectFrame frame =
                      new DomainObjectFrame( destination , obj , ++_ioCounter , id ) ;
              _objOut.writeObject( frame ) ;
+             _logger.debug("Frame with ID {} sent to destination {}", frame.getId(), frame.getDestination());
              _objOut.reset() ;
              _packetHash.put( frame , listener ) ;
              return _ioCounter ;
