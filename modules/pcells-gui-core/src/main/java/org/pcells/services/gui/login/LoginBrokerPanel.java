@@ -155,12 +155,15 @@ public class      LoginBrokerPanel
         }else if( source == _updateButton ){
             destination = _currentDestination ;
         }
+        _logger.debug("LoginBrokerPanel source: {} destination: {}", source, destination);
         if( ( destination == null ) || ( destination.length() == 0 ) )return ;
         _anyBroker.setText( destination ) ;
         String command = "ls -l -binary" ;
 
         try{
+            _logger.debug("Send message to {}, command: {}", destination, command);
             _connection.sendObject( destination , command , this , 1000 ) ;
+            _logger.debug("Message has been sent.");
             _currentDestination = destination ;
             setCurrentModel( _verifyBox.isSelected() ? _longModel : _shortModel ) ;
         }catch(Exception ee ){
@@ -173,6 +176,7 @@ public class      LoginBrokerPanel
         }
     }
     public void domainAnswerArrived( Object obj , int id ){
+        _logger.debug("Domain answer arrived. {} and ID: {}", obj.getClass(), id);
         if( id == 1000 ){
             String destination = _currentDestination ;
             if( obj == null ){
@@ -231,6 +235,7 @@ public class      LoginBrokerPanel
 
     }
     private void loginBrokerInfoArrived( LoginBrokerInfo [] info ){
+        _logger.debug("LoginBroker info arrived: {}", info);
         if( _verifyBox.isSelected() ){
             _infoList = new LoginBrokerInfoRow[info.length] ;
             _model.clear() ;
