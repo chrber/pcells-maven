@@ -116,7 +116,7 @@ public class Ssh2DomainConnection
                         informListenersOpened();
                         runReceiver();
                     } catch (Throwable e) {
-                        e.printStackTrace();
+                        _logger.error("Problem during informListenersOpened: {}",e);
                     } finally {
                         informListenersClosed();
                     }
@@ -127,7 +127,7 @@ public class Ssh2DomainConnection
             } else {
             }
         } catch (Exception e) {
-            _logger.error("Ssh2 Exception caught: " + e.toString());
+            _logger.error("Ssh2 Exception caught: {}", e.toString());
         } finally {
             ssh2Client.stop();
         }
@@ -153,6 +153,7 @@ public class Ssh2DomainConnection
         try {
             in.close();
         } catch (Exception ee) {
+            _logger.debug("Problem during closing identity file read input stream: {}", ee);
         }
 
         _rsaAuth = new SshAuthRsa(key);
@@ -245,8 +246,7 @@ public class Ssh2DomainConnection
             publicKey = generatePublicKey(get_publicKeyFilePath(), algorithm);
             _logger.debug("Generated Public Key");
         } catch (Exception e) {
-            _logger.error("Problem getting public key: ");
-            e.printStackTrace();
+            _logger.error("Problem getting public key: {}", e);
         }
         PrivateKey privateKey = null;
         try {
@@ -254,8 +254,7 @@ public class Ssh2DomainConnection
             privateKey = generatePrivateKey(get_privateKeyFilePath(), algorithm);
             _logger.debug("Generated Private Key");
         } catch (Exception e) {
-            _logger.error("Problem getting private key: ");
-            e.printStackTrace();
+            _logger.error("Problem getting private key: {}", e);
         }
         return new KeyPair(publicKey, privateKey);
     }
@@ -266,7 +265,7 @@ public class Ssh2DomainConnection
         try {
             fis = new FileInputStream(f);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            _logger.error("File {} not found: {}", filename, e);
         }
         DataInputStream dis = new DataInputStream(fis);
         byte[] keyBytes = new byte[(int)f.length()];
@@ -274,7 +273,7 @@ public class Ssh2DomainConnection
             dis.readFully(keyBytes);
             dis.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            _logger.error("Error reading file {}: {}", filename, e);
         }
         _logger.debug("Read file: " + filename);
         return keyBytes;
@@ -318,8 +317,7 @@ public class Ssh2DomainConnection
             _logger.debug("Pinging host:" + InetAddress.getByName(hostname).isReachable(1000));
             _logger.debug("Host is reachable");
         } catch (Exception e) {
-            _logger.error("Host is not reachable");
-            e.printStackTrace();
+            _logger.error("Host {} is not reachable: {}", hostname, e);
         }
 
         _logger.debug("Starting Test");
@@ -360,8 +358,7 @@ public class Ssh2DomainConnection
 //                connectionOpened(new Ssh2DomainConnection(_hostname, _portnumber));
                 _logger.debug("After go() call");
             } catch (Exception ee) {
-                _logger.error("RunConnection got : " + ee);
-                ee.printStackTrace();
+                _logger.error("RunConnection got exception: {}", ee);
             }
         }
 
@@ -371,7 +368,7 @@ public class Ssh2DomainConnection
                 try {
                     sendObject("logoff", this, 55);
                 } catch (Exception ee) {
-                    _logger.error("Exception in sendObject" + ee);
+                    _logger.error("Exception in sendObject: {}", ee);
                 }
             }
         }
@@ -381,7 +378,7 @@ public class Ssh2DomainConnection
             try {
                 sendObject("System", "ps -f", this, 54);
             } catch (Exception ee) {
-                _logger.error("Exception in sendObject" + ee);
+                _logger.error("Exception in sendObject: {}", ee);
             }
         }
 

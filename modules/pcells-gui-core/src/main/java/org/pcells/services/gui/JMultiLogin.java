@@ -448,10 +448,14 @@ public class JMultiLogin extends JFrame implements ActionListener, MenuListener 
                                         pw.println(line);
                                     }
                                 }finally{
-                                    try{ subbr.close() ; }catch(Exception ae){}
+                                    try{
+                                        subbr.close();
+                                    } catch (Exception ae) {
+                                        System.out.println("Problem during closing BufferedReader: "+ ae);
+                                    }
                                 }
                             }catch(Exception eee ){
-                                _logger.error("Problem reading subUrl : "+subUrl+" : "+eee);
+                                System.out.println("Problem reading subUrl : "+subUrl+" : "+eee);
                                 continue ;
                             }
                         }
@@ -462,7 +466,11 @@ public class JMultiLogin extends JFrame implements ActionListener, MenuListener 
                 }
 
             }finally{
-                try{ br.close() ; }catch(Exception aeee){}
+                try{
+                    br.close();
+                } catch (Exception ee) {
+                    System.out.println("HelpMenu: Problem during closing the BufferedReader: " + ee);
+                }
             }
         }catch(Exception ae ){
             _logger.error("Problem in reading main index : "+ae);
@@ -702,7 +710,11 @@ public class JMultiLogin extends JFrame implements ActionListener, MenuListener 
                         }
                     }
                 }finally{
-                    try{ br.close() ; }catch(Exception eee){}
+                    try{
+                        br.close();
+                    } catch (Exception ee) {
+                        System.out.println("Problem during closing BufferedReader: "+ ee);
+                    }
                 }
             }catch(Exception ee ){
                 _logger.error("Problem reading version "+ee);
@@ -766,7 +778,11 @@ public class JMultiLogin extends JFrame implements ActionListener, MenuListener 
                     }
                     return ;
                 }finally{
-                    try{ br.close() ; }catch(Exception eee){}
+                    try{
+                        br.close();
+                    } catch (Exception ee){
+                        System.out.println("Problem during closing BufferedReader: "+ ee);
+                    }
                 }
             }catch(Exception ee ){
                 _logger.error("Problem reading version "+ee);
@@ -984,7 +1000,11 @@ public class JMultiLogin extends JFrame implements ActionListener, MenuListener 
             int pos = response.indexOf('=') ;
             if( pos < 0 ){
                 _ourRoot.remove(response);
-                try{ _ourRoot.sync() ; }catch(Exception ee ){}
+                try{
+                    _ourRoot.sync();
+                } catch (Exception ee) {
+                    System.out.println("Problem during sync with persistent store.");
+                }
                 System.getProperties().remove(response);
                 return ;
             }
@@ -999,7 +1019,11 @@ public class JMultiLogin extends JFrame implements ActionListener, MenuListener 
             String value = response.substring(pos+1);
             System.setProperty(key,value);
             _ourRoot.put(key,value);
-            try{ _ourRoot.sync() ; }catch(Exception ee ){}
+            try{
+                _ourRoot.sync();
+            } catch (Exception ee ) {
+                System.out.println("Problem during sync with persistent store.");
+            }
             CellGuiSkinHelper.loadProperties() ;
 
             Iterator it = System.getProperties().entrySet().iterator() ;
@@ -1259,9 +1283,9 @@ public class JMultiLogin extends JFrame implements ActionListener, MenuListener 
                 _master = new CellGuiSkinHelper.CellPanel( new BorderLayout(4,4) ) ;
                 _master.setBorder( new CellBorder( "Console" , 30 ) ) ;
 
-                _master.add( _scrollPane = new JScrollPane(_text) ) ;
+                _master.add(_scrollPane = new JScrollPane(_text)) ;
 
-                CellGuiSkinHelper.setComponentProperties( _showOUT ) ;
+                CellGuiSkinHelper.setComponentProperties(_showOUT) ;
                 CellGuiSkinHelper.setComponentProperties( _showERR ) ;
 
                 JPanel south = new CellGuiSkinHelper.CellPanel(new FlowLayout()) ;

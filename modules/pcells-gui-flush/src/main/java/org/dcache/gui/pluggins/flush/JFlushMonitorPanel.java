@@ -2,23 +2,29 @@
 //
 package org.dcache.gui.pluggins.flush ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
+import diskCacheV111.hsmControl.flush.HsmFlushControlCore;
+import diskCacheV111.pools.PoolCellInfo;
+import diskCacheV111.pools.PoolCostInfo;
+import diskCacheV111.pools.StorageClassFlushInfo;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.connection.DomainConnectionListener;
+import org.pcells.services.gui.CellGuiSkinHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.*;
-import javax.swing.table.*;
-import java.util.*;
-import java.io.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.* ;
-
-import org.dcache.gui.pluggins.* ;
-
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
-import diskCacheV111.hsmControl.flush.* ;
-import diskCacheV111.pools.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 
 public class      JFlushMonitorPanel
        extends    CellGuiSkinHelper.CellPanel {
@@ -303,7 +309,9 @@ public class      JFlushMonitorPanel
      *                           Basic Table
      */
    private class HappyTable extends JTable implements Runnable {
-   
+
+      private final Logger _logger = LoggerFactory.getLogger(HappyTable.class);
+
       private java.util.List     _list              = null ;
               java.util.List     _entryList         = null ;
       private EntryComparator    _currentComparator = null ;
@@ -399,8 +407,8 @@ public class      JFlushMonitorPanel
             for( int i = 0 ; i < row.length ; i++ ){
                try{
                     list.add( _entryList.get(row[i]) ) ;
-               }catch(Exception e ){
-
+               } catch (Exception ee) {
+                   _logger.error("Problem during adding to list: {}", ee);
                }
             }
          }

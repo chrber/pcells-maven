@@ -46,8 +46,8 @@ public abstract class AbstractHistogramModel
      *         or an empty array if no list data listeners
      *         are currently registered
      *
-     * @see #addListDataListener
-     * @see #removeListDataListener
+//     * @see #addListDataListener
+//     * @see #removeListDataListener
      *
      * @since 1.4
      */

@@ -8,6 +8,8 @@ import dmg.protocols.ssh.*;
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainConnectionListener;
 import org.pcells.services.connection.DomainEventListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +24,9 @@ import java.util.Vector;
 public class      JSshLoginPanel 
        extends    JLoginPanel 
        implements SshClientAuthentication {
-       
+
+   private final static Logger _logger = LoggerFactory.getLogger(JSshLoginPanel.class);
+
    private SshDomainConnection _connection = new SshDomainConnection() ;
    private ObjectOutputStream _objOut = null ;
    private ObjectInputStream  _objIn  = null ;
@@ -43,17 +47,21 @@ public class      JSshLoginPanel
 
 
    private class ConnectionThread implements Runnable {
+
+      private final Logger _logger = LoggerFactory.getLogger(ConnectionThread.class);
+
       public void run(){
          try{
             runConnectionProtocol() ;
             _connection.informListenersOpened() ;
          }catch( SshAuthenticationException ae){
+            _logger.error("Login failed, problem with ssh auth: {}", ae);
             setErrorMessage( "Login Failed") ;
             displayLoginPanel() ;
             return ;
          }catch( Exception e){
-            e.printStackTrace();
-            setErrorMessage( "Login Failed ("+e+")") ;
+            _logger.error("Login Failed: {}", e);
+            setErrorMessage( "Login Failed") ;
             displayLoginPanel() ;
             return ;
          }
@@ -62,10 +70,14 @@ public class      JSshLoginPanel
          try{
             runReceiver() ;
          }catch(Exception ee ){
-            ee.printStackTrace();
+            _logger.error("Connection broken: {}", ee);
             setErrorMessage("Connection Broken");
          }finally{
-            try{ _socket.close() ;}catch( Exception ce ){}      
+            try{
+                _socket.close();
+            } catch (Exception ce) {
+                _logger.error("Problem during closing socket: {}", ce);
+            }
             _connection.informListenersClosed() ;
             displayLoginPanel() ;
          }
@@ -96,22 +108,21 @@ public class      JSshLoginPanel
          DomainConnectionListener listener = null ;
          while( true ){
             if( ( obj = _objIn.readObject()  ) == null )break ;
-            System.out.println("Received : "+obj ) ;
+            _logger.debug("Received : "+obj ) ;
             if( ! ( obj instanceof DomainObjectFrame ) )continue ;
             synchronized( _connection._ioLock ){
                frame    = (DomainObjectFrame) obj ;
                listener = (DomainConnectionListener)_connection._packetHash.remove( frame ) ;
                if( listener == null ){
-                  System.err.println("Message without receiver : "+frame ) ;
+                  _logger.error("Message without receiver : "+frame );
                   continue ;
                }
             }
             try{
-                System.out.println("Delivering : "+frame.getPayload() ) ;
+                _logger.debug("Delivering : "+frame.getPayload() );
                 listener.domainAnswerArrived( frame.getPayload() , frame.getSubId() ) ;
-            }catch(Exception eee ){
-                eee.printStackTrace();
-                System.out.println( "Problem in domainAnswer Arrived : "+eee ) ;
+            } catch (Exception ee){
+                _logger.error( "Problem in domainAnswer Arrived : {}"+ee);
             }
          }
       }
@@ -121,6 +132,8 @@ public class      JSshLoginPanel
   //   domain connection interface 
   //  
   public class SshDomainConnection implements DomainConnection {
+
+     private final Logger _logger = LoggerFactory.getLogger(SshDomainConnection.class);
      private Hashtable _packetHash = new Hashtable() ;
      private Object    _ioLock     = new Object() ; 
      private int       _ioCounter  = 100 ;
@@ -133,7 +146,7 @@ public class      JSshLoginPanel
                             DomainConnectionListener listener ,
                             int id 
                                                  ) throws IOException {
-         System.out.println("Sending : "+obj ) ;
+         _logger.debug("Sending : "+obj ) ;
          synchronized( _ioLock ){
              if( ! _connected )throw new IOException( "Not connected" ) ;
              DomainObjectFrame frame = 
@@ -149,7 +162,7 @@ public class      JSshLoginPanel
                             DomainConnectionListener listener ,
                             int id 
                                                  ) throws IOException {
-         System.out.println("Sending : "+obj ) ;
+         _logger.debug("Sending : "+obj ) ;
          synchronized( _ioLock ){
              if( ! _connected )throw new IOException( "Not connected" ) ;
              DomainObjectFrame frame = 
@@ -164,9 +177,10 @@ public class      JSshLoginPanel
         synchronized( _ioLock ){
           _listener.addElement(listener) ;
           if( _connected ){
-              try{  listener.connectionOpened( this ) ;
+              try{
+                  listener.connectionOpened( this );
               }catch( Throwable t ){
-                 t.printStackTrace() ;
+                 _logger.error("Problem during opening connection listener: {}", t);
               }
           }
         }
@@ -185,7 +199,7 @@ public class      JSshLoginPanel
                DomainEventListener listener = (DomainEventListener)e.nextElement() ;
                try{  listener.connectionOpened( this ) ;
                }catch( Throwable t ){
-                  t.printStackTrace() ;
+                  _logger.error("Problem with opening listener: {}", t);
                }
            }
         }
@@ -199,7 +213,7 @@ public class      JSshLoginPanel
                DomainEventListener listener = (DomainEventListener)e.nextElement() ;
                try{  listener.connectionClosed( this ) ;
                }catch( Throwable t ){
-                  t.printStackTrace() ;
+                  _logger.error("Problem closing listener: {}", t);
                }
            }
         }
@@ -226,7 +240,7 @@ public class      JSshLoginPanel
   public String getUser( ){
      _requestCounter = 0 ;
      String loginName = getLogin() ;
-     System.out.println( "getUser : "+loginName ) ;
+     _logger.debug("getUser : " + loginName) ;
      return loginName ;
   }
   public SshSharedKey  getSharedKey( InetAddress host ){ 
@@ -235,7 +249,7 @@ public class      JSshLoginPanel
 
   public SshAuthMethod getAuthMethod(){  
       String password = getPassword() ;
-      System.out.println("getAuthMethod("+_requestCounter+") "+password) ;
+      _logger.debug("getAuthMethod(" + _requestCounter + ") " + password) ;
       return _requestCounter++ > 2 ? 
              null : 
              new SshAuthPassword( password) ;

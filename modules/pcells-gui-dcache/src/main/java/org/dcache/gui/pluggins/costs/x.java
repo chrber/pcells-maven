@@ -1,3 +1,5 @@
+package org.dcache.gui.pluggins.costs;
+
 import java.text.* ;
 
 public class x {

@@ -4,6 +4,8 @@ package org.pcells.services.gui ;
 //
 
 import org.pcells.services.connection.DomainConnection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -15,7 +17,8 @@ import java.awt.event.ActionListener;
 public class CellSelection 
        extends JPanel 
        implements ActionListener      {
-       
+
+   private final static Logger _logger = LoggerFactory.getLogger(CellSelection.class);
    private DomainConnection _connection = null ;
    private Font _bigFont = new Font( "Times" , Font.BOLD , 26 ) ;
    
@@ -91,7 +94,7 @@ public class CellSelection
                 try{
                    Thread.currentThread().sleep(10000) ;
                 }catch(Exception ee ){
-                
+                    _logger.error("Problem during thread sleep: "+ ee);
                 }
                 displayLists();
              }

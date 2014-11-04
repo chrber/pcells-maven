@@ -12,10 +12,10 @@ doesn't handle those transfer queues centrally. The central dCache components
 delegate all those transfers immediatly to the most appropriate pool.
 dCache essentially handles the following queue types :
 <ol type="a">
-  <li>Transfers between dCache pools and client applications. (dCap,ftp,http...)</strong>
-  <li>Transfers from HSM systems into a dCache pool</strong>
-  <li>Transfers from dCache pools into HSM systems</strong>.
-  <li>Transfers between pools.
+  <li>Transfers between dCache pools and client applications. (dCap,ftp,http...)</li>
+  <li>Transfers from HSM systems into a dCache pool</li>
+  <li>Transfers from dCache pools into HSM systems</li>.
+  <li>Transfers between pools.</li>
 </ol>
 To make those highly distributed queues managable, dCache builds <em>virtual
 queues</em> which are consequently the sum of the queues of same type from the

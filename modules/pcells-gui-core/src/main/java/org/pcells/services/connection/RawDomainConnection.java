@@ -3,12 +3,16 @@
 package org.pcells.services.connection ;
 //
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.Socket;
 
 /**
  */
 public class RawDomainConnection extends DomainConnectionAdapter {
 
+   private final static Logger _logger = LoggerFactory.getLogger(RawDomainConnection.class);
    private String _hostname;
    private int    _portnumber;
    private Socket _socket;
@@ -26,7 +30,11 @@ public class RawDomainConnection extends DomainConnectionAdapter {
       try{
          super.go() ;
       }finally{
-         try{ _socket.close() ; }catch(Exception ee ){}
+         try{
+             _socket.close();
+         } catch (Exception ee ) {
+             _logger.error("Problem during closing socket for RawDomainConnection.");
+         }
       }
 
    }
@@ -36,7 +44,7 @@ public class RawDomainConnection extends DomainConnectionAdapter {
 
       public RunConnection(  )
       {
-         System.out.println("class runConnection init");
+         _logger.debug("class runConnection init");
          addDomainEventListener(this);
          new Thread(this).start() ;
       }
@@ -45,43 +53,43 @@ public class RawDomainConnection extends DomainConnectionAdapter {
          try{
             go() ;
          }catch(Exception ee ){
-            System.out.println("RunConnection got : "+ee);
+            _logger.error("RunConnection got : "+ee);
             ee.printStackTrace();
          }
       }
       @Override
       public void domainAnswerArrived( Object obj , int id ){
-          System.out.println("Answer : "+obj);
+          _logger.debug("Answer : "+obj);
           if( id == 54 ){
              try{
                 sendObject(  "logoff" , this , 55 ) ;
              }catch(Exception ee ){
-                System.out.println("Exception in sendObject"+ee);
+                _logger.error("Exception in sendObject"+ee);
              }
           }
       }
       @Override
       public void connectionOpened( DomainConnection connection ){
-         System.out.println("DomainConnection : connectionOpened");
+         _logger.debug("DomainConnection : connectionOpened");
          try{
             sendObject( "System" , "ps -f" , this , 54 ) ;
          }catch(Exception ee ){
-            System.out.println("Exception in sendObject"+ee);
+            _logger.error("Exception in sendObject"+ee);
          }
       }
       @Override
       public void connectionClosed( DomainConnection connection ){
-         System.out.println("DomainConnection : connectionClosed");
+         _logger.debug("DomainConnection : connectionClosed");
       }
       @Override
       public void connectionOutOfBand( DomainConnection connection ,
                                        Object subject                ){
-         System.out.println("DomainConnection : connectionOutOfBand");
+         _logger.error("DomainConnection : connectionOutOfBand");
       }
    }
    public void test()
    {
-      System.out.println("Starting test");
+      _logger.debug("Starting test");
       new RunConnection() ;
    }
    public static void main( String [] args )

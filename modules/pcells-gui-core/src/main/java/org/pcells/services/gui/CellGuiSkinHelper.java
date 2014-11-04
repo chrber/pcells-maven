@@ -2,12 +2,17 @@
 //
 package org.pcells.services.gui ;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.HashMap;
 
 public class CellGuiSkinHelper  {
+
+   private final static Logger _logger = LoggerFactory.getLogger(CellGuiSkinHelper.class);
 
 //   static Color __blue   = new Color(190,40,40);
 //   static Color __black  = new Color(94, 105, 176);
@@ -88,8 +93,12 @@ public class CellGuiSkinHelper  {
         }
         type = System.getProperty("skin.type") ;
 	if( type != null ){
-	  try{  __type = Integer.parseInt(type) ;}catch(Exception ee){}
-	}
+	  try{
+          __type = Integer.parseInt(type);
+      } catch (Exception ee) {
+          _logger.error("Problem during SkinType determination: "+ ee);
+      }
+    }
         String trans = System.getProperty("skin.trans") ;
         __transparent = ( trans != null ) && trans.equals("true") ;
         trans = System.getProperty("skin.mode") ;

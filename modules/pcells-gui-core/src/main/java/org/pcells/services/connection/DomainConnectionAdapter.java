@@ -142,7 +142,7 @@ public class DomainConnectionAdapter implements DomainConnection {
            try{
                listener.domainAnswerArrived( frame.getPayload() , frame.getSubId() ) ;
            }catch(Exception eee ){
-               _logger.error( "Problem in domainAnswerArrived : "+eee ); ;
+               _logger.error("Problem in domainAnswerArrived : {}", eee );
            }
         }
      }
@@ -194,7 +194,7 @@ public class DomainConnectionAdapter implements DomainConnection {
           if( _connected ){
               try{  listener.connectionOpened( this ) ;
               }catch( Throwable t ){
-                 t.printStackTrace() ;
+                 _logger.error("Problem while adding EventListener: {}", t);
               }
           }
         }
@@ -213,7 +213,7 @@ public class DomainConnectionAdapter implements DomainConnection {
 
                try{  listener.connectionOpened( this ) ;
                }catch( Throwable t ){
-                  t.printStackTrace() ;
+                  _logger.error("Problem while checking listeners (listener opening): {}", t);
                }
            }
         }
@@ -225,7 +225,7 @@ public class DomainConnectionAdapter implements DomainConnection {
            for ( DomainEventListener listener: array ){
                try{  listener.connectionClosed( this ) ;
                }catch( Throwable t ){
-                  t.printStackTrace() ;
+                   _logger.error("Problem while checking listeners (listener closed): {}", t);
                }
            }
         }

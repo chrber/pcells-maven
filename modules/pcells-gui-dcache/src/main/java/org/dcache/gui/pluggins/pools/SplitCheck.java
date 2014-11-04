@@ -1,3 +1,5 @@
+package org.dcache.gui.pluggins.pools;
+
 public class SplitCheck {
 
    public static void main( String [] args )throws Exception {

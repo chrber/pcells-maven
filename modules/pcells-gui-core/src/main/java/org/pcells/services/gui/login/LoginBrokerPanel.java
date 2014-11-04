@@ -167,6 +167,7 @@ public class      LoginBrokerPanel
             _currentDestination = destination ;
             setCurrentModel( _verifyBox.isSelected() ? _longModel : _shortModel ) ;
         }catch(Exception ee ){
+            _logger.error("Problem sending object: {} to {}", ee, destination);
             JOptionPane.showMessageDialog(
                     this,
                     destination+" reported "+ee.getMessage()  ,

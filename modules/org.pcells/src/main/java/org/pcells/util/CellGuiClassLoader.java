@@ -3,6 +3,9 @@
 package  org.pcells.util ;
 //
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -19,6 +22,7 @@ import java.util.regex.Pattern;
 
 public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassLoader {
 
+   private final static Logger _logger = LoggerFactory.getLogger(CellGuiClassLoader.class);
    private String _ourBaseURL   = null ;
    private Map    _validJars    = new HashMap() ;
    private Map    _validModules = new TreeMap() ;
@@ -262,7 +266,7 @@ public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassL
              //System.out.println("Subpath : "+path);
           }
       }catch(Exception ee ){
-          System.err.println("Syntax error in "+ourBaseUrl ) ;
+          _logger.error("Syntax error in {}: {}",ourBaseUrl, ee);
           throw ee ;
       }
       File x = new File(path) ;
@@ -354,9 +358,9 @@ public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassL
                          //System.err.println("helpUrl for : "+jarName+" : "+helpUrl+" : "+helpName) ;
 
                       }catch(Exception ee ){
-                         System.err.println("Problem with help text at url ("+nextJarFile+") : "+ee ) ;
+                         _logger.error("Problem with help text at url {}: {}", nextJarFile, ee );
                       }
-                      if( _debug )System.err.println("JarFile : "+entry ) ;
+                      _logger.debug("JarFile : "+entry );
                  }finally{
 		     //
 		     // I don't know how to close the connection.
@@ -364,13 +368,17 @@ public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassL
 		     //
 		 }
 	     }catch(Exception ei){
-		 System.err.println("Problems opening : "+nextJarFile);
+             _logger.error("Problems opening : {}", nextJarFile);
 		 continue ;
 	     }
 	  }
 
        }finally{
-	  try{ br.close() ; }catch(Exception ee ){}
+	        try{
+                br.close();
+            }catch (Exception ee ){
+                _logger.error("Problem durign closing BufferedReader: {}", ee);
+            }
        }
 
        //
@@ -432,7 +440,8 @@ public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassL
                         if( ( posString != null ) && ( ( posString = posString.trim()).length() > 0 ) ){
                            try{
                               position = Integer.parseInt( posString ) ;
-                           }catch(Exception eeee ){
+                           }catch(Exception ee ){
+                               _logger.error("Problem during parsing jar version: {}"+ ee);
                            }
                         }
                         
@@ -447,14 +456,14 @@ public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassL
                         ent.addModule( moduleName , e ) ;
                         
                      }catch(Exception ioe ){
-		        System.err.println("Syntax Error in manifest : "+key+ " : " +ioe  )  ;
+                         _logger.error("Syntax Error in manifest for key {}: {}", key, ioe  );
 		        continue ;
                      }
                   }
               }
               
-           }catch(Exception eee ){
-              System.err.println("Problem preparing to load "+url+" : "+eee ) ;
+           }catch(Exception ee){
+              _logger.error("Problem preparing to load {} : {}", url, ee ) ;
               continue ;
            }
        }
@@ -468,8 +477,7 @@ public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassL
         try{
             __classLoader = new CellGuiClassLoader( applicationName ) ;
         }catch(Exception ee  ){
-            System.err.println("CellGuiClassLoader failed with : "+ee);
-            ee.printStackTrace() ;
+            _logger.error("CellGuiClassLoader failed with : {}", ee);
         }
        try{
 
@@ -480,8 +488,7 @@ public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassL
           Object panel = c.newInstance( new Object [] { applicationName , args } ) ;
 
        }catch(Exception eee ){
-          System.err.println("Can't create new JMultiLogin");
-          eee.printStackTrace() ;
+          _logger.error("Can't create new JMultiLogin: {}", eee);
        }
 
    }

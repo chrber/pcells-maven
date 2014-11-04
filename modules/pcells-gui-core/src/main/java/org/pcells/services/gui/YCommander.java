@@ -246,7 +246,11 @@ public class      YCommander
                 map.put( list[0] , list ) ;
             }
         }finally{
-            try{ br.close() ; }catch(Exception ee){}
+            try{
+                br.close();
+            } catch (Exception ee) {
+                _logger.error("Problem during closing BufferedReader for loading locale file: "+ ee);
+            }
         }
         return map ;
     }
