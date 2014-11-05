@@ -231,11 +231,13 @@ public class      YCommander
     }
     private Map loadLocalFile( String filename ) throws FileNotFoundException , IOException, java.net.MalformedURLException {
 
-        URL fileURL = new URL( JMultiLogin.__classLoader.getBase() +"/"+filename ) ;
+        URL fileURL = getClass().getResource("/plugin-files/"+filename);
+        _logger.debug("Trying to load {}", fileURL);
         Map map     = new HashMap() ;
 
-        BufferedReader br = new BufferedReader( new InputStreamReader( fileURL.openStream() ) ) ;
+        BufferedReader br = null;
         try{
+            br = new BufferedReader( new InputStreamReader( fileURL.openStream() ) ) ;
             while( true ){
                 String line = br.readLine() ;
                 if( line == null )break ;

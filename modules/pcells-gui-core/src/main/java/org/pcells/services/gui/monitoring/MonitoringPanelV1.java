@@ -7,7 +7,6 @@ import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainConnectionListener;
 import org.pcells.services.connection.DomainEventListener;
 import org.pcells.services.gui.CellGuiSkinHelper;
-import org.pcells.services.gui.JMultiLogin;
 import org.pcells.services.gui.util.AnimatedLabel;
 
 import javax.swing.*;
@@ -124,27 +123,28 @@ public class      MonitoringPanelV1
    }
    private java.util.List loadLocalFile( String filename ) throws FileNotFoundException , IOException, java.net.MalformedURLException {
 
-      //Object x = this.getClass().getClassLoader() ;
-      //System.err.println("OBJECT : "+x.getClass().getName()+" <> "+x );
-      //CellGuiClassLoader loader = (CellGuiClassLoader)this.getClass().getClassLoader() ;
-      URL fileURL = new URL( JMultiLogin.__classLoader.getBase() +"/"+filename ) ;
-      java.util.List map     = new ArrayList() ;
+       URL fileURL = getClass().getResource("/plugin-files/" + filename);
+       java.util.List map = new ArrayList();
 
-      BufferedReader br = new BufferedReader( new InputStreamReader( fileURL.openStream() ) ) ;
-      try{
-         while( true ){
-            String line = br.readLine() ;
-            if( line == null )break ;
-            //System.err.println("DEBUG : readline : "+line ) ;
-            line = line.trim() ;
-            if( ( line.length() == 0 ) || ( line.startsWith("#") ) )continue ;
-            String [] list = line.split(":") ;
-            map.add( list ) ;
-         }
-      }finally{
-         try{ br.close() ; }catch(Exception ee){}
-      }
-      return map ;
+       BufferedReader br = null;
+       try {
+           br = new BufferedReader(new InputStreamReader(fileURL.openStream()));
+           while (true) {
+               String line = br.readLine();
+               if (line == null) break;
+               //System.err.println("DEBUG : readline : "+line ) ;
+               line = line.trim();
+               if ((line.length() == 0) || (line.startsWith("#"))) continue;
+               String[] list = line.split(":");
+               map.add(list);
+           }
+       } finally {
+           try {
+               br.close();
+           } catch (Exception ee) {
+           }
+       }
+       return map;
    }
    public class MessageWindow extends JFrame  implements ActionListener  {
        private JTextArea _textField     = new JTextArea() ;
