@@ -231,7 +231,7 @@ public class      JCostModule
 
 
                 }
-                poolList = (String[]) _poolInfo.getPoolNames().toArray();
+                poolList = _poolInfo.getPoolNames().toArray(new String[0]);
                 if( poolList == null )
                     throw new
                             Exception("Got empty pool list");
