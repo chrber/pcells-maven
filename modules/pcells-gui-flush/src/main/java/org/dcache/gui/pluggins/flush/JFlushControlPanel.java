@@ -3,6 +3,7 @@
 package org.dcache.gui.pluggins.flush ;
 //
 import diskCacheV111.hsmControl.flush.FlushControlCellInfo;
+import diskCacheV111.util.TimeoutCacheException;
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainConnectionListener;
 import org.pcells.services.connection.DomainEventListener;
@@ -196,30 +197,45 @@ public class      JFlushControlPanel
 
                 if( subid == 4 ){
 
-                    if( obj instanceof java.util.List ){
+                    if( obj instanceof java.util.List )
+                    {
                         java.util.List list = (java.util.List)obj ;
                         for( Iterator i = list.iterator() ; i.hasNext() ; ){
                             _logger.debug("Pool : "+i.next() ) ;
                         }
                         _monitor.preparePoolList( list ) ;
-                    }else{
+                    }
+                    else if ( obj instanceof TimeoutCacheException )
+                    {
+                        _logger.error("FlushManager could not be found: {}", obj.getClass().getName());
+                    }
+                    else
+                    {
                         _logger.error("Unexpected message id=4 : "+obj.getClass().getName()+" : "+obj);
                         _monitor.preparePoolList( new ArrayList() );
                     }
 
-                }else if( subid == 5 ){
-
-                    if( obj instanceof diskCacheV111.hsmControl.flush.FlushControlCellInfo ){
+                }
+                else if( subid == 5 )
+                {
+                    _logger.debug("Message ID is {}", subid);
+                    if( obj instanceof diskCacheV111.hsmControl.flush.FlushControlCellInfo )
+                    {
 
                         FlushControlCellInfo status = (FlushControlCellInfo)obj ;
 
                         _status.prepareFlushStatus( status ) ;
 
-                    }else{
+                    }
+                    else if ( obj instanceof TimeoutCacheException )
+                    {
+                        _logger.error("FlushManager could not be found: {}", obj.getClass().getName());
+                    }
+                    else
+                    {
                         _logger.error("Unexpected message id=5 : "+obj.getClass().getName()+" : "+obj);
                         _status.prepareFlushStatus( null ) ;
                     }
-
                 }
 
             }catch(Exception ee ){
