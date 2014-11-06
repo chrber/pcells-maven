@@ -36,7 +36,7 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
+                <artifactId>maven-jar-plugin</artifactId>
             </plugin>
         </plugins>
 
@@ -54,13 +54,10 @@
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
+                    <artifactId>maven-jar-plugin</artifactId>
                     <version>2.4</version>
                     <configuration>
                         <outputDirectory>../org.pcells/target</outputDirectory>
-                        <descriptorRefs>
-                            <descriptorRef>jar-with-dependencies</descriptorRef>
-                        </descriptorRefs>
                         <archive>
                             <manifest>
                                 <mainClass>org.pcells.services.gui.JMultiLogin</mainClass>
@@ -83,7 +80,7 @@
                             <id>make-assembly</id>
                             <phase>package</phase>
                             <goals>
-                                <goal>single</goal>
+                                <goal>jar</goal>
                             </goals>
                         </execution>
                     </executions>
