@@ -43,18 +43,17 @@
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>2.4</version>
                     <configuration>
-                        <finalName>dcache</finalName>
                         <outputDirectory>../org.pcells/target</outputDirectory>
                         <descriptorRefs>
                             <descriptorRef>jar-with-dependencies</descriptorRef>
                         </descriptorRefs>
                         <archive>
                             <manifest>
-                                <mainClass>org.pcells.util.CellGuiClassLoader</mainClass>
+                                <mainClass>org.pcells.services.gui.JMultiLogin</mainClass>
                             </manifest>
                             <manifestEntries>
-                                <pcells-gui-jar-name> dcache </pcells-gui-jar-name>
-                                <pcells-gui-jar-version> ${dependency.dcache.version} </pcells-gui-jar-version>
+                                <pcells-gui-jar-name> dcache-dependencies </pcells-gui-jar-name>
+                                <pcells-gui-jar-version> 2.0.3 </pcells-gui-jar-version>
                             </manifestEntries>
                         </archive>
                     </configuration>
