@@ -41,7 +41,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.4</version>
+                    <version>${maven-assembly-plugin.version}</version>
                     <configuration>
                         <finalName>dcache</finalName>
                         <outputDirectory>../org.pcells/target</outputDirectory>
