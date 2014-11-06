@@ -3,17 +3,12 @@
 package org.dcache.gui.pluggins.monitoring ;
 //
  
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.util.regex.*;
-import java.io.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.monitoring.* ;
-import dmg.cells.services.login.*;
-import dmg.cells.nucleus.NoRouteToCellException ;
+import dmg.cells.nucleus.NoRouteToCellException;
+import dmg.cells.services.login.LoginBrokerInfo;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.connection.DomainConnectionListener;
+import org.pcells.services.gui.monitoring.ComponentMonitorAdapter;
+import org.pcells.services.gui.monitoring.ComponentMonitorable;
 
 public class SrmMonitor 
        extends ComponentMonitorAdapter 
@@ -104,7 +99,7 @@ public class SrmMonitor
    private void askForLoginManagerInfo(){
       setAction("Asking LoginManager for SRM location");
       try{
-          _connection.sendObject( "srm-LoginBroker" ,
+          _connection.sendObject( "LoginBroker" ,
                                   "ls -binary" ,
                                   this ,
                                   100
