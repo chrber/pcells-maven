@@ -12,33 +12,24 @@
     </parent>
 
     <groupId>org.dcache</groupId>
-    <artifactId>org.pcells</artifactId>
+    <artifactId>dcache-dependencies</artifactId>
     <version>2.0-SNAPSHOT</version>
 
     <dependencies>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.0.12</version>
+            <groupId>org.dcache</groupId>
+            <artifactId>dcache-core</artifactId>
+            <version>${dependency.dcache.version}</version>
         </dependency>
         <dependency>
             <groupId>org.dcache</groupId>
-            <artifactId>dcache-dependencies</artifactId>
-            <version>2.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>org.dcache</groupId>
-            <artifactId>pcells-common</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <artifactId>cells</artifactId>
+            <version>${dependency.dcache.version}</version>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -49,19 +40,11 @@
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
-                    <configuration>
-                        <source>${maven.compiler.source}</source>
-                        <target>${maven.compiler.target}</target>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-assembly-plugin</artifactId>
                     <version>2.4</version>
                     <configuration>
+                        <finalName>dcache</finalName>
+                        <outputDirectory>../org.pcells/target</outputDirectory>
                         <descriptorRefs>
                             <descriptorRef>jar-with-dependencies</descriptorRef>
                         </descriptorRefs>
@@ -70,8 +53,8 @@
                                 <mainClass>org.pcells.util.CellGuiClassLoader</mainClass>
                             </manifest>
                             <manifestEntries>
-                                <pcells-gui-jar-name> org.pcells </pcells-gui-jar-name>
-                                <pcells-gui-jar-version> 2.0.3 </pcells-gui-jar-version>
+                                <pcells-gui-jar-name> dcache </pcells-gui-jar-name>
+                                <pcells-gui-jar-version> ${dependency.dcache.version} </pcells-gui-jar-version>
                             </manifestEntries>
                         </archive>
                     </configuration>
@@ -88,4 +71,5 @@
             </plugins>
         </pluginManagement>
     </build>
+
 </project>
