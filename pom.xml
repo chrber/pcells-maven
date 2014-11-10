@@ -19,19 +19,12 @@
         <maven-jar-plugin.version>2.5</maven-jar-plugin.version>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>dcache.repository</id>
-            <url>https://download.dcache.org/nexus/content/groups/public</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>dcache.repository</id>
-            <url>https://download.dcache.org/nexus/content/groups/public</url>
-        </pluginRepository>
-    </pluginRepositories>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>pcells</id>
+            <url>https://download.dcache.org/nexus/content/repositories/pcells</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <modules>
         <module>modules/org.pcells</module>
