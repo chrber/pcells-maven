@@ -1,0 +1,7 @@
+<configuration>
+    <!-- If you would like to see status information of the logback.xml config load, remove the next line -->
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+
+    <root level="ERROR">
+    </root>
+</configuration>

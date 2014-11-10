@@ -1,0 +1,6 @@
+from java.lang import Thread
+from org.pcells.services.connection import Ssh2DomainConnection
+
+sshConnection=Ssh2DomainConnection("localhost", 22224)
+runCon=sshConnection.test()
+Thread(runCon).start()

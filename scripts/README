@@ -1,0 +1,13 @@
+Following steps needed to run scripts:
+
+To test general functionality of scripting, execute script:
+
+cd scripts
+./wrapper.sh runConnection.jy
+
+To execute commands against dCache using scripts against pCells execute (e.g.):
+
+cd scripts
+./wrapper.sh executeCommand.py "PoolManager" "psu ls pool -l"
+
+If you want to adjust logging levels you can use the logback.xml file in the scripts directory.
