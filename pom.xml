@@ -19,6 +19,75 @@
         <maven-jar-plugin.version>2.5</maven-jar-plugin.version>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.freehep</groupId>
+            <artifactId>freehep-jaida</artifactId>
+            <version>3.4.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.freehep</groupId>
+                    <artifactId>freehep-commandline</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.freehep</groupId>
+                    <artifactId>freehep-commanddispatcher</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.freehep</groupId>
+                    <artifactId>freehep-argv</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.freehep</groupId>
+                    <artifactId>freehep-jaida-xml</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.freehep</groupId>
+                    <artifactId>freehep-xml</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>hep.aida</groupId>
+                    <artifactId>aida-test</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.l2fprod</groupId>
+                    <artifactId>l2fprod-common-all</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>commons-math</groupId>
+                    <artifactId>commons-math</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javax.help</groupId>
+                    <artifactId>javahelpr</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>jdom</groupId>
+                    <artifactId>jdom</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.java.dev</groupId>
+                    <artifactId>truezip</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>xerces</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>pcells</id>
+            <url>https://download.dcache.org/nexus/content/repositories/pcells</url>
+        </repository>
+        <repository>
+            <id>dcache.repository</id>
+            <url>https://download.dcache.org/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
     <distributionManagement>
         <snapshotRepository>
             <id>pcells</id>
