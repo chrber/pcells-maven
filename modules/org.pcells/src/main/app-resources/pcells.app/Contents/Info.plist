@@ -25,9 +25,9 @@
 		<key>MainClass</key>
 		<string>org.pcells.util.CellGuiClassLoader</string>
 		<key>JVMVersion</key>
-		<string>1.5+</string>
+		<string>1.7+</string>
 		<key>ClassPath</key>
-		<string>$JAVAROOT/org.pcells.jar</string>
+		<string>$JAVAROOT/org.pcells-2.0-SNAPSHOT-jar-with-dependencies.jar</string>
 		<key>Properties</key>
 		<dict>
 			<key>apple.laf.useScreenMenuBar</key>
