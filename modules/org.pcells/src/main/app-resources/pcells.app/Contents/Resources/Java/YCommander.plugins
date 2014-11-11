@@ -1,0 +1,4 @@
+Pools:org.dcache.gui.pluggins.pools.PoolControlPanel::.*MultiProtocol.*:enabled
+NewPools:org.dcache.gui.pluggins.pools.PoolControlPanel::.*UniversalSpringCell.*:enabled
+Flush:org.dcache.gui.pluggins.flush.JFlushControlPanel::.*Flush.*:enabled
+LoginBroker:org.pcells.services.gui.login.LoginBrokerPanel::.*LoginBroker.*:enabled

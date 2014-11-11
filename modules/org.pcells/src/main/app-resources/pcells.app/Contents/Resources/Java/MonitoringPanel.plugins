@@ -1,0 +1,4 @@
+Pnfs:org.dcache.gui.pluggins.monitoring.PnfsManagerMonitor:Check Pnfs Manager:
+SRM:org.dcache.gui.pluggins.monitoring.SrmMonitor:Checks SRM 'info' time:
+Login Broker:org.pcells.services.gui.login.LoginBrokerMonitor:Checks LoginBroker for protocols:
+Pools:org.dcache.gui.pluggins.monitoring.PoolMonitor:Checks Pools availability:
