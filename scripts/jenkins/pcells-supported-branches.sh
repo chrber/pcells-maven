@@ -1,6 +1,8 @@
 #!/bin/sh
 set -x;
 
+TAG=2.0.3
+
 if [ -d pcells-maven ]; then
   rm -rf pcells-maven;
 fi
