@@ -2,25 +2,25 @@
 //
 package org.dcache.gui.pluggins.poolManager ;
 //
-import org.dcache.gui.pluggins.*;
-import org.dcache.gui.pluggins.pools.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
+import diskCacheV111.pools.PoolCostInfo;
+import diskCacheV111.util.CacheException;
+import diskCacheV111.vehicles.CostModulePoolInfoTable;
+import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.connection.DomainConnectionListener;
+import org.pcells.services.gui.CellGuiSkinHelper;
+import org.pcells.services.gui.EasyCommander;
+import org.pcells.services.gui.LoadedPicturePanel;
+
 import javax.swing.*;
-import javax.swing.table.*;
-import javax.swing.event.* ;
-import javax.swing.border.* ;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
-import java.io.* ;
-import java.util.prefs.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.* ;
-import org.pcells.services.gui.util.* ;
-import diskCacheV111.vehicles.CostModulePoolInfoTable ;
-import diskCacheV111.pools.PoolCostInfo ;
+import java.util.prefs.Preferences;
 
 
 public class      SrmSpaceManagerPanel
@@ -343,7 +343,9 @@ public class      SrmSpaceManagerPanel
 	       //
 	       setWaiting(false);
 	       displayErrorMessage("SrmSpaceManager not present !" );
-	       	       
+        }else if( obj instanceof CacheException){
+            setWaiting(false);
+            displayErrorMessage("SrmSpaceManager: No Link Groups configured.\n");
 	    }else if( ! ( obj instanceof String ) ){
 	       //
 	       // Something unexpected.
