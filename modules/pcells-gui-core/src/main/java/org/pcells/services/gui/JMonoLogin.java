@@ -384,24 +384,24 @@ public class JMonoLogin extends CellGuiSkinHelper.CellPanel {
 //                String publicKeyFilePath = userHome+ "/.ssh" + File.separator + "id_dsa.pub.der";
                 Preferences sshKeysPrefs = _preferences.node("SSH2_KEYS");
                 String privateKeyFilePath = sshKeysPrefs.get("privateKeyPath", userHome + "/.ssh" + File.separator + "id_dsa.der");
-                String publicKeyFilePath = sshKeysPrefs.get("publicKeyPath", userHome+ "/.ssh" + File.separator + "id_dsa.pub.der");
-                String algorithm = sshKeysPrefs.get("algorithm", "RSA");
-                connection.set_algorithm(algorithm);
                 _logger.debug("private KeyFile: " + privateKeyFilePath);
-                _logger.debug("public KeyFile: " + publicKeyFilePath);
 
-                if (new File(privateKeyFilePath).exists() && new File (publicKeyFilePath).exists()) {
+                File privateKeyFile = new File(privateKeyFilePath);
+                if (privateKeyFile.exists() && privateKeyFile.canRead()) {
                     _logger.debug("Private and public keys exist");
                     try {
 //                        connection.setIdentityFile(identity);
                         connection.set_keyPath(path);
                         _logger.debug("Setting keyPath to: " + connection.get_keyPath());
-                        connection.setKeyPairPaths(privateKeyFilePath, publicKeyFilePath);
-                        _logger.debug("Setting private key to: " + privateKeyFilePath.toString() + " and  public key to: "+ publicKeyFilePath.toString());
+                        connection.setPrivateKeyPath(privateKeyFilePath);
+                        _logger.debug("Setting private key to: " + privateKeyFilePath.toString());
                     } catch (Exception ee) {
 //                        _logger.error("Problems reading : " + identity);
                         _logger.error("Some problem: " + ee);
                     }
+                }
+                else {
+                    _logger.error("Could not read private key: {}.", privateKeyFilePath);
                 }
             }
             _logger.debug("Connected to " + nodename + ":" + portnumber);
@@ -472,6 +472,7 @@ public class JMonoLogin extends CellGuiSkinHelper.CellPanel {
 
         private JLabel _loginLabel = new JLabel("Login Name", JLabel.RIGHT);
         private JLabel _passwordLabel = new JLabel("Password", JLabel.RIGHT);
+        private JLabel _keybaseLoginEmptyPassword = new JLabel("For keybased login leave password empty!");
         private JTextField _login = new JTextField(20);
         private JPasswordField _passwd = new JPasswordField(20);
         private JLabel _statusLabel = new JLabel(" ", JLabel.CENTER);
@@ -526,12 +527,21 @@ public class JMonoLogin extends CellGuiSkinHelper.CellPanel {
             c.fill = GridBagConstraints.HORIZONTAL;
             add(_passwd, c);
 
+            _keybaseLoginEmptyPassword.setFont(new Font("Courier", Font.ITALIC | Font.BOLD, 10));
+            _keybaseLoginEmptyPassword.setHorizontalTextPosition(SwingConstants.RIGHT);
             c.gridx = 0;
             c.gridy = 3;
+            c.gridwidth = 1;
+            c.fill = GridBagConstraints.HORIZONTAL;
+            add(_keybaseLoginEmptyPassword, c);
+
+            c.gridx = 0;
+            c.gridy = 4;
             c.gridwidth = 2;
             c.fill = GridBagConstraints.HORIZONTAL;
             _statusLabel.setForeground(Color.red);
             add(_statusLabel, c);
+
 
 
             c.gridwidth = 1;
