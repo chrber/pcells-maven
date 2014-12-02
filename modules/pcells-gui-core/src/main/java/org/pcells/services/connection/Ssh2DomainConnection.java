@@ -8,16 +8,14 @@ import org.apache.sshd.ClientSession;
 import org.apache.sshd.SshClient;
 import org.apache.sshd.client.future.AuthFuture;
 import org.apache.sshd.client.future.ConnectFuture;
+import org.bouncycastle.openssl.PEMReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.security.*;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
+import java.security.KeyPair;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,7 +37,6 @@ public class Ssh2DomainConnection
     public String _privateKeyFilePath;
     public String _publicKeyFilePath;
     public String _keyPath;
-    public String _algorithm;
 
     public Ssh2DomainConnection(String hostname, int portnumber) {
         _hostname = hostname;
@@ -71,9 +68,9 @@ public class Ssh2DomainConnection
             while ((ret & ClientSession.WAIT_AUTH) != 0) {
                 if ( _password.isEmpty() ) {
                     _logger.debug("++++++++++++ Keybaseed Login +++++++++++++++++");
-                    _logger.debug("++++++++++++ with User: " + _loginName + "and keyPath: " + get_keyPath() + "and algorithm: " + get_algorithm() + " +++++++++++++++++");
-                    KeyPair keyPair = loadKeyPair(_algorithm);
-                    _logger.debug("Got key pair: " + keyPair.getPrivate().toString() + " and " + keyPair.getPublic().toString());
+                    _logger.debug("++++++++++++ with User: " + _loginName + " and keyPath: " + get_keyPath() + "+++++++++++++++++");
+                    KeyPair keyPair = loadPemKeyPair();
+                    _logger.debug("Got key pair, private: " + keyPair.getPrivate().toString() + " and public" + keyPair.getPublic().toString());
                     authFuture = _session.authPublicKey(_loginName, keyPair);
                     ret = _session.waitFor(ClientSession.WAIT_AUTH | ClientSession.CLOSED | ClientSession.AUTHED, 0);
                 } else {
@@ -141,9 +138,8 @@ public class Ssh2DomainConnection
         _password = password;
     }
 
-    public void setKeyPairPaths(String privateKeyFile, String publicKeyFile) {
+    public void setPrivateKeyPath(String privateKeyFile) {
         _privateKeyFilePath = privateKeyFile;
-        _publicKeyFilePath = publicKeyFile;
     }
 
     public void setIdentityFile(File identityFile) throws Exception {
@@ -227,79 +223,27 @@ public class Ssh2DomainConnection
         this._keyPath = _keyPath;
     }
 
-    public String get_algorithm() {
-        return _algorithm;
-    }
+    public KeyPair loadPemKeyPair () {
+        String filename = get_privateKeyFilePath();
+        _logger.debug("Generating PEM keypair: " + filename );
 
-    public void set_algorithm(String _algorithm) {
-        this._algorithm = _algorithm;
-    }
-
-    public KeyPair loadKeyPair(String algorithm)
-            throws IOException, NoSuchAlgorithmException,
-            InvalidKeySpecException {
-        _logger.debug("Loading key files");
-
-        PublicKey publicKey = null;
+        FileReader pemFileReader = null;
         try {
-            _logger.debug("Get Public Key: " + get_publicKeyFilePath() + " with algorithm: " + algorithm);
-            publicKey = generatePublicKey(get_publicKeyFilePath(), algorithm);
-            _logger.debug("Generated Public Key");
-        } catch (Exception e) {
-            _logger.error("Problem getting public key: {}", e);
-        }
-        PrivateKey privateKey = null;
-        try {
-            _logger.debug("Get Private Key: " + get_privateKeyFilePath() + " with algorithm: " + algorithm);
-            privateKey = generatePrivateKey(get_privateKeyFilePath(), algorithm);
-            _logger.debug("Generated Private Key");
-        } catch (Exception e) {
-            _logger.error("Problem getting private key: {}", e);
-        }
-        return new KeyPair(publicKey, privateKey);
-    }
-
-    private byte[] readFromKeyFile (String filename) {
-        File f = new File(filename);
-        FileInputStream fis = null;
-        try {
-            fis = new FileInputStream(f);
+            pemFileReader = new FileReader(filename);
         } catch (FileNotFoundException e) {
-            _logger.error("File {} not found: {}", filename, e);
+            _logger.error("Private key file not found: {}", filename);
         }
-        DataInputStream dis = new DataInputStream(fis);
-        byte[] keyBytes = new byte[(int)f.length()];
+
+        PEMReader pemReader = new PEMReader(pemFileReader);
+        KeyPair keypair = null;
         try {
-            dis.readFully(keyBytes);
-            dis.close();
+            keypair = (KeyPair) pemReader.readObject();
         } catch (IOException e) {
-            _logger.error("Error reading file {}: {}", filename, e);
+            _logger.error("Problem reading private key: {}, exception: ", filename, e);
+        } catch (ClassCastException cce) {
+            _logger.error("PrivateKey file read from {} was of wrong class, exception: {}", filename, cce);
         }
-        _logger.debug("Read file: " + filename);
-        return keyBytes;
-    }
-
-    public PublicKey generatePublicKey(String filename, String algorithm)
-            throws Exception {
-        _logger.debug("Generating Public Key: " + filename + " , " + algorithm);
-        byte[] keyBytes = readFromKeyFile(filename);
-        X509EncodedKeySpec spec =
-                new X509EncodedKeySpec(keyBytes);
-        _logger.debug("Get Kefactory for algorithm: " + algorithm);
-        KeyFactory kf = KeyFactory.getInstance(algorithm);
-        return kf.generatePublic(spec);
-    }
-
-    public PrivateKey generatePrivateKey(String filename, String algorithm)
-            throws Exception {
-        _logger.debug("Generating Private Key: " + filename + " , " + algorithm);
-        byte[] keyBytes = readFromKeyFile(filename);
-
-        PKCS8EncodedKeySpec spec =
-                new PKCS8EncodedKeySpec(keyBytes);
-        _logger.debug("Get Keyfactory for algorithm: " + algorithm);
-        KeyFactory kf = KeyFactory.getInstance(algorithm);
-        return kf.generatePrivate(spec);
+        return keypair;
     }
 
     public static void main(String[] args) throws Exception {
@@ -343,7 +287,6 @@ public class Ssh2DomainConnection
             set_keyPath(keyPath);
             set_privateKeyFilePath(userHome + File.separator + ".ssh" + File.separator + "id_dsa.der");
             set_publicKeyFilePath(userHome + File.separator + ".ssh" + File.separator + "id_dsa.pub.der");
-            set_algorithm("DSA");
             setLoginName("admin");
             _logger.debug("Keys set to: " + get_privateKeyFilePath() + " and " + get_publicKeyFilePath());
             setPassword("");
