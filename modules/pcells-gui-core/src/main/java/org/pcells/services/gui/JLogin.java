@@ -2,7 +2,7 @@
 //
 package org.pcells.services.gui ;
 
-import org.dcache.util.Args;
+import dmg.util.Args;
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainEventListener;
 
