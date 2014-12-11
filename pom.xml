@@ -10,6 +10,34 @@
 
     <packaging>pom</packaging>
 
+    <licenses>
+        <license>
+            <name>GNU Affero General Public License Version 3</name>
+            <url>http://www.gnu.org/licenses/agpl-3.0.txt</url>
+            <distribution>manual</distribution>
+        </license>
+        <license>
+            <name>GNU Lesser General Public License Version 3</name>
+            <url>http://www.gnu.org/licenses/lgpl-3.0.txt</url>
+            <distribution>manual</distribution>
+        </license>
+        <license>
+            <name>Fermitools Software Legal Information (Modified BSD License)</name>
+            <distribution>manual</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>dCache.org</name>
+        <url>http://www.dcache.org/</url>
+    </organization>
+
+    <ciManagement>
+        <system>jenkins</system>
+        <url>https://ci.dcache.org/view/pcells/job/pcells-supported-branches/</url>
+    </ciManagement>
+
+
     <properties>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
@@ -18,6 +46,16 @@
         <maven-assembly-plugin.version>2.5</maven-assembly-plugin.version>
         <maven-jar-plugin.version>2.5</maven-jar-plugin.version>
     </properties>
+
+    <prerequisites>
+        <maven>3.0.4</maven>
+    </prerequisites>
+
+    <scm>
+        <url>https://github.com/dCache/pcells-maven</url>
+        <connection>scm:git:https://github.com/dCache/pcells-maven.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:dCache/pcells-maven.git</developerConnection>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -105,4 +143,22 @@
         <module>modules/pcells-gui-flush</module>
         <module>modules/pcells-gui-drives</module>
     </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <tagNameFormat>@{project.version}</tagNameFormat>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
