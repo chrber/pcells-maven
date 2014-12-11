@@ -54,7 +54,7 @@
                             </manifest>
                             <manifestEntries>
                                 <pcells-gui-jar-name> dcache-dependencies </pcells-gui-jar-name>
-                                <pcells-gui-jar-version> 2.0.3 </pcells-gui-jar-version>
+                                <pcells-gui-jar-version> ${project.version} </pcells-gui-jar-version>
                             </manifestEntries>
                         </archive>
                     </configuration>

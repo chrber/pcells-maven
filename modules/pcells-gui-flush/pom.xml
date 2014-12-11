@@ -64,7 +64,7 @@
                             </manifest>
                             <manifestEntries>
                                 <pcells-gui-jar-name> pcells-gui-flush </pcells-gui-jar-name>
-                                <pcells-gui-jar-version> 2.0.3 </pcells-gui-jar-version>
+                                <pcells-gui-jar-version> ${project.version} </pcells-gui-jar-version>
                                 <pcells-gui-module-name-0> PnfsManager </pcells-gui-module-name-0>
                                 <pcells-gui-module-name-1> FlushManager </pcells-gui-module-name-1>
                                 <pcells-gui-module-class-0> org.dcache.gui.pluggins.pnfs.PnfsManagerPanel </pcells-gui-module-class-0>
