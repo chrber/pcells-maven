@@ -2,7 +2,6 @@
 //
 package org.pcells.services.gui ;
 
-import org.dcache.util.Args;
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainEventListener;
 
@@ -13,12 +12,8 @@ import java.io.PrintStream;
 import java.lang.reflect.Constructor;
 import java.util.StringTokenizer;
 
-//
+import org.dcache.util.Args;
 
-
-
-/**
- */
 public class JLogin extends JFrame {
 
     private javax.swing.Timer _timer = null ;
