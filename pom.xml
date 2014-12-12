@@ -45,6 +45,9 @@
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <maven-assembly-plugin.version>2.5</maven-assembly-plugin.version>
         <maven-jar-plugin.version>2.5</maven-jar-plugin.version>
+        <google.guava.version>18.0</google.guava.version>
+        <slf4j-api.version>1.7.7</slf4j-api.version>
+        <spring-core.version>4.1.2.RELEASE</spring-core.version>
     </properties>
 
     <prerequisites>

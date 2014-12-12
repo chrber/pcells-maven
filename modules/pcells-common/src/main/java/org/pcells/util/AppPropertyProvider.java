@@ -14,13 +14,13 @@ import java.util.Properties;
  */
 public class AppPropertyProvider {
 
-    private final static Logger _logger = LoggerFactory.getLogger(AppPropertyProvider.class)
+    private final static Logger _logger = LoggerFactory.getLogger(AppPropertyProvider.class);
 
     private ClassPathResource _appPropertiesResource;
     private Properties _properties;
     private String _versionString;
 
-    private AppPropertyProvider() {
+    public AppPropertyProvider() {
         _appPropertiesResource = new ClassPathResource("app.properties");
         _properties = new Properties();
         InputStream inputStream = null;

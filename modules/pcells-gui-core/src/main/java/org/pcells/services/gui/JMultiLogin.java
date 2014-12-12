@@ -6,6 +6,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.core.Appender;
 import org.pcells.services.gui.util.DrawBoardFrame;
+import org.pcells.util.AppPropertyProvider;
 import org.pcells.util.CellGuiClassLoader;
 import org.pcells.util.ClassLoaderPreferences;
 import org.pcells.util.Logable;
@@ -636,7 +637,7 @@ public class JMultiLogin extends JFrame implements ActionListener, MenuListener 
         private String  _ourVersionLocation  = "/docs/help/version" ;
         private int  [] _currentVersion       = { 0 , 0 } ;
         // This seems to be the place where the actual version is set
-        private String  _currentVersionString = "2.0.3" ;
+        private String  _currentVersionString = new AppPropertyProvider().getVersionString();
         private String  _serverVersionString  = null ;
         private String  _versionUrlString     = "http://www.dcache.org/downloads/gui/version.txt";
         private VersionUpdate(){

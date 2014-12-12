@@ -46,8 +46,12 @@ public class CellGuiClassLoader  extends URLClassLoader  implements ModuleClassL
    // pcells-gui-module-help-0:     /docs/GuiMasterHelp.html
    //
    public static class Version implements Comparable {
-      private String _versionString = "2.0.3" ;
-      private Version(){ _versionString = "2.0.3" ; }
+      private String _versionString;
+      private Version(){
+          AppPropertyProvider appPropertyProvider = new AppPropertyProvider();
+          _logger.info("Loading pcells version from app.properties file.");
+          _versionString = appPropertyProvider.getVersionString();
+      }
       private Version(String versionString){
          if( versionString == null )return ;
          _versionString = versionString.trim() ;
