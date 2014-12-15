@@ -60,7 +60,7 @@
     <scm>
         <url>https://github.com/dCache/pcells-maven</url>
         <connection>scm:git:https://github.com/dCache/pcells-maven.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:dCache/pcells-maven.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:dCache/pcells-maven.git</developerConnection>
     </scm>
 
     <dependencies>
