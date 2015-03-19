@@ -2,15 +2,13 @@
 //
 package org.dcache.gui.pluggins.poolManager ;
 //
-import diskCacheV111.pools.PoolCostInfo;
-import diskCacheV111.util.CacheException;
-import diskCacheV111.vehicles.CostModulePoolInfoTable;
-import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector;
+
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainConnectionListener;
 import org.pcells.services.gui.CellGuiSkinHelper;
 import org.pcells.services.gui.EasyCommander;
 import org.pcells.services.gui.LoadedPicturePanel;
+import org.slf4j.Logger;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -22,10 +20,18 @@ import java.awt.event.ActionListener;
 import java.util.*;
 import java.util.prefs.Preferences;
 
+import diskCacheV111.pools.PoolCostInfo;
+import diskCacheV111.services.space.message.GetLinkGroupsMessage;
+import diskCacheV111.util.CacheException;
+import diskCacheV111.vehicles.CostModulePoolInfoTable;
+import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector;
+
 
 public class      SrmSpaceManagerPanel
         extends    CellGuiSkinHelper.CellPanel
         implements ActionListener{
+
+    private static final Logger _log = org.slf4j.LoggerFactory.getLogger(SrmSpaceManagerPanel.class);
 
     private DomainConnection _connection      = null ;
     private Preferences      _preferences     = null ;
@@ -252,11 +258,7 @@ public class      SrmSpaceManagerPanel
             if( source == _updateButton ){
                 setWaiting(true);
                 try{
-
-                    _connection.sendObject(
-                            "SrmSpaceManager" , "ls -l" , this , UPDATE_SRM_LS
-                    ) ;
-
+                    _connection.sendObject("SrmSpaceManager", new GetLinkGroupsMessage(), this , UPDATE_SRM_LS) ;
                 }catch(Exception e ){
                     setWaiting(false);
                     displayErrorMessage("Couldn't send query to server.\n"+e.getMessage() );
@@ -269,7 +271,7 @@ public class      SrmSpaceManagerPanel
 
                 PoolGroupLinkCollector.DataArrivedEvent e = (PoolGroupLinkCollector.DataArrivedEvent)event ;
 
-                if(_debug)System.out.println(e.toString());
+                _log.debug("Data arrived from treeCollector: {}", e.toString());
 
                 if( e.isError() ){
                     setWaiting(false);
@@ -277,7 +279,7 @@ public class      SrmSpaceManagerPanel
                     return ;
                 }
 
-                if(_debug)System.out.println(_treeCollector.getLinkGroupMap());
+                _log.debug("LinkGroupMap: {}",_treeCollector.getLinkGroupMap());
                 //
                 // now only the pool cost is still missing.
                 //
@@ -327,8 +329,9 @@ public class      SrmSpaceManagerPanel
             _weAreWaiting = isWaiting ;
         }
         public void domainAnswerArrived( Object obj , int subid ){
-
+            _log.debug("DomainAnswer arrived.");
             if( subid == UPDATE_SRM_LS ){
+                _log.debug("UPDATE_SRM_LS type message arrived answering message of ID: {}. Object: {}", subid, obj.getClass());
 
                 if( ( obj == null ) ){
                     //
@@ -359,7 +362,7 @@ public class      SrmSpaceManagerPanel
                         //
                         // This is a valid reply from the space manager.
                         //
-                        srmSpaceLsArrived( (String) obj ) ;
+                        srmSpaceLsArrived( (String) obj, subid ) ;
                         //
                         // Though we still need the PoolManager tree structure.
                         //
@@ -435,18 +438,18 @@ public class      SrmSpaceManagerPanel
                 ArrayList linkNameList  = (ArrayList)entry.getValue() ;
                 Set       poolNameSet   = new HashSet() ;
 
-                if(_debug)System.out.println("LinkGroupName : "+linkGroupName);
+                _log.debug("LinkGroupName : {}",linkGroupName);
 
                 for( Iterator lks = linkNameList.iterator() ; lks.hasNext() ; ){
 
                     String linkName = (String)lks.next() ;
 
-                    if(_debug)System.out.println("  Link : "+linkName);
+                    _log.debug("Link : {}", linkName);
 
                     PoolGroupLinkCollector.LinkEntry le =
                             (PoolGroupLinkCollector.LinkEntry)links.get(linkName);
 
-                    if(_debug)if(le==null)System.out.println("   LinkName "+linkName+" not found");
+                    if(le==null)_log.debug("LinkName {} not found.", linkName);
 
                     String [] poolNames = le.getResolvedPools() ;
                     if( poolNames == null )continue ;
@@ -474,7 +477,7 @@ public class      SrmSpaceManagerPanel
                 }
                 lg.setTotal(size);
             }
-            if(_debug)System.out.println("LinkGroupMap : "+_linkGroupMap);
+            _log.debug("LinkGroupMap : {}", _linkGroupMap);
             //
             // set the link group table.
             _spaceLinkGroupTable.setSpaceLinkGroupMap( _linkGroupMap ) ;
@@ -483,9 +486,15 @@ public class      SrmSpaceManagerPanel
             //
             _spaceReservationPanel.clearAll();
         }
-        private void srmSpaceLsArrived( String str ) throws IllegalArgumentException {
+        private void srmSpaceLsArrived( String str, int subid ) throws IllegalArgumentException {
 
-            if(_debug)System.out.println(str);
+            if (str.isEmpty()) {
+                _log.debug("Message with ID: {} had an empty reply.", subid);
+            }
+            else {
+                _log.debug("SpaceManager received string: {}", str);
+            }
+
             int errors = 0 ;
             java.util.List reservationList = new ArrayList() ;
             java.util.Map  linkGroupMap    = new HashMap() ;
@@ -510,6 +519,7 @@ public class      SrmSpaceManagerPanel
                         break ;
                     case 1 :
                         try{
+                            _log.debug("SpaceReservation Line: {}", line);
                             reservationList.add( new SpaceReservation( line ) ) ;
                         }catch(Exception e ){
                             errors ++ ;
@@ -519,6 +529,7 @@ public class      SrmSpaceManagerPanel
                         break ;
                     case 2 :
                         try{
+                            _log.debug("LinkGroup Line: {}", line);
                             SpaceLinkGroup slg = new SpaceLinkGroup(line);
                             linkGroupMap.put( new Long(slg.getId()) , slg ) ;
                         }catch(Exception e ){
@@ -534,9 +545,9 @@ public class      SrmSpaceManagerPanel
                 displayErrorMessage(
                         "Some errors detected while scanning srm spaces; check console output");
             }
-            System.out.println("Reservations : "+reservationList.size());
-            System.out.println("Link Groups  : "+linkGroupMap.size());
-            System.out.println("Scan Errors  : "+errors);
+            _log.debug("Number of reservations: {}", reservationList.size());
+            _log.debug("Number of Link Groups: {}", linkGroupMap.size());
+            _log.error("Scan Errors: {}", errors);
             //
             // iterate through the reservations, insert the link group name
             // and add them to the array.
