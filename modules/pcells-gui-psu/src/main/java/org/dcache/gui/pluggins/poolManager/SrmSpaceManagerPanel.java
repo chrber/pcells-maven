@@ -258,7 +258,7 @@ public class      SrmSpaceManagerPanel
             if( source == _updateButton ){
                 setWaiting(true);
                 try{
-                    _connection.sendObject("SrmSpaceManager", new GetLinkGroupsMessage(), this , UPDATE_SRM_LS) ;
+                    _connection.sendObject("SpaceManager", new GetLinkGroupsMessage(), this , UPDATE_SRM_LS) ;
                 }catch(Exception e ){
                     setWaiting(false);
                     displayErrorMessage("Couldn't send query to server.\n"+e.getMessage() );
