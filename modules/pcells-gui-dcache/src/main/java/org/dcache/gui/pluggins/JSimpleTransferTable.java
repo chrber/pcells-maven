@@ -398,7 +398,7 @@ public class      JSimpleTransferTable
                    IoJobInfo found = null ;
                    for( int i= 0 ; i < x.length ; i++ ){
                        if( x[i].getClientName().equals(door) && 
-                           ( _transferInfoOnKill._serialId.intValue() == (int) x[i].getClientId() ) ){
+                           ( _transferInfoOnKill._serialId == x[i].getClientId() ) ){
                            found = x[i] ;   
                            break ;
                        }

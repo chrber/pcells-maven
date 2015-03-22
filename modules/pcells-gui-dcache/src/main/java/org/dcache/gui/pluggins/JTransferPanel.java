@@ -22,6 +22,8 @@ import diskCacheV111.vehicles.RestoreHandlerInfo ;
 import diskCacheV111.util.PnfsId ;
 import org.pcells.services.gui.* ;
 
+import org.dcache.util.Args;
+
 public class      JTransferPanel 
        extends    JSwitchUpdatePanel 
        implements ActionListener, 
@@ -84,7 +86,7 @@ public class      JTransferPanel
    class TransferInfo {
        public String  _cellName   = null ;
        public String  _domainName = null ;
-       public Integer _serialId   = null ;
+       public Long _serialId   = null ;
        public String  _protocol   = null ;
        public Integer _uid = null ;
        public Integer _pid = null ;
@@ -102,24 +104,24 @@ public class      JTransferPanel
        
        private TransferInfo( String string ) throws Exception {
            _string  = string ;
-           StringTokenizer st = new StringTokenizer(string);
-           _cellName = st.nextToken() ;
-           _domainName = st.nextToken() ;
-           _serialId   = new Integer( st.nextToken() ) ;
-           _protocol   = st.nextToken() ;
-           _uid        = new Integer( st.nextToken() ) ;
-           _pid        = new Integer( st.nextToken() ) ;
-           _pnfsId     = new PnfsId( st.nextToken() ) ;
-           _pool       = st.nextToken() ;
-           _client     = st.nextToken() ;
-           _status     = st.nextToken() ;
-           _timer      = new Long( st.nextToken() ) ;
-           _mode       = st.nextToken() ;
-           if( st.hasMoreTokens() ){
-              _transferTime = new Long( st.nextToken() );
-              _bytesTransferred = new Long( st.nextToken() ) ;
-              _transferSpeed = new Double( st.nextToken() ) ;
-              _transferStarted = new Long( st.nextToken() ) ;
+           Args args = new Args(string);
+           _cellName = args.argv(0);
+           _domainName = args.argv(1);
+           _serialId   = new Long(args.argv(2));
+           _protocol   = args.argv(3);
+           _uid        = new Integer(args.argv(4));
+           _pid        = new Integer(args.argv(5));
+           _pnfsId     = new PnfsId(args.argv(6));
+           _pool       = args.argv(7);
+           _client     = args.argv(8);
+           _status     = args.argv(9);
+           _timer      = new Long(args.argv(10));
+           _mode       = args.argv(11);
+           if (args.argc() >= 16) {
+              _transferTime = new Long(args.argv(12));
+              _bytesTransferred = new Long(args.argv(13));
+              _transferSpeed = new Double(args.argv(14));
+               _transferStarted = new Long(args.argv(15));
            }
            
        }
