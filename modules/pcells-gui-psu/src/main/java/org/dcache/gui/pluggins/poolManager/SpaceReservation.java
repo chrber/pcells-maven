@@ -22,7 +22,7 @@ public class SpaceReservation extends SpaceEntityCore {
    private long   _created   = 0L ;
    private long   _lifetime  = 0L ;
    private long   _expiration = 0L ;
-   private SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd kk:mm:ss zzz yyyy") ;
+   private SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd kk:mm:ss zzz yyyy", Locale.US) ;
    
    public SpaceReservation( String code ) throws IllegalArgumentException, ParseException {
       super(code);
