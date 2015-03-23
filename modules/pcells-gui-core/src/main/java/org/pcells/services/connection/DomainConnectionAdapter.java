@@ -161,9 +161,10 @@ public class DomainConnectionAdapter implements DomainConnection {
              DomainObjectFrame frame =
                      new DomainObjectFrame( obj , ++_ioCounter , id ) ;
              _logger.debug("Frame with ID {} sent to destination {}", frame.getId(), frame.getDestination());
-             _objOut.writeObject( frame ) ;
+             _packetHash.put(frame, listener) ;
+             _objOut.writeObject(frame) ;
              _objOut.reset() ;
-             _packetHash.put( frame , listener ) ;
+             _objOut.flush();
              return _ioCounter ;
          }
      }
@@ -180,10 +181,11 @@ public class DomainConnectionAdapter implements DomainConnection {
              }
              DomainObjectFrame frame =
                      new DomainObjectFrame( destination , obj , ++_ioCounter , id ) ;
-             _objOut.writeObject( frame ) ;
              _logger.debug("Frame with ID {} sent to destination {}", frame.getId(), frame.getDestination());
+             _packetHash.put(frame, listener) ;
+             _objOut.writeObject(frame);
              _objOut.reset() ;
-             _packetHash.put( frame , listener ) ;
+             _objOut.flush();
              return _ioCounter ;
          }
      }

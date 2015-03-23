@@ -12,7 +12,7 @@ import java.net.URL;
  
 public class HelloWindow extends JWindow {
 
-    private javax.swing.Timer _timer  = new javax.swing.Timer( 500 , new Scheduler() );
+    private javax.swing.Timer _timer  = new javax.swing.Timer( 50 , new Scheduler() );
     private PicturePanel  _picture    = null ;
     
     private class Scheduler implements ActionListener {

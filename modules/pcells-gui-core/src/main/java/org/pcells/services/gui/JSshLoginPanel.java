@@ -151,9 +151,10 @@ public class      JSshLoginPanel
              if( ! _connected )throw new IOException( "Not connected" ) ;
              DomainObjectFrame frame = 
                      new DomainObjectFrame((Serializable) obj, ++_ioCounter , id ) ;
+             _packetHash.put( frame, listener ) ;
              _objOut.writeObject( frame ) ;
              _objOut.reset() ;
-             _packetHash.put( frame , listener ) ;
+             _objOut.flush();
              return _ioCounter ;
          }
      }
@@ -167,9 +168,10 @@ public class      JSshLoginPanel
              if( ! _connected )throw new IOException( "Not connected" ) ;
              DomainObjectFrame frame = 
                      new DomainObjectFrame( destination , (Serializable) obj, ++_ioCounter , id ) ;
-             _objOut.writeObject( frame ) ;
+             _packetHash.put( frame, listener ) ;
+             _objOut.writeObject( frame);
              _objOut.reset() ;
-             _packetHash.put( frame , listener ) ;
+             _objOut.flush();
              return _ioCounter ;
          }
      }
