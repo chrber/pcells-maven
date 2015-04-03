@@ -23,7 +23,6 @@ import dmg.cells.nucleus.CellInfo ;
 import diskCacheV111.vehicles.RestoreHandlerInfo ;
 import diskCacheV111.vehicles.IoJobInfo ;
 import diskCacheV111.util.PnfsId ;
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
 import org.pcells.services.gui.* ;
 import org.dcache.gui.pluggins.*;
 import org.pcells.services.gui.util.* ;

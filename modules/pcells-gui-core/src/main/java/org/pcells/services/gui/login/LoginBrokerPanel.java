@@ -2,7 +2,6 @@
 //
 package org.pcells.services.gui.login ;
 //
-import diskCacheV111.util.TimeoutCacheException;
 import dmg.cells.nucleus.NoRouteToCellException;
 import dmg.cells.services.login.LoginBrokerInfo;
 import org.pcells.services.connection.DomainConnection;
@@ -184,8 +183,8 @@ public class      LoginBrokerPanel
             if( obj == null ){
                 JOptionPane.showMessageDialog(
                         this,
-                        "Request to "+destination+" timed out"  ,
-                        "Problem in "+destination ,
+                        destination+" could not respond in time. Either it does not exist or is too busy.",
+                        "Destination: "+destination+" missing or busy" ,
                         JOptionPane.ERROR_MESSAGE ) ;
                 return ;
             }else if( obj instanceof NoRouteToCellException ){
@@ -194,13 +193,6 @@ public class      LoginBrokerPanel
                         this,
                         destination+" not found"  ,
                         "Problem in "+destination ,
-                        JOptionPane.ERROR_MESSAGE ) ;
-                return ;
-            }else if( obj instanceof TimeoutCacheException ){
-                JOptionPane.showMessageDialog(
-                        this,
-                        destination+" could not respond in time. Either it does not exist or is too busy.",
-                        "Destination: "+destination+" missing or busy" ,
                         JOptionPane.ERROR_MESSAGE ) ;
                 return ;
             }else if( ! ( obj instanceof LoginBrokerInfo [] ) ){

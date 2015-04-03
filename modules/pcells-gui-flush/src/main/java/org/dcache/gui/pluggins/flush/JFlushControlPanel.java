@@ -3,7 +3,6 @@
 package org.dcache.gui.pluggins.flush ;
 //
 import diskCacheV111.hsmControl.flush.FlushControlCellInfo;
-import diskCacheV111.util.TimeoutCacheException;
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainConnectionListener;
 import org.pcells.services.connection.DomainEventListener;
@@ -205,7 +204,7 @@ public class      JFlushControlPanel
                         }
                         _monitor.preparePoolList( list ) ;
                     }
-                    else if ( obj instanceof TimeoutCacheException )
+                    else if ( obj == null )
                     {
                         _logger.error("FlushManager could not be found: {}", obj.getClass().getName());
                     }
@@ -227,7 +226,7 @@ public class      JFlushControlPanel
                         _status.prepareFlushStatus( status ) ;
 
                     }
-                    else if ( obj instanceof TimeoutCacheException )
+                    else if ( obj == null )
                     {
                         _logger.error("FlushManager could not be found: {}", obj.getClass().getName());
                     }
