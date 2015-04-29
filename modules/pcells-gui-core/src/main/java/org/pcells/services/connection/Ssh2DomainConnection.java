@@ -8,6 +8,7 @@ import org.apache.sshd.ClientSession;
 import org.apache.sshd.SshClient;
 import org.apache.sshd.client.future.AuthFuture;
 import org.apache.sshd.client.future.ConnectFuture;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.security.KeyPair;
+import java.security.Security;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,6 +27,11 @@ import java.util.Date;
 public class Ssh2DomainConnection
         extends DomainConnectionAdapter
         implements SshClientAuthentication {
+
+    static
+    {
+        Security.addProvider(new BouncyCastleProvider());
+    }
 
     private static Logger _logger;
     private String _hostname = null;
