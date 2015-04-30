@@ -2,24 +2,23 @@
 //
 package org.dcache.gui.pluggins;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.tree.*;
-import javax.swing.border.*;
-import java.util.*;
-import java.io.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import dmg.cells.network.CellDomainNode ;
-import dmg.cells.nucleus.CellTunnelInfo ;
-import dmg.cells.nucleus.CellDomainInfo ;   
-import dmg.cells.nucleus.CellInfo ;   
-import diskCacheV111.vehicles.RestoreHandlerInfo ;   
-import org.pcells.services.gui.* ;
+
+import org.pcells.services.gui.CellGuiSkinHelper;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
+import java.awt.AWTEventMulticaster;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
 

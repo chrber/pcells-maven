@@ -1,10 +1,10 @@
 package dmg.security.cipher.rsa ;
 
+import dmg.security.cipher.IllegalEncryptionException;
+
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.Random;
-
-import dmg.security.cipher.IllegalEncryptionException;
 
 /**
   *

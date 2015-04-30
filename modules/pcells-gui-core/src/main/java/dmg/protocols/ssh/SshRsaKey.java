@@ -1,5 +1,7 @@
 package dmg.protocols.ssh ;
 
+import dmg.security.digest.Md5;
+
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,8 +10,6 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.Random;
 import java.util.StringTokenizer;
-
-import dmg.security.digest.Md5;
 
 public class SshRsaKey  {
 

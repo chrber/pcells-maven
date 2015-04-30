@@ -1,7 +1,8 @@
 package org.pcells.services.gui.util ;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ListModel;
+
+import java.awt.Color;
 
 
 public interface PieChartModel extends ListModel {

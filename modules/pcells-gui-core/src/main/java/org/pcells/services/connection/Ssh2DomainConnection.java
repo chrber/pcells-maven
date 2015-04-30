@@ -2,7 +2,13 @@
 //
 package org.pcells.services.connection;
 //
-import dmg.protocols.ssh.*;
+
+import dmg.protocols.ssh.SshAuthMethod;
+import dmg.protocols.ssh.SshAuthPassword;
+import dmg.protocols.ssh.SshAuthRsa;
+import dmg.protocols.ssh.SshClientAuthentication;
+import dmg.protocols.ssh.SshRsaKey;
+import dmg.protocols.ssh.SshSharedKey;
 import org.apache.sshd.ClientChannel;
 import org.apache.sshd.ClientSession;
 import org.apache.sshd.SshClient;
@@ -13,7 +19,17 @@ import org.bouncycastle.openssl.PEMReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.security.KeyPair;

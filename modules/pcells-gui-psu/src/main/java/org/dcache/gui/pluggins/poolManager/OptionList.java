@@ -2,16 +2,23 @@
 //
 package org.dcache.gui.pluggins.poolManager ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
-import java.util.* ;
-import java.util.regex.* ;
 
-import org.pcells.services.gui.* ;
+import org.pcells.services.gui.CellGuiSkinHelper;
+
+import javax.swing.AbstractListModel;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.DefaultListSelectionModel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.border.TitledBorder;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.TreeMap;
 
 public class OptionList 
        extends CellGuiSkinHelper.CellPanel {

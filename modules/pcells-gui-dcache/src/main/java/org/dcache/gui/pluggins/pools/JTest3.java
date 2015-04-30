@@ -2,22 +2,32 @@
 
 package org.dcache.gui.pluggins.pools ;
 
-import org.pcells.services.gui.* ;
-import org.pcells.services.gui.util.* ;
+import org.pcells.services.gui.util.ShadowedPanel;
 
-import java.io.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.util.Date;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.LayoutManager;
+import java.awt.LayoutManager2;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.ContainerEvent;
+import java.awt.event.ContainerListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.LinkedList;
-import javax.swing.*;
-import javax.swing.border.*;
-import java.util.prefs.*;
-import java.lang.reflect.*;
-import java.util.Random;
 
 
 /**

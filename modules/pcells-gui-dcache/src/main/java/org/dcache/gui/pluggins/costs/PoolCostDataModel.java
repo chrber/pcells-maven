@@ -2,18 +2,14 @@
 //
 package org.dcache.gui.pluggins.costs ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.util.*;
-import org.pcells.services.gui.util.histogram.*;
-import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector ;
 
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
-import diskCacheV111.vehicles.CostModulePoolInfoTable ;
-import diskCacheV111.pools.PoolCostInfo ;
+import diskCacheV111.pools.PoolCostInfo;
+import org.pcells.services.gui.util.histogram.AbstractHistogramModel;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Map;
 
 
 public class PoolCostDataModel extends AbstractHistogramModel {

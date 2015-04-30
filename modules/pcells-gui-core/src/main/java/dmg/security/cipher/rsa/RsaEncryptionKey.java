@@ -1,8 +1,8 @@
 package dmg.security.cipher.rsa ;
 
-import java.math.BigInteger;
-
 import dmg.security.cipher.EncryptionKey;
+
+import java.math.BigInteger;
 
 /**
   *

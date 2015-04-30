@@ -3,7 +3,7 @@
 package org.dcache.gui.pluggins.costs ;
 //
 
-import diskCacheV111.pools.PoolCostInfo ;
+import diskCacheV111.pools.PoolCostInfo;
 
 public class ExtendedPoolCostInfo implements Comparable {
 

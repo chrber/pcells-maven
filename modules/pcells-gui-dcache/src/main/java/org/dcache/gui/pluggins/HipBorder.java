@@ -2,12 +2,18 @@
 //
 package org.dcache.gui.pluggins;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
+
+import javax.swing.border.Border;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.Polygon;
+import java.awt.RenderingHints;
 
 
 public class HipBorder implements Border {

@@ -2,22 +2,23 @@
 //
 package org.dcache.gui.pluggins.costs ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.util.*;
-import java.io.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.* ;
-import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector ;
 
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
-import diskCacheV111.vehicles.CostModulePoolInfoTable ;
-import diskCacheV111.pools.PoolCostInfo ;
+import javax.swing.JComponent;
+import javax.swing.ListModel;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 
 public class PoolCostDrawBoard extends JComponent {

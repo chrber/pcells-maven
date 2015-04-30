@@ -2,6 +2,7 @@
 //
 package org.dcache.gui.pluggins.pools ;
 //
+
 import diskCacheV111.pools.PoolCellInfo;
 import diskCacheV111.pools.PoolCostInfo;
 import diskCacheV111.pools.StorageClassFlushInfo;
@@ -16,10 +17,19 @@ import org.pcells.services.gui.EasyCommander;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;

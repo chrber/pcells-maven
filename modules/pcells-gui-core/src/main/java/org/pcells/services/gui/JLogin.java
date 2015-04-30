@@ -5,8 +5,16 @@ package org.pcells.services.gui ;
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainEventListener;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Constructor;

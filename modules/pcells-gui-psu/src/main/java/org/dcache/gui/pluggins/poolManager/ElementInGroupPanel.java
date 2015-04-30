@@ -2,17 +2,29 @@
 //
 package org.dcache.gui.pluggins.poolManager ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
-import java.util.* ;
-import java.util.regex.* ;
 
-import org.pcells.services.gui.* ;
-import org.dcache.gui.pluggins.* ;
+ import org.pcells.services.gui.CellGuiSkinHelper;
+
+ import javax.swing.BorderFactory;
+ import javax.swing.DefaultListCellRenderer;
+ import javax.swing.DefaultListModel;
+ import javax.swing.DefaultListSelectionModel;
+ import javax.swing.JButton;
+ import javax.swing.JCheckBox;
+ import javax.swing.JLabel;
+ import javax.swing.JList;
+ import javax.swing.JPanel;
+ import javax.swing.JTextField;
+ import javax.swing.event.ListSelectionEvent;
+ import javax.swing.event.ListSelectionListener;
+
+ import java.awt.Color;
+ import java.awt.Component;
+ import java.awt.GridBagConstraints;
+ import java.awt.GridBagLayout;
+ import java.awt.GridLayout;
+ import java.awt.event.ActionEvent;
+ import java.awt.event.ActionListener;
 
 public class ElementInGroupPanel extends CellGuiSkinHelper.CellPanel {
 

@@ -2,22 +2,16 @@
 
 package org.dcache.gui.pluggins.pools ;
 
-import org.pcells.services.gui.* ;
-import org.pcells.services.gui.util.* ;
+import diskCacheV111.vehicles.IoJobInfo;
+import diskCacheV111.vehicles.JobInfo;
 
-import diskCacheV111.pools.* ;
-
-import java.util.*;
-import java.util.regex.*;
-import java.awt.*;
-import java.text.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
-
-import diskCacheV111.vehicles.JobInfo ;
-import diskCacheV111.vehicles.IoJobInfo ;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.StringTokenizer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class GuiJobInfo {

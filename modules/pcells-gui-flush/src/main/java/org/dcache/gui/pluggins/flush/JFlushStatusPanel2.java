@@ -2,23 +2,32 @@
 //
 package org.dcache.gui.pluggins.flush ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.util.*;
-import java.io.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.* ;
 
-import org.dcache.gui.pluggins.* ;
+import diskCacheV111.hsmControl.flush.FlushControlCellInfo;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.connection.DomainConnectionListener;
+import org.pcells.services.gui.CellBorder;
+import org.pcells.services.gui.CellGuiSkinHelper;
 
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
-import diskCacheV111.hsmControl.flush.* ;
-import diskCacheV111.pools.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.Map;
 
 public class      JFlushStatusPanel2
        extends    CellGuiSkinHelper.CellPanel

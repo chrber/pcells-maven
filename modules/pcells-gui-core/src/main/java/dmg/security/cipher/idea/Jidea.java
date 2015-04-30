@@ -1,9 +1,9 @@
 package dmg.security.cipher.idea;
 
+import dmg.security.cipher.BlockCipher;
+
 import java.util.Date;
 import java.util.Random;
-
-import dmg.security.cipher.BlockCipher;
 
 /**
   *  <strong>This module is an java implementation of the

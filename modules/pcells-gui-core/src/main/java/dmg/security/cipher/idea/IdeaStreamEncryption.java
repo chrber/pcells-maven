@@ -1,10 +1,10 @@
 package dmg.security.cipher.idea ;
 
-import java.util.Date;
-import java.util.Random;
-
 import dmg.security.cipher.IllegalEncryptionException;
 import dmg.security.cipher.StreamEncryption;
+
+import java.util.Date;
+import java.util.Random;
 
 /**
   *

@@ -2,16 +2,27 @@
 //
 package org.dcache.gui.pluggins;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
-import java.util.* ;
-import java.util.regex.* ;
 
-import org.pcells.services.gui.* ;
+import org.pcells.services.gui.CellBorder;
+import org.pcells.services.gui.CellGuiSkinHelper;
+
+import javax.swing.AbstractListModel;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.regex.Pattern;
 
 public class JTitleList 
         extends CellGuiSkinHelper.CellPanel 

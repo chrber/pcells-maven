@@ -2,22 +2,24 @@
 
 package org.dcache.gui.pluggins.pools ;
 
-import org.pcells.services.gui.* ;
-import org.pcells.services.gui.util.* ;
+import org.pcells.services.gui.util.RowObjectTableModel;
 
-import diskCacheV111.pools.* ;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumnModel;
 
-import java.util.*;
-
-import java.awt.*;
-import java.text.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
-
-import diskCacheV111.vehicles.JobInfo ;
-import diskCacheV111.vehicles.IoJobInfo ;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class PoolQueueListPanel extends JPanel implements ListSelectionListener {

@@ -1,11 +1,11 @@
 package dmg.security.cipher ;
 
-import java.util.Date;
-import java.util.Random;
-
 import dmg.security.cipher.blowfish.Jblowfish;
 import dmg.security.cipher.des.Jdes;
 import dmg.security.cipher.idea.Jidea;
+
+import java.util.Date;
+import java.util.Random;
 
 public class StreamTest {
   private static byte [] __key =

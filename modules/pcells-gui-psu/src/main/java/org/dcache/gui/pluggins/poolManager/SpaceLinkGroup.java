@@ -2,7 +2,9 @@
 //
 package org.dcache.gui.pluggins.poolManager ;
 //
-import java.util.* ;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class SpaceLinkGroup extends SpaceEntityCore {
    

@@ -1,13 +1,13 @@
 package dmg.security.cipher ;
 
+import dmg.security.cipher.rsa.RsaEncryptionKey;
+
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
-
-import dmg.security.cipher.rsa.RsaEncryptionKey;
 /*
  *  ssh private key file (binary)
  *

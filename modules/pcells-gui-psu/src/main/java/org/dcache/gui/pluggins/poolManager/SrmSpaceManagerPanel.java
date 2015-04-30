@@ -2,25 +2,44 @@
 //
 package org.dcache.gui.pluggins.poolManager ;
 //
+
 import diskCacheV111.pools.PoolCostInfo;
 import diskCacheV111.util.CacheException;
 import diskCacheV111.vehicles.CostModulePoolInfoTable;
-import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector;
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainConnectionListener;
 import org.pcells.services.gui.CellGuiSkinHelper;
 import org.pcells.services.gui.EasyCommander;
 import org.pcells.services.gui.LoadedPicturePanel;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.prefs.Preferences;
+
+import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector;
 
 
 public class      SrmSpaceManagerPanel

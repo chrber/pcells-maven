@@ -1,20 +1,18 @@
 package org.dcache.gui.pluggins.drives;
 
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.connection.DomainConnectionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 import java.util.prefs.Preferences;
-import java.util.StringTokenizer ;
-import java.util.ArrayList ;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
 import org.dcache.gui.pluggins.JSwitchUpdatePanel;
-import org.pcells.services.connection.DomainConnection;
-import org.pcells.services.connection.DomainConnectionListener;
 
 public class  JTapeDriveWatchPanel 
        extends    JSwitchUpdatePanel

@@ -2,15 +2,24 @@
 //
 package org.dcache.gui.pluggins;
 //
-import org.pcells.services.gui.CellGuiSkinHelper;
-import org.pcells.services.gui.util.DrawBoardFrame;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+ import org.pcells.services.gui.CellGuiSkinHelper;
+ import org.pcells.services.gui.util.DrawBoardFrame;
+
+ import javax.swing.JFrame;
+ import javax.swing.JPanel;
+
+ import java.awt.BorderLayout;
+ import java.awt.Color;
+ import java.awt.Dimension;
+ import java.awt.FontMetrics;
+ import java.awt.Graphics;
+ import java.awt.Graphics2D;
+ import java.awt.RenderingHints;
+ import java.awt.event.MouseAdapter;
+ import java.awt.event.MouseEvent;
+ import java.awt.event.WindowAdapter;
+ import java.awt.event.WindowEvent;
 
 public class      JHistogramDisplay 
        extends    CellGuiSkinHelper.CellPanel 

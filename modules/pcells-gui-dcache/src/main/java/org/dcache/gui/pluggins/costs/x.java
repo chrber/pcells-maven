@@ -1,6 +1,6 @@
 package org.dcache.gui.pluggins.costs;
 
-import java.text.* ;
+import java.text.DecimalFormat;
 
 public class x {
     

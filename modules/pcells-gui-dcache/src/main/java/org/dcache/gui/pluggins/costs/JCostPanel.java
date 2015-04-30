@@ -2,9 +2,9 @@
 //
 package org.dcache.gui.pluggins.costs ;
 //
+
 import diskCacheV111.pools.PoolCostInfo;
 import diskCacheV111.vehicles.CostModulePoolInfoTable;
-import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector;
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainConnectionListener;
 import org.pcells.services.connection.DomainEventListener;
@@ -12,13 +12,28 @@ import org.pcells.services.gui.LoadedPicturePanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+
+import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector;
 
 public class      JCostPanel
         extends    JPanel

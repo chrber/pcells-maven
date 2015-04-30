@@ -4,8 +4,9 @@ package org.pcells.services.gui.util ;
 
 //
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+
+import java.awt.Component;
 import java.awt.event.ContainerListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

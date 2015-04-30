@@ -2,15 +2,40 @@
 //
 package org.pcells.services.gui;
 
-import org.pcells.services.connection.*;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.connection.DomainEventListener;
+import org.pcells.services.connection.RawDomainConnection;
+import org.pcells.services.connection.Ssh1DomainConnection;
+import org.pcells.services.connection.Ssh2DomainConnection;
 import org.pcells.util.CellGuiClassLoader;
 import org.pcells.util.ModuleClassLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import java.awt.*;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;

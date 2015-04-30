@@ -1,15 +1,19 @@
 package org.dcache.gui.pluggins.pools ;
 
-import org.pcells.services.gui.* ;
-import org.pcells.services.gui.util.* ;
+import org.pcells.services.gui.CellGuiSkinHelper;
 
-import diskCacheV111.pools.* ;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import java.util.*;
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.border.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.util.Map;
 
 public class PoolGenericInfoPanel extends JPanel  {
 

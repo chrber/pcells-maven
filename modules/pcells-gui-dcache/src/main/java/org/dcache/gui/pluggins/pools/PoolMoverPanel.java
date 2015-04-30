@@ -2,20 +2,23 @@
 //
 package org.dcache.gui.pluggins.pools ;
 //
+
 import diskCacheV111.poolManager.PoolManagerCellInfo;
 import diskCacheV111.vehicles.IoJobInfo;
-import org.dcache.gui.pluggins.JHistogramDisplay;
 import org.pcells.services.connection.DomainConnection;
 import org.pcells.services.connection.DomainConnectionListener;
 import org.pcells.services.gui.CellGuiSkinHelper;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.prefs.Preferences;
+
+import org.dcache.gui.pluggins.JHistogramDisplay;
 
 public class      PoolMoverPanel
        extends    CellGuiSkinHelper.CellPanel 

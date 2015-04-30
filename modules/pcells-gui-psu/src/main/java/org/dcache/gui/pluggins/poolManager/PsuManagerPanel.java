@@ -2,19 +2,14 @@
 //
 package org.dcache.gui.pluggins.poolManager ;
 //
-import org.dcache.gui.pluggins.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.util.*;
-import java.io.* ;
-import java.util.prefs.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.* ;
+
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.gui.CellGuiSkinHelper;
+
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.prefs.Preferences;
 
 //import diskCacheV111.poolManager.PoolManagerCellInfo ;
 

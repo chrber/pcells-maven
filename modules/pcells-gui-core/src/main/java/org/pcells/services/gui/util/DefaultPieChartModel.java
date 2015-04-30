@@ -1,6 +1,6 @@
 package org.pcells.services.gui.util ;
 
-import javax.swing.*;
+import javax.swing.DefaultListModel;
 
 
 public class DefaultPieChartModel extends DefaultListModel implements PieChartModel {

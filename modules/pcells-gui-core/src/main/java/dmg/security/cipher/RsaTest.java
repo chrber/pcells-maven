@@ -1,10 +1,10 @@
 package dmg.security.cipher ;
 
-import java.io.FileInputStream;
-import java.util.Date;
-
 import dmg.security.cipher.rsa.RsaEncryption;
 import dmg.security.cipher.rsa.RsaEncryptionKey;
+
+import java.io.FileInputStream;
+import java.util.Date;
 
 /**
   *

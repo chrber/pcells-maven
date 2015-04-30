@@ -2,8 +2,11 @@
 //
 package org.dcache.gui.pluggins.poolManager ;
 //
-import java.util.* ;
-import java.text.* ;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.Map;
 
 public class SpaceReservation extends SpaceEntityCore {
 

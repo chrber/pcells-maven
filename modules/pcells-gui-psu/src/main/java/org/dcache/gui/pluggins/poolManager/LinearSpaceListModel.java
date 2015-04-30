@@ -2,8 +2,7 @@
 package org.dcache.gui.pluggins.poolManager ;
 
 
-import javax.swing.* ;
-import java.awt.* ;
+import javax.swing.DefaultListModel;
 
 public class LinearSpaceListModel extends DefaultListModel {
 

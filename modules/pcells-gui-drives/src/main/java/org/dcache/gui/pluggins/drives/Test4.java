@@ -1,22 +1,23 @@
 
 package org.dcache.gui.pluggins.drives ;
 
-import org.dcache.gui.pluggins.monitoring.*;
-import java.io.*;
-import java.net.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.tree.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
-import java.util.prefs.*;
-import dmg.cells.applets.login.* ;
-import java.lang.reflect.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.IOException;
 
 public class Test4 extends JFrame {
 

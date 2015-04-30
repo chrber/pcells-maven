@@ -1,5 +1,11 @@
 package dmg.protocols.ssh ;
 
+import dmg.security.cipher.StreamCipher;
+import dmg.security.cipher.StreamFromBlockCipher;
+import dmg.security.cipher.blowfish.Jblowfish;
+import dmg.security.cipher.des.Jdes;
+import dmg.security.cipher.idea.Jidea;
+import dmg.util.DummyStreamEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,13 +15,6 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
-
-import dmg.security.cipher.StreamCipher;
-import dmg.security.cipher.StreamFromBlockCipher;
-import dmg.security.cipher.blowfish.Jblowfish;
-import dmg.security.cipher.des.Jdes;
-import dmg.security.cipher.idea.Jidea;
-import dmg.util.DummyStreamEngine;
 
 
 public class SshCoreEngine  {

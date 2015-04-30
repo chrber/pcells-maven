@@ -1,13 +1,13 @@
 package dmg.security.cipher.pgp ;
 
+import dmg.security.cipher.EncryptionKey;
+import dmg.security.cipher.EncryptionKeyInputStream;
+import dmg.security.cipher.rsa.RsaEncryptionKey;
+
 import java.io.EOFException;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import dmg.security.cipher.EncryptionKey;
-import dmg.security.cipher.EncryptionKeyInputStream;
-import dmg.security.cipher.rsa.RsaEncryptionKey;
 
 /**
   *

@@ -2,20 +2,27 @@
 //
 package org.dcache.gui.pluggins.pools ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.table.*;
-import java.util.*;
-import java.io.* ;
-import java.util.prefs.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.* ;
 
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.gui.CellGuiSkinHelper;
+import org.pcells.services.gui.EasyCommander;
+import org.pcells.services.gui.LoadedPicturePanel;
+
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.prefs.Preferences;
 
 public class      PoolCommandPanel
        extends    CellGuiSkinHelper.CellPanel 

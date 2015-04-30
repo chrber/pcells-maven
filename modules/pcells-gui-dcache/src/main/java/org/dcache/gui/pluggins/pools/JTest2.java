@@ -2,23 +2,23 @@
 
 package org.dcache.gui.pluggins.pools ;
 
-import org.pcells.services.gui.* ;
-import org.pcells.services.gui.util.* ;
+import org.pcells.services.gui.util.DefaultPieChartModel;
+import org.pcells.services.gui.util.JPieChart;
+import org.pcells.services.gui.util.PieChartModel;
 
-import java.io.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.util.Date;
-import javax.swing.*;
-import javax.swing.border.*;
-import java.util.prefs.*;
-import dmg.cells.applets.login.* ;
-import java.lang.reflect.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Random;
-import org.dcache.gui.pluggins.*;
 
 public class JTest2 extends JFrame {
 

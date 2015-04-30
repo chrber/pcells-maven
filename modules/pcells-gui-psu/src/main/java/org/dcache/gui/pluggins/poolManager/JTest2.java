@@ -2,23 +2,10 @@
 
 package org.dcache.gui.pluggins.poolManager ;
 
-import org.pcells.services.gui.* ;
-import org.pcells.services.gui.util.* ;
+import javax.swing.JFrame;
 
-import java.io.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.util.Date;
-import javax.swing.*;
-import javax.swing.border.*;
-import java.util.prefs.*;
-import dmg.cells.applets.login.* ;
-import java.lang.reflect.*;
-import java.util.Random;
-import org.dcache.gui.pluggins.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 public class JTest2 extends JFrame {
 

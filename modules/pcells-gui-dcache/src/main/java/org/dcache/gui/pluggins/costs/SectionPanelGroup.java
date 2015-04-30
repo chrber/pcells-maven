@@ -2,23 +2,23 @@
 //
 package org.dcache.gui.pluggins.costs ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import java.util.*;
-import java.io.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import org.pcells.services.gui.* ;
-import org.pcells.services.gui.util.histogram.*;
-import org.dcache.gui.pluggins.pools.PoolGroupLinkCollector ;
 
-import diskCacheV111.poolManager.PoolManagerCellInfo ;
-import diskCacheV111.vehicles.CostModulePoolInfoTable ;
-import diskCacheV111.pools.PoolCostInfo ;
+import diskCacheV111.pools.PoolCostInfo;
+import org.pcells.services.gui.util.histogram.SimpleNamedBarHistogram;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 
 
 public class SectionPanelGroup extends JTabbedPane {

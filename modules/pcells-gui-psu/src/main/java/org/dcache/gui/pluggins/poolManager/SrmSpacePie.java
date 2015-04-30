@@ -1,14 +1,21 @@
 package org.dcache.gui.pluggins.poolManager ;
 
-import org.pcells.services.gui.* ;
-import org.pcells.services.gui.util.* ;
+import org.pcells.services.gui.util.DefaultPieChartModel;
+import org.pcells.services.gui.util.JPieChart;
+import org.pcells.services.gui.util.PieChartModel;
 
-import diskCacheV111.pools.* ;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.border.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 public class SrmSpacePie extends JPanel  {
 

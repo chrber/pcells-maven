@@ -2,30 +2,21 @@
 //
 package org.dcache.gui.pluggins.poolManager ;
 //
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.font.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.tree.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
-import java.util.*;
-import java.text.*;
-import java.io.* ;
-import org.pcells.services.connection.DomainConnection ;
-import org.pcells.services.connection.DomainConnectionListener ;
-import org.pcells.services.connection.DomainEventListener ;
-import dmg.cells.network.CellDomainNode ;
-import dmg.cells.nucleus.CellTunnelInfo ;
-import dmg.cells.nucleus.CellDomainInfo ;   
-import dmg.cells.nucleus.CellInfo ;   
-import diskCacheV111.vehicles.RestoreHandlerInfo ;
-import diskCacheV111.vehicles.IoJobInfo ;
-import diskCacheV111.util.PnfsId ;
-import org.pcells.services.gui.* ;
-import org.dcache.gui.pluggins.*;
-import org.pcells.services.gui.util.* ;
+
+import diskCacheV111.vehicles.IoJobInfo;
+import org.pcells.services.connection.DomainConnection;
+import org.pcells.services.gui.util.RowObjectTableModel;
+
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
 
 
 public class SpaceReservationTable extends JTable {

@@ -1,11 +1,11 @@
 package dmg.protocols.ssh ;
 
-import java.util.Date;
-import java.util.Random;
-
 import dmg.security.cipher.StreamCipher;
 import dmg.security.digest.Md5;
 import dmg.security.digest.MsgDigest;
+
+import java.util.Date;
+import java.util.Random;
 
 public class SshSmsgPublicKey extends SshPacket {
 

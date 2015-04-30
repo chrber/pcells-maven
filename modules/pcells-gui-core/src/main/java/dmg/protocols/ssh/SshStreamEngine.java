@@ -1,5 +1,7 @@
 package dmg.protocols.ssh ;
 
+import dmg.security.digest.Md5;
+import dmg.util.StreamEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,9 +18,6 @@ import java.net.Socket;
 import java.security.Principal;
 import java.util.Date;
 import java.util.Random;
-
-import dmg.security.digest.Md5;
-import dmg.util.StreamEngine;
 
 import org.dcache.auth.Subjects;
 import org.dcache.auth.UserNamePrincipal;
