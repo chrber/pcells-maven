@@ -1,7 +1,11 @@
 #!/bin/bash
 CLASSPATH=""
-rm -rf ./pcells
-for f in `find ../modules/org.pcells/target -type f -name '*.jar' `; do CLASSPATH=$CLASSPATH:$f; done
+#rm -rf ./pcells
+#for f in `find ../modules/org.pcells/target -type f -name '*.jar' `; 
+for f in `find ./pcells/ -type f -name '*.jar' `; 
+    do CLASSPATH=$CLASSPATH:$f; 
+done
+
 echo Classpath: $CLASSPATH
 prog=$1
 shift

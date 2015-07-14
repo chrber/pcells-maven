@@ -28,6 +28,8 @@ class _myEventListener( DomainEventListener ) :
     def __init__( self, verbose ) :
         global _ConnectionSema
         self._verbose = verbose
+        if verbose :
+                print "_myEventListener.__init__: Acquire semaphore."
         _ConnectionSema.acquire() # Connection is initially closed
 
     def connectionOpened( self, connection ) :
@@ -40,6 +42,8 @@ class _myEventListener( DomainEventListener ) :
         global _ConnectionSema
         if self._verbose :
             print "Connection closed"
+        if verbose :
+                print "_myEventListener.connectionClosed: Acquire semaphore."
         _ConnectionSema.acquire()
 
     def connectionOutOfBand( self, connection, subject ) :
@@ -129,8 +133,8 @@ class AdminServerSession:
         # The SSH v1 connection is provided by dmg.protocols.ssh.
         self._connection = Ssh2DomainConnection( host, port )
         self._connection.setLoginName( login )
-        self._connection.setPrivateKeyPath("/Users/chris/.ssh/id_dsa")
-        #self._connection.set_algorithm("DSA")
+        #self._connection.setPrivateKeyPath("/Users/chris/.ssh/id_dsa")
+        self._connection.set_algorithm("DSA")
 	# If the password argument starts with a /, we assume it is a file
 	# containing the password, rather than the actual password.
 	if password[0] == "/" :
@@ -151,9 +155,15 @@ class AdminServerSession:
             if verbose :
                 print "AdminServerSession: starting connection"
             self._thread = _msgThread( self._connection.go, "AdminSvrSession" )
+            if verbose :
+                print "AdminServerSession: Running go"
             self._thread.start()
+            if verbose :
+                print "AdminServerSession: Start thread" 
             # Don't allow sending commands until the connection is up.
             # You should only call this once. A second call will deadlock.
+            if verbose :
+                print "AdminServerSession: Acquire semaphore."
             _ConnectionSema.acquire()
             if verbose :
                 print "AdminServerSession: connected"
