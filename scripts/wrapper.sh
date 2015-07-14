@@ -1,9 +1,8 @@
 #!/bin/bash
 CLASSPATH=""
 rm -rf ./pcells
-unzip ../dist/pcells.zip > /dev/null  
-for f in `find ./pcells -type f -name '*.*' `; do CLASSPATH=$CLASSPATH:$f; done
-#echo Classpath: $CLASSPATH
+for f in `find ../modules/org.pcells/target -type f -name '*.jar' `; do CLASSPATH=$CLASSPATH:$f; done
+echo Classpath: $CLASSPATH
 prog=$1
 shift
 cmd=${1:-""}

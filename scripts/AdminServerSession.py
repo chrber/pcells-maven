@@ -129,7 +129,8 @@ class AdminServerSession:
         # The SSH v1 connection is provided by dmg.protocols.ssh.
         self._connection = Ssh2DomainConnection( host, port )
         self._connection.setLoginName( login )
-        self._connection.set_algorithm("DSA")
+        self._connection.setPrivateKeyPath("/Users/chris/.ssh/id_dsa")
+        #self._connection.set_algorithm("DSA")
 	# If the password argument starts with a /, we assume it is a file
 	# containing the password, rather than the actual password.
 	if password[0] == "/" :
