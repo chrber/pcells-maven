@@ -48,7 +48,6 @@ public class      LoginBrokerPanel
     private JTable           _table         = new JTable();
     private LoginBrokerModel _model         = null , _longModel = null , _shortModel = null ;
     private JButton          _doorBroker    = new JButton("DoorBroker");
-    private JButton          _serviceBroker = new JButton("ServiceBroker");
     private JButton          _updateButton  = new JButton("Update");
     private JTextField       _anyBroker     = new JTextField(10);
     private JLabel           _brokerLabel   = new JLabel("Brokers");
@@ -109,13 +108,11 @@ public class      LoginBrokerPanel
         add( new JScrollPane( _table ) , "Center" ) ;
 
         _doorBroker.addActionListener(this);
-        _serviceBroker.addActionListener(this);
         _anyBroker.addActionListener(this);
         _updateButton.addActionListener(this);
         _verifyBox.setSelected(false);
 
         CellGuiSkinHelper.setComponentProperties( _doorBroker ) ;
-        CellGuiSkinHelper.setComponentProperties( _serviceBroker ) ;
         CellGuiSkinHelper.setComponentProperties( _anyBroker ) ;
         CellGuiSkinHelper.setComponentProperties( _updateButton ) ;
         CellGuiSkinHelper.setComponentProperties( _verifyBox ) ;
@@ -126,7 +123,6 @@ public class      LoginBrokerPanel
 
         _topLeftPanel.add( _verifyBox);
         _topLeftPanel.add( _doorBroker);
-        _topLeftPanel.add( _serviceBroker);
         topPanel.add( _topLeftPanel , "West" ) ;
 
         JPanel topRightPanel = new JPanel( new GridBagLayout() ) ;
@@ -146,7 +142,6 @@ public class      LoginBrokerPanel
     }
     public void setDestination( String destination ){
         _topLeftPanel.remove( _doorBroker);
-        _topLeftPanel.remove( _serviceBroker);
         _topLeftPanel.add( _updateButton ) ;
         _anyBroker.setText( destination ) ;
         _anyBroker.setEnabled(false);
@@ -157,8 +152,6 @@ public class      LoginBrokerPanel
         String destination = null ;
         if( source ==  _doorBroker ){
             destination = "LoginBroker" ;
-        }else if( source ==  _serviceBroker ){
-            destination = "service-LoginBroker" ;
         }else if( source ==  _anyBroker ){
             destination = _anyBroker.getText().trim() ;
         }else if( source == _updateButton ){
