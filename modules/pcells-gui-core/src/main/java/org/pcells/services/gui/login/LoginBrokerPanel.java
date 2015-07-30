@@ -48,7 +48,6 @@ public class      LoginBrokerPanel
     private JTable           _table         = new JTable();
     private LoginBrokerModel _model         = null , _longModel = null , _shortModel = null ;
     private JButton          _doorBroker    = new JButton("DoorBroker");
-    private JButton          _srmBroker     = new JButton("SrmBroker");
     private JButton          _serviceBroker = new JButton("ServiceBroker");
     private JButton          _updateButton  = new JButton("Update");
     private JTextField       _anyBroker     = new JTextField(10);
@@ -109,14 +108,12 @@ public class      LoginBrokerPanel
 
         add( new JScrollPane( _table ) , "Center" ) ;
 
-        _srmBroker.addActionListener(this);
         _doorBroker.addActionListener(this);
         _serviceBroker.addActionListener(this);
         _anyBroker.addActionListener(this);
         _updateButton.addActionListener(this);
         _verifyBox.setSelected(false);
 
-        CellGuiSkinHelper.setComponentProperties( _srmBroker ) ;
         CellGuiSkinHelper.setComponentProperties( _doorBroker ) ;
         CellGuiSkinHelper.setComponentProperties( _serviceBroker ) ;
         CellGuiSkinHelper.setComponentProperties( _anyBroker ) ;
@@ -129,7 +126,6 @@ public class      LoginBrokerPanel
 
         _topLeftPanel.add( _verifyBox);
         _topLeftPanel.add( _doorBroker);
-        _topLeftPanel.add( _srmBroker);
         _topLeftPanel.add( _serviceBroker);
         topPanel.add( _topLeftPanel , "West" ) ;
 
@@ -150,7 +146,6 @@ public class      LoginBrokerPanel
     }
     public void setDestination( String destination ){
         _topLeftPanel.remove( _doorBroker);
-        _topLeftPanel.remove( _srmBroker);
         _topLeftPanel.remove( _serviceBroker);
         _topLeftPanel.add( _updateButton ) ;
         _anyBroker.setText( destination ) ;
@@ -162,8 +157,6 @@ public class      LoginBrokerPanel
         String destination = null ;
         if( source ==  _doorBroker ){
             destination = "LoginBroker" ;
-        }else if( source ==  _srmBroker ){
-            destination = "srm-LoginBroker" ;
         }else if( source ==  _serviceBroker ){
             destination = "service-LoginBroker" ;
         }else if( source ==  _anyBroker ){
