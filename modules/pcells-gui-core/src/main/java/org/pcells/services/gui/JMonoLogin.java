@@ -413,10 +413,7 @@ public class JMonoLogin extends CellGuiSkinHelper.CellPanel {
                 if (privateKeyFile.exists() && privateKeyFile.canRead()) {
                     _logger.debug("Private and public keys exist");
                     try {
-//                        connection.setIdentityFile(identity);
-                        connection.set_keyPath(path);
-                        _logger.debug("Setting keyPath to: " + connection.get_keyPath());
-                        connection.setPrivateKeyPath(privateKeyFilePath);
+                        connection.setPrivateKeyFilePath(privateKeyFilePath);
                         _logger.debug("Setting private key to: " + privateKeyFilePath.toString());
                     } catch (Exception ee) {
 //                        _logger.error("Problems reading : " + identity);

@@ -3,12 +3,7 @@
 package org.pcells.services.connection;
 //
 
-import dmg.protocols.ssh.SshAuthMethod;
-import dmg.protocols.ssh.SshAuthPassword;
-import dmg.protocols.ssh.SshAuthRsa;
-import dmg.protocols.ssh.SshClientAuthentication;
-import dmg.protocols.ssh.SshRsaKey;
-import dmg.protocols.ssh.SshSharedKey;
+import dmg.protocols.ssh.*;
 import org.apache.sshd.ClientChannel;
 import org.apache.sshd.ClientSession;
 import org.apache.sshd.SshClient;
@@ -19,17 +14,7 @@ import org.bouncycastle.openssl.PEMReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.security.KeyPair;
@@ -58,8 +43,6 @@ public class Ssh2DomainConnection
     public String _password = null;
     public String _loginName = "Unknown";
     public String _privateKeyFilePath;
-    public String _publicKeyFilePath;
-    public String _keyPath;
 
     public Ssh2DomainConnection(String hostname, int portnumber) {
         _hostname = hostname;
@@ -91,7 +74,7 @@ public class Ssh2DomainConnection
             while ((ret & ClientSession.WAIT_AUTH) != 0) {
                 if ( _password.isEmpty() ) {
                     _logger.debug("++++++++++++ Keybaseed Login +++++++++++++++++");
-                    _logger.debug("++++++++++++ with User: " + _loginName + " and keyPath: " + get_keyPath() + "+++++++++++++++++");
+                    _logger.debug("++++++++++++ with User: " + _loginName);
                     KeyPair keyPair = loadPemKeyPair();
                     _logger.debug("Got key pair, private: " + keyPair.getPrivate().toString() + " and public" + keyPair.getPublic().toString());
                     authFuture = _session.authPublicKey(_loginName, keyPair);
@@ -161,24 +144,6 @@ public class Ssh2DomainConnection
         _password = password;
     }
 
-    public void setPrivateKeyPath(String privateKeyFile) {
-        _privateKeyFilePath = privateKeyFile;
-    }
-
-    public void setIdentityFile(File identityFile) throws Exception {
-
-        InputStream in = new FileInputStream(identityFile);
-        SshRsaKey key = new SshRsaKey(in);
-        try {
-            in.close();
-        } catch (Exception ee) {
-            _logger.debug("Problem during closing identity file read input stream: {}", ee);
-        }
-
-        _rsaAuth = new SshAuthRsa(key);
-
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////
     //
     //   Client Authentication interface
@@ -226,24 +191,8 @@ public class Ssh2DomainConnection
         return _privateKeyFilePath;
     }
 
-    public void set_privateKeyFilePath(String _privateKeyFilePath) {
+    public void setPrivateKeyFilePath(String _privateKeyFilePath) {
         this._privateKeyFilePath = _privateKeyFilePath;
-    }
-
-    public String get_publicKeyFilePath() {
-        return _publicKeyFilePath;
-    }
-
-    public void set_publicKeyFilePath(String _publicKeyFilePath) {
-        this._publicKeyFilePath = _publicKeyFilePath;
-    }
-
-    public String get_keyPath() {
-        return _keyPath;
-    }
-
-    public void set_keyPath(String _keyPath) {
-        this._keyPath = _keyPath;
     }
 
     public KeyPair loadPemKeyPair () {
@@ -306,12 +255,8 @@ public class Ssh2DomainConnection
             _logger.debug("LoginName set");
 //            setIdentityFile(new File("/Users/chris/.ssh/identity"));
             String userHome = System.getProperties().getProperty("user.home");
-            String keyPath = userHome+".ssh";
-            set_keyPath(keyPath);
-            set_privateKeyFilePath(userHome + File.separator + ".ssh" + File.separator + "id_dsa.der");
-            set_publicKeyFilePath(userHome + File.separator + ".ssh" + File.separator + "id_dsa.pub.der");
+            setPrivateKeyFilePath(userHome + File.separator + ".ssh" + File.separator + "id_dsa");
             setLoginName("admin");
-            _logger.debug("Keys set to: " + get_privateKeyFilePath() + " and " + get_publicKeyFilePath());
             setPassword("");
             _logger.debug("Password set");
         }
