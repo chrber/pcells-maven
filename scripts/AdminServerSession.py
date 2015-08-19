@@ -130,22 +130,17 @@ class AdminServerSession:
         # Define the ListenerObject for all incoming messages
         self._responseListener = _myDomainConnectionListener( verbose )
         # We set up the connection parameters.
-        # The SSH v1 connection is provided by dmg.protocols.ssh.
         self._connection = Ssh2DomainConnection( host, port )
         self._connection.setLoginName( login )
-        self._connection.setPrivateKeyPath("/Users/chris/.ssh/id_dsa")
-        #self._connection.set_algorithm("DSA")
+
 	# If the password argument starts with a /, we assume it is a file
 	# containing the password, rather than the actual password.
-	if password[0] == "/" :
-            print "Password file provided"
-	    self._connection.setPassword("")
-            self._connection.set_privateKeyFilePath(password)
-            self._connection.set_publicKeyFilePath(password+".pub")
-            # hack:
-            self._connection.set_keyPath("/Users/chris/.ssh")
-            self._connection.set_publicKeyFilePath("/Users/chris/.ssh/id_dsa.pub.der")
-            self._connection.set_privateKeyFilePath("/Users/chris/.ssh/id_dsa.der")
+        if password[0] == "/" :
+            print "KeyFile provided"
+            # self._connection.set_publicKeyFilePath(password+".pub")
+            # self._connection.set_privateKeyFilePath(password)
+            self._connection.setPrivateKeyPath(password)
+            print "Set KeyFile path to: "+ password
 	else :
 	    self._connection.setPassword( password )
 
@@ -249,7 +244,13 @@ def runAdminCommands( func, extraUsage = "", params = {} ) :
 
     try :
         if verbose:
-            print "creating admin session"
+            print "creating admin session with"
+            print "----------------------------------------"
+            print "host: "+host
+            print "port: "+str(port)
+            print "login: "+login
+            print "password:"+password
+            print "verbose: "+str(verbose)
         session = AdminServerSession( host, port, login, password, verbose )
         if verbose:
             print "calling command function"
