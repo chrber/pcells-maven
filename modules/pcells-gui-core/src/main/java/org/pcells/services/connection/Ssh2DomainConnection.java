@@ -187,7 +187,7 @@ public class Ssh2DomainConnection
         return result;
     }
 
-    public String get_privateKeyFilePath() {
+    public String getPrivateKeyFilePath() {
         return _privateKeyFilePath;
     }
 
@@ -196,7 +196,7 @@ public class Ssh2DomainConnection
     }
 
     public KeyPair loadPemKeyPair () {
-        String filename = get_privateKeyFilePath();
+        String filename = getPrivateKeyFilePath();
         _logger.debug("Generating PEM keypair: " + filename );
 
         FileReader pemFileReader = null;

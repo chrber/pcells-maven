@@ -136,10 +136,8 @@ class AdminServerSession:
 	# If the password argument starts with a /, we assume it is a file
 	# containing the password, rather than the actual password.
         if password[0] == "/" :
-            print "KeyFile provided"
-            # self._connection.set_publicKeyFilePath(password+".pub")
-            # self._connection.set_privateKeyFilePath(password)
-            self._connection.setPrivateKeyPath(password)
+            print "KeyFile provided: " + password
+            self._connection.setPrivateKeyFilePath(password)
             print "Set KeyFile path to: "+ password
 	else :
 	    self._connection.setPassword( password )

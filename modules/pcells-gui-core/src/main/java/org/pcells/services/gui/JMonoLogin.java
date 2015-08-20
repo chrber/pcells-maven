@@ -361,8 +361,6 @@ public class JMonoLogin extends CellGuiSkinHelper.CellPanel {
             if (pw != null) {
                 password = new String(pw);
             }
-//         String loginname = addr.get("loginname","admin");
-//         String password  = addr.get("password","dickerelch");
             int portnumber = Integer.parseInt(port);
             _logger.debug("Connecting to " + nodename + ":" + portnumber);
             Ssh1DomainConnection connection = new Ssh1DomainConnection(nodename, portnumber);
@@ -370,7 +368,6 @@ public class JMonoLogin extends CellGuiSkinHelper.CellPanel {
             connection.setPassword(password);
             String userHome = System.getProperties().getProperty("user.home");
             if (userHome != null) {
-//                File identity = new File(userHome,".ssh/identity" ) ;
                 File identity = new File(userHome, ".ssh" + File.separator + "identity");
                 _logger.debug("Setting identity file to : " + identity);
                 if (identity.exists()) {
@@ -416,7 +413,6 @@ public class JMonoLogin extends CellGuiSkinHelper.CellPanel {
                         connection.setPrivateKeyFilePath(privateKeyFilePath);
                         _logger.debug("Setting private key to: " + privateKeyFilePath.toString());
                     } catch (Exception ee) {
-//                        _logger.error("Problems reading : " + identity);
                         _logger.error("Some problem: " + ee);
                     }
                 }

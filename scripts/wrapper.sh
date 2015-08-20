@@ -9,4 +9,5 @@ prog=$1
 shift
 cmd=${1:-""}
 shift
+echo "Connecting using this key: ${HOME}/.ssh/id_dsa"
 jython -J-cp $CLASSPATH -J-Xmx1024m  -J-Xms128m ${prog} -v localhost 22224 admin ${HOME}/.ssh/id_dsa "$cmd" "$*"
