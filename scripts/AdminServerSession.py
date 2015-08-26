@@ -11,13 +11,14 @@ import re
 import string
 import getopt
 from types import *
-
+import rpdb2
 
 # This semaphore is used to ensure that connectionOpened() has been called
 # in the EventListener before the AdminServerSession constructor returns.
 # Note that this a Java semaphore, not a python one.
 _ConnectionSema = Semaphore( 1 )
-
+# rpdb2.start_embedded_debugger("test")
+# rpdb2.start_embedded_debugger_interactive_password()
 
 class _myEventListener( DomainEventListener ) :
     """
@@ -132,7 +133,6 @@ class AdminServerSession:
         # We set up the connection parameters.
         self._connection = Ssh2DomainConnection( host, port )
         self._connection.setLoginName( login )
-
 	# If the password argument starts with a /, we assume it is a file
 	# containing the password, rather than the actual password.
         if password[0] == "/" :

@@ -4,4 +4,6 @@
 
     <root level="ERROR">
     </root>
+    <org.pcells.services.connection level="DEBUG">
+    </org.pcells.services.connection>
 </configuration>
