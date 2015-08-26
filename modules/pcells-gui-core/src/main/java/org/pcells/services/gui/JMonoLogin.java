@@ -420,7 +420,6 @@ public class JMonoLogin extends CellGuiSkinHelper.CellPanel {
                     _logger.error("Could not read private key: {}.", privateKeyFilePath);
                 }
             }
-            _logger.debug("Connected to " + nodename + ":" + portnumber);
             _domainConnection = connection;
             connection.addDomainEventListener(_switchboard);
             connection.go();
