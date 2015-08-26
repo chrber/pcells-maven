@@ -9,6 +9,23 @@ import org.apache.sshd.ClientSession;
 import org.apache.sshd.SshClient;
 import org.apache.sshd.client.future.AuthFuture;
 import org.apache.sshd.client.future.ConnectFuture;
+import org.apache.sshd.client.kex.DHG1;
+import org.apache.sshd.client.kex.DHG14;
+import org.apache.sshd.client.session.ChannelForwardedTcpip;
+import org.apache.sshd.common.*;
+import org.apache.sshd.common.cipher.*;
+import org.apache.sshd.common.compression.CompressionNone;
+import org.apache.sshd.common.forward.DefaultForwardingAcceptorFactory;
+import org.apache.sshd.common.mac.HMACMD5;
+import org.apache.sshd.common.mac.HMACMD596;
+import org.apache.sshd.common.mac.HMACSHA1;
+import org.apache.sshd.common.mac.HMACSHA196;
+import org.apache.sshd.common.random.BouncyCastleRandom;
+import org.apache.sshd.common.random.JceRandom;
+import org.apache.sshd.common.random.SingletonRandomFactory;
+import org.apache.sshd.common.signature.SignatureDSA;
+import org.apache.sshd.common.signature.SignatureRSA;
+import org.apache.sshd.common.util.SecurityUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMReader;
 import org.slf4j.Logger;
@@ -20,8 +37,7 @@ import java.net.Socket;
 import java.security.KeyPair;
 import java.security.Security;
 import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 /**
  */
@@ -56,6 +72,8 @@ public class Ssh2DomainConnection
     public void go() throws Exception {
         _logger.debug("Running Ssh2 GO");
         SshClient ssh2Client = SshClient.setUpDefaultClient();
+//        setUpDefaultCiphers(ssh2Client);
+        setAllFactories(ssh2Client);
         _logger.debug("Initialized Ssh2Client");
         ssh2Client.start();
         try {
@@ -128,6 +146,7 @@ public class Ssh2DomainConnection
                     if (channelReturn == ClientChannel.EXIT_SIGNAL) _session.close(true);
                 }
             } else {
+                _logger.debug("AuthFuture did not succeed.");
             }
         } catch (Exception e) {
             _logger.error("Ssh2 Exception caught: {}", e.toString());
@@ -216,6 +235,52 @@ public class Ssh2DomainConnection
             _logger.error("PrivateKey file read from {} was of wrong class, exception: {}", filename, cce);
         }
         return keypair;
+    }
+
+    private static void setAllFactories(SshClient client) {
+        if (SecurityUtils.isBouncyCastleRegistered()) {
+            client.setKeyExchangeFactories(Arrays.<NamedFactory<KeyExchange>>asList(
+                    new DHG14.Factory(),
+                    new DHG1.Factory()));
+            client.setRandomFactory(new SingletonRandomFactory(new BouncyCastleRandom.Factory()));
+        } else {
+            client.setKeyExchangeFactories(Arrays.<NamedFactory<KeyExchange>>asList(
+                    new DHG1.Factory()));
+            client.setRandomFactory(new SingletonRandomFactory(new JceRandom.Factory()));
+        }
+        setUpDefaultCiphers(client);
+        // Compression is not enabled by default
+        // client.setCompressionFactories(Arrays.<NamedFactory<Compression>>asList(
+        //         new CompressionNone.Factory(),
+        //         new CompressionZlib.Factory(),
+        //         new CompressionDelayedZlib.Factory()));
+        client.setCompressionFactories(Arrays.<NamedFactory<Compression>>asList(
+                new CompressionNone.Factory()));
+        client.setMacFactories(Arrays.<NamedFactory<Mac>>asList(
+                new HMACMD5.Factory(),
+                new HMACSHA1.Factory(),
+                new HMACMD596.Factory(),
+                new HMACSHA196.Factory()));
+        client.setSignatureFactories(Arrays.<NamedFactory<Signature>>asList(
+                new SignatureDSA.Factory(),
+                new SignatureRSA.Factory()));
+        client.setChannelFactories(Arrays.<NamedFactory<Channel>>asList(
+                new ChannelForwardedTcpip.Factory()));
+        ForwardingAcceptorFactory faf = new DefaultForwardingAcceptorFactory();
+        client.setTcpipForwardNioSocketAcceptorFactory(faf);
+
+    }
+
+    private static void setUpDefaultCiphers(SshClient client) {
+        List<NamedFactory<Cipher>> avail = new LinkedList<NamedFactory<Cipher>>();
+        avail.add(new AES128CTR.Factory());
+        avail.add(new AES256CTR.Factory());
+        avail.add(new ARCFOUR128.Factory());
+        avail.add(new ARCFOUR256.Factory());
+        avail.add(new AES128CBC.Factory());
+        avail.add(new AES192CBC.Factory());
+        avail.add(new AES256CBC.Factory());
+        client.setCipherFactories(avail);
     }
 
     public static void main(String[] args) throws Exception {
